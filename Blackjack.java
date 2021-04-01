@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.util.Scanner;
 import java.util.Vector;
 
-public class blackjack{
+public class Blackjack{
 
     public static void main(String args[])
     {
