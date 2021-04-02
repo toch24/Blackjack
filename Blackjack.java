@@ -8,16 +8,40 @@ import java.awt.*;
 import javax.swing.*;
 import java.util.Scanner;
 
-public class Blackjack{
+public class Blackjack extends JFrame{
 
     public static void main(String args[])
     {
-        //create a new blackjack game
-
-        Deck deck = new Deck();
+        //creating a new Blackjack game
+        new Blackjack();
 
     }   
+
+    public Blackjack(){
+        super("Blackjack");
+        newGame();
+        
+    }
+
+    
+public void newGame(){
+    //setting the deck
+    Deck deck = new Deck();
+
+    //setting the JPanel for the JFrame
+    setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+    JPanel panel = new JPanel(new FlowLayout(SwingConstants.LEADING, 10, 10));
+    panel.setBackground(Color.green.darker());
+    add(panel);
+
+    //setting size and packing everything up
+    setPreferredSize(new Dimension(800,600));
+    setResizable(false);
+    pack();
+    setVisible(true);
+
 }
+
 
 class dealer{ 
 
@@ -35,3 +59,4 @@ class player{
 }
 
 
+} //end of BlackJack class
