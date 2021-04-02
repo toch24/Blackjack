@@ -14,19 +14,17 @@ public class Blackjack extends JFrame{
     {
         //creating a new Blackjack game
         new Blackjack();
-
     }   
 
     public Blackjack(){
         super("Blackjack");
         newGame();
-        
     }
 
-    
 public void newGame(){
     //setting the deck
     Deck deck = new Deck();
+    deck.shuffle(deck.getDeck());
 
     //setting the JPanel for the JFrame
     setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );

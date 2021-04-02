@@ -8,10 +8,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Dimension;
-
-
-
-
 import javax.swing.border.Border;
 
 public class HomeJPanel extends JPanel 
