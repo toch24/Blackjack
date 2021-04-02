@@ -1,4 +1,4 @@
-// Andrew Morris, Oksana Rubis, Tommy Chang
+// Andrew Morris, Oksana Rubis, Tommy Chong
 // Blackjack game
 // Project X
 
@@ -10,18 +10,21 @@ import java.util.Scanner;
 
 public class Blackjack extends JFrame{
 
+/*
     public static void main(String args[])
     {
         //creating a new Blackjack game
         new Blackjack();
 
         // This commented area is for error checking the deck (we should keep this here for now so we can see what happens over time)
-        /* Deck object = new Deck();
+         Deck object = new Deck();
         object.printDeck();
         object.shuffle(object.getDeck());
-        object.printDeck(); */
+        object.printDeck();
 
-    }   
+    }
+
+  */
 
     public Blackjack(){
         super("Blackjack");
@@ -34,6 +37,7 @@ public void newGame(){
     deck.shuffle(deck.getDeck());
 
     //setting the JPanel for the JFrame
+/*
     setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     JPanel panel = new JPanel(new FlowLayout(SwingConstants.LEADING, 10, 10));
     panel.setBackground(Color.green.darker());
@@ -44,11 +48,12 @@ public void newGame(){
     setResizable(false);
     pack();
     setVisible(true);
+*/
 
 }
 
 
-class dealer{ 
+class dealer{
 
 }
 
