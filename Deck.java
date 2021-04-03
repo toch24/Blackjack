@@ -30,7 +30,7 @@ public class Deck {
 	}
 
 	public void shuffle(Card[] gameDeck){                  // Shuffle the deck, this is a core function for blackjack.
-        Random rand = new Random();	
+        rand = new Random();	
 
         for (int i = 0; i < 4; ++i){	
             for (int j = 0; j < 52; ++j){

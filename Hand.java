@@ -1,6 +1,6 @@
 public class Hand {
-    //Theoretically we dont need more than 8 cards in hand...?
-    private Card[] hand = new Card[8];
+    //Maximum cards in hand is 14
+    private Card[] hand = new Card[14];
 	private int count = 0;
     
     public void addCard(Card card) {
