@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.border.Border;
+import javax.swing.text.AbstractDocument.Content;
 
 public class HomeJPanel extends JPanel
 {
@@ -22,7 +23,7 @@ public class HomeJPanel extends JPanel
    public HomeJPanel()
    {
       setLayout( new FlowLayout() ); 						//set frame layout
-
+  
       setBackground( Color.green.darker());
 
       welcomeLabel = new JLabel( "BLACKJACK");
@@ -54,20 +55,26 @@ public class HomeJPanel extends JPanel
       add(button2);
       add(button3);
 
-
-      button1.addActionListener(new ActionListener() { 		//if options to play again is clicked by user
+      //play basics button
+      button1.addActionListener(new ActionListener() { 		
           public void actionPerformed(ActionEvent e) {
-        	  JFrame basicsFrame = new JFrame("Basic BlackJack");
-              JPanel basicsPanel = new JPanel();
-              basicsFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-              basicsFrame.add( basicsPanel ); 					//add screensaverJPanel to frame
-              basicsFrame.setBackground( Color.green.darker() ); 				//set frame background color
-              basicsPanel.setBackground( Color.green.darker());
-              basicsFrame.setSize( 800, 600 ); 						//set frame size
-              basicsFrame.setResizable(false);
-              setVisible(false);
-              basicsFrame.setVisible( true ); 						//display frame
-              new Blackjack();
+        
+         //replace JPanel with new JPanel
+         removeAll();
+
+		 JLabel test;
+         test = new JLabel( "TEST");
+         test.setBounds(150, 50, 450, 300);
+         test.setToolTipText( "test" );
+         test.setFont( new Font( null, Font.BOLD, 50 ) );
+         test.setHorizontalAlignment(JLabel.CENTER);
+         test.setVerticalAlignment(JLabel.CENTER);
+         add(test); 									//testing removing all components from jpanel and adding new ones
+        
+         revalidate();
+         repaint();
+            
+    //    new Blackjack();
              
               // This commented area is for error checking the deck (we should keep this here for now so we can see what happens over time)
               /* Deck object = new Deck();
@@ -79,25 +86,30 @@ public class HomeJPanel extends JPanel
       });
 
 
-      button2.addActionListener(new ActionListener() { 		//if options to play again is clicked by user
+      button2.addActionListener(new ActionListener() { 		
           public void actionPerformed(ActionEvent e) {
         	  String string = "Insert Rules Here: ";
         	  JOptionPane.showMessageDialog( null, string );
           }
       });
 
-      button3.addActionListener(new ActionListener() { 		//if options to play again is clicked by user
+
+      //play casino button
+      button3.addActionListener(new ActionListener() { 		
           public void actionPerformed(ActionEvent e) {
-        	  JFrame basicsFrame = new JFrame("Casino BlackJack");
-              JPanel basicsPanel = new JPanel();
-              basicsFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-              basicsFrame.add( basicsPanel ); 					//add screensaverJPanel to frame
-              basicsFrame.setBackground( Color.green.darker() ); 				//set frame background color
-              basicsPanel.setBackground( Color.green.darker());
-              basicsFrame.setSize( 800, 600 ); 						//set frame size
-              basicsFrame.setResizable(false);
-              setVisible(false );
-              basicsFrame.setVisible( true ); 						//display frame
+            //replace JPanel with new JPanel
+            removeAll();
+            JLabel test;
+            test = new JLabel( "TEST");
+            test.setBounds(150, 50, 450, 300);
+            test.setToolTipText( "test" );
+            test.setFont( new Font( null, Font.BOLD, 50 ) );
+            test.setHorizontalAlignment(JLabel.CENTER);
+            test.setVerticalAlignment(JLabel.CENTER);
+            add(test); 									//testing removing all components from jpanel and adding new ones
+           
+            revalidate();
+            repaint();
           }
       });
 
