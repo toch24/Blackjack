@@ -5,10 +5,9 @@ public class Bot {
     //A new hand for the bot
     private Hand hand = new Hand();
 
-    //Add 2 cards to hand
+    //Add a card to hand
 	public void addCard(Card card) {
 		hand.addCard(card);
-        hand.addCard(card);
 	}
 
     //Return true if the bot has a blackjack

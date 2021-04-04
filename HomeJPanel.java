@@ -74,7 +74,7 @@ public class HomeJPanel extends JPanel
          revalidate();
          repaint();
             
-    //    new Blackjack();
+        new Blackjack();
              
               // This commented area is for error checking the deck (we should keep this here for now so we can see what happens over time)
               /* Deck object = new Deck();
