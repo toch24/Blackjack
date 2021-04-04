@@ -23,7 +23,8 @@ public class Bot {
 	//Automate the bots moves. Passing deck as parameter so that it can take a card if needed
 	public void botPlay(Deck deck){
 		if(hand.total() <= 16){
-			//take a card from deck. TODO: implement a function in Deck.java to return next card
+			//take a card from deck
+			hand.addCard(deck.nextCard());
 		}
 
 	}

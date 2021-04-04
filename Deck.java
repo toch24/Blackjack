@@ -3,12 +3,12 @@ import java.util.Random;
 public class Deck {
     private Card[] gameDeck = new Card[52];
     private Random rand = new Random();
+	private int next = 0;
 	
 	public Deck(){
 
 		int count = 0;
-		try{
-            //setting the deck of cards
+        //setting the deck of cards
 		for (int i = 1; i <= 13; i++) {
 			gameDeck[count++] = new Card("Hearts", i);
 		}
@@ -21,12 +21,19 @@ public class Deck {
 		for (int i = 1; i <= 13; i++) {
 			gameDeck[count++] = new Card("Diamonds", i);
 		}	
-		}
 		
-		catch(Exception e) {
-			
+		
+	}
+
+	//get the next card of the deck
+	public Card nextCard(){
+		next++;
+		if(next >= 0 && next <= 52){
+			return gameDeck[next];
 		}
-	
+		//Do people even use the entire deck in blackjack??
+		
+		return null;
 	}
 
 	public void shuffle(Card[] gameDeck){                  // Shuffle the deck, this is a core function for blackjack.
