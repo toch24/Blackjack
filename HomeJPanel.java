@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.Random;
 import java.awt.event.ActionEvent;
+import java.awt.*;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -58,23 +59,17 @@ public class HomeJPanel extends JPanel
       //play basics button
       button1.addActionListener(new ActionListener() { 		
           public void actionPerformed(ActionEvent e) {
-        
-         //replace JPanel with new JPanel
-         removeAll();
-
-		 JLabel test;
-         test = new JLabel( "TEST");
-         test.setBounds(150, 50, 450, 300);
-         test.setToolTipText( "test" );
-         test.setFont( new Font( null, Font.BOLD, 50 ) );
-         test.setHorizontalAlignment(JLabel.CENTER);
-         test.setVerticalAlignment(JLabel.CENTER);
-         add(test); 									//testing removing all components from jpanel and adding new ones
-        
-         revalidate();
-         repaint();
-            
-        new Blackjack();
+            JFrame basicsFrame = new JFrame("Basic BlackJack");
+            JPanel basicsPanel = new basicsPanel();
+            basicsFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+            basicsFrame.add( basicsPanel ); 					//add screensaverJPanel to frame
+            basicsFrame.setBackground( Color.green.darker()); 				//set frame background color
+            basicsPanel.setBackground( Color.green.darker());
+            basicsFrame.setSize( 800, 600 ); 						//set frame size
+            basicsFrame.setResizable(false);
+            setVisible(false);
+            basicsFrame.setVisible( true ); 						//display frame
+            new Blackjack();
              
               // This commented area is for error checking the deck (we should keep this here for now so we can see what happens over time)
               /* Deck object = new Deck();
@@ -97,21 +92,20 @@ public class HomeJPanel extends JPanel
       //play casino button
       button3.addActionListener(new ActionListener() { 		
           public void actionPerformed(ActionEvent e) {
-            //replace JPanel with new JPanel
-            removeAll();
-            JLabel test;
-            test = new JLabel( "TEST");
-            test.setBounds(150, 50, 450, 300);
-            test.setToolTipText( "test" );
-            test.setFont( new Font( null, Font.BOLD, 50 ) );
-            test.setHorizontalAlignment(JLabel.CENTER);
-            test.setVerticalAlignment(JLabel.CENTER);
-            add(test); 									//testing removing all components from jpanel and adding new ones
-           
-            revalidate();
-            repaint();
+            JFrame basicsFrame = new JFrame("Casino BlackJack");
+            JPanel casinoPanel = new JPanel();
+            basicsFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+            basicsFrame.add( casinoPanel ); 					//add screensaverJPanel to frame
+            basicsFrame.setBackground( Color.green.darker() ); 				//set frame background color
+            casinoPanel.setBackground( Color.green.darker());
+            basicsFrame.setSize( 800, 600 ); 						//set frame size
+            basicsFrame.setResizable(false);
+            setVisible(false );
+            basicsFrame.setVisible( true ); 						//display frame
           }
       });
 
    }
+
 }
+
