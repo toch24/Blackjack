@@ -61,6 +61,7 @@ public class HomeJPanel extends JPanel
           public void actionPerformed(ActionEvent e) {
             JFrame basicsFrame = new JFrame("Basic BlackJack");
             JPanel basicsPanel = new basicsPanel();
+            
             basicsFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
             basicsFrame.add( basicsPanel ); 					//add screensaverJPanel to frame
             basicsFrame.setBackground( Color.green.darker()); 				//set frame background color

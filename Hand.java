@@ -24,7 +24,7 @@ public class Hand {
     //Calculate the total value of cards. This also checks to see whether to use 1 or 11 for ace
 	public int total() {
         boolean ace = false;
-		int total =0;
+		int total = 0;
 		
 		for (int i = 0; i < count; i++) {
 			int value = hand[i].getcardValue();

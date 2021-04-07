@@ -1,6 +1,7 @@
 public class Player {
     //A new hand for the player
     private Hand hand = new Hand();
+	private int bet;
 
     //Return true if the player has a blackjack
 	public boolean hasBlackjack(){
@@ -10,11 +11,9 @@ public class Player {
 			return false;
 		}
 	}
-
     
     //Add a card to hand
 	public void addCard(Card card) {
 		hand.addCard(card);
 	}
-
 }

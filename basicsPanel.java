@@ -13,21 +13,70 @@ import javax.swing.text.AbstractDocument.Content;
 
 public class basicsPanel extends JPanel{
     //@Override
-
+  
   private JButton bet;
+  private JTextField betField;                      // Using this to get the input from the bets i guess
+  private int userBet;
+
     public basicsPanel(){
       bet = new JButton("Bet");
-      bet.setBounds(350, 400,100, 100);
+      bet.setBounds(350,400,100,50);
       add(bet);
+        // Create functionality for the bet button, this will let players place bets.
+      bet.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent e) {
+            // Make a new frame to display the betting area.
+            JFrame betFrame = new JFrame("Betting...");
+            JPanel betPanel = new JPanel();
+            JLabel betLabel = new JLabel("Place your bet: ");           // address the player!
+            JOptionPane errorCheck = new JOptionPane("Error");
+
+            betFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+            betFrame.add( betPanel );
+            betFrame.setResizable(false);
+            betFrame.setSize(300,100);
+
+            // Create JTextField to allow for user inputs
+            betField = new JTextField(4);
+            betField.setBounds(50,100, 200,30);
+            betField.setVisible(true);
+
+            // add the textfield to the JPanel with the label
+            betPanel.add(betLabel);
+            betPanel.add(betField);
+
+            betFrame.setVisible(true);                                   // Make it visible.
+
+            betField.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    userBet = Integer.parseInt(betField.getText());      // Take the user bet.
+                    int bet = userBet;
+                    //System.out.println(userBet);
+                    if(userBet > 0)
+                    {                        
+                        Pot.addToPot(bet);                               // Add to the pot.  
+                        /* int checkPot = Pot.getPot();
+                        System.out.println(checkPot); */
+                        betFrame.dispose();                              // Forse the JFrame closed when we successfully make a bet.
+                        String betAddress = "Bet Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
+                        JOptionPane.showMessageDialog(null, betAddress);
+                    }
+                    else if(userBet < 0)
+                    {   // Use this to error check, the user cannot make bets < 0. 
+                        String error = "Error: Please Input A Value Greater Than 0";
+                        JOptionPane.showMessageDialog(null, error);
+                    }
+                }
+            });
+        }
+      });
     }
 
     public void paintComponent( Graphics g )
     {
         g.setColor(Color.white);
         g.fillRect(280, 360 , 100, 150);
-
         g.fillRect(400, 360 , 100, 150);
-
     }
 
 

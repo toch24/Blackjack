@@ -17,6 +17,7 @@ public class Blackjack{
 public void newGame(){
     //setting the deck
     Deck deck = new Deck();
+
     deck.shuffle(deck.getDeck());
 
     //giving two cards to each player
@@ -33,6 +34,5 @@ public void newGame(){
     dealer.addCard(deck.nextCard());
 
 }
-
 
 } //end of BlackJack class
