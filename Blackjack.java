@@ -23,8 +23,10 @@ public class Blackjack{
 public void newGame(){
     //setting the deck
     Deck deck = new Deck();
+    
 
     deck.shuffle(deck.getDeck());
+    deck.printDeck();
 
     //giving two cards to each player
     bot1.addCard(deck.nextCard());
@@ -53,7 +55,7 @@ public int getUserBet(){
 public Card[] getPlayerCards(){
     Hand hand;
     hand = player.getHand();
-    
+
     return hand.getCards();
 }
 
