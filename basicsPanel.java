@@ -19,7 +19,7 @@ public class basicsPanel extends JPanel{
   private Card[] cards;
 
     public basicsPanel(){
-      setCards();                                   //sets the cards images
+      //setCards();                                   //sets the cards images
       bet = new JButton("Bet");
       bet.setBounds(350,400,100,50);
       add(bet);
@@ -54,8 +54,8 @@ public class basicsPanel extends JPanel{
                     int bet = userBet;
                     //System.out.println(userBet);
                     if(userBet > 0)
-                    {                        
-                        Pot.addToPot(bet);                               // Add to the pot.  
+                    {
+                        Pot.addToPot(bet);                               // Add to the pot.
                         game.setUserBet(bet);                           // This sets the current bet from the user for comparison purposes
                         /* int checkPot = Pot.getPot();
                         System.out.println(checkPot); */
@@ -64,7 +64,7 @@ public class basicsPanel extends JPanel{
                         JOptionPane.showMessageDialog(null, betAddress);
                     }
                     else if(userBet < 0)
-                    {   // Use this to error check, the user cannot make bets < 0. 
+                    {   // Use this to error check, the user cannot make bets < 0.
                         String error = "Error: Please Input A Value Greater Than 0";
                         JOptionPane.showMessageDialog(null, error);
                     }
@@ -85,7 +85,7 @@ public class basicsPanel extends JPanel{
         suit = c.getcardSuit();
         String png;
         String value = String.valueOf(cardvalue);
-        
+
         //get the card png (easier way and less code...)
         if(suit.equals("Heart")){
           png = value + "H" + ".png";
@@ -119,7 +119,7 @@ public class basicsPanel extends JPanel{
       String suit;
 
       switch(value){
-        case 1: 
+        case 1:
               switch(s){
                 case "Hearts": png = "AH.png";
                             break;
@@ -191,13 +191,12 @@ public class basicsPanel extends JPanel{
                             break;
               }
               break;
-        
+
 
 
       }
       return png;
     }
    */
- 
-}
 
+}
