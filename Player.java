@@ -16,4 +16,12 @@ public class Player {
 	public void addCard(Card card) {
 		hand.addCard(card);
 	}
+
+	public void currentBet(int b){
+		bet = b;
+	}
+
+	public int getCurrentBet(){
+		return bet;
+	}
 }

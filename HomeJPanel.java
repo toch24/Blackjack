@@ -15,7 +15,7 @@ import javax.swing.text.AbstractDocument.Content;
 public class HomeJPanel extends JPanel
 {
   // private JTextField textField1; 							//text field with set size
-
+   public static Blackjack game;
    private JLabel welcomeLabel;
    private JButton button1;
    private JButton button3;
@@ -70,13 +70,6 @@ public class HomeJPanel extends JPanel
             basicsFrame.setResizable(false);
             setVisible(false);
             basicsFrame.setVisible( true ); 						//display frame
-            new Blackjack();
-             
-              // This commented area is for error checking the deck (we should keep this here for now so we can see what happens over time)
-              /* Deck object = new Deck();
-              object.printDeck();
-              object.shuffle(object.getDeck());
-              object.printDeck();*/
 
           }
       });

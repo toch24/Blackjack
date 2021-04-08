@@ -6,9 +6,15 @@ import java.util.Random;
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
+
+
 import java.util.Scanner;
 
 public class Blackjack{
+    private Bot bot1 = new Bot();
+    private Bot bot2 = new Bot();
+    private Bot dealer = new Bot();
+    private Player player = new Player();
 
     public Blackjack(){
         newGame();
@@ -21,18 +27,28 @@ public void newGame(){
     deck.shuffle(deck.getDeck());
 
     //giving two cards to each player
-    Bot bot1 = new Bot();
     bot1.addCard(deck.nextCard());
     bot1.addCard(deck.nextCard());
 
-    Bot bot2 = new Bot();
     bot2.addCard(deck.nextCard());
     bot2.addCard(deck.nextCard());
 
-    Bot dealer = new Bot();
     dealer.addCard(deck.nextCard());
     dealer.addCard(deck.nextCard());
+
+    player.addCard(deck.nextCard());
+    player.addCard(deck.nextCard());
 
 }
+
+public void setUserBet(int bet){
+    player.currentBet(bet);
+}
+
+public int getUserBet(){
+    return player.getCurrentBet();
+}
+
+
 
 } //end of BlackJack class

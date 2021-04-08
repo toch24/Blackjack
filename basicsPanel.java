@@ -12,11 +12,10 @@ import javax.swing.border.Border;
 import javax.swing.text.AbstractDocument.Content;
 
 public class basicsPanel extends JPanel{
-    //@Override
-  
   private JButton bet;
   private JTextField betField;                      // Using this to get the input from the bets i guess
   private int userBet;
+  private Blackjack game = new Blackjack();
 
     public basicsPanel(){
       bet = new JButton("Bet");
@@ -55,6 +54,7 @@ public class basicsPanel extends JPanel{
                     if(userBet > 0)
                     {                        
                         Pot.addToPot(bet);                               // Add to the pot.  
+                        game.setUserBet(bet);                           // This sets the current bet from the user for comparison purposes
                         /* int checkPot = Pot.getPot();
                         System.out.println(checkPot); */
                         betFrame.dispose();                              // Forse the JFrame closed when we successfully make a bet.
@@ -72,6 +72,7 @@ public class basicsPanel extends JPanel{
       });
     }
 
+   
     public void paintComponent( Graphics g )
     {
         g.setColor(Color.white);
@@ -79,5 +80,5 @@ public class basicsPanel extends JPanel{
         g.fillRect(400, 360 , 100, 150);
     }
 
-
 }
+
