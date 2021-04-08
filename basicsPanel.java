@@ -81,9 +81,11 @@ public class basicsPanel extends JPanel{
 
       cards = game.getPlayerCards();
       for(Card c : cards){
+        //If the card is not null, then get all the data. (Need this error checking because Card array is initialized with size of 14)
+        if(c != null){
         cardvalue = c.getcardValue();
-        suit = c.getcardSuit();
-        String png;
+        suit = c.getcardSuit(); 
+        String png;                                     //name of the png file
         String value = String.valueOf(cardvalue);
         
         //get the card png (easier way and less code...)
@@ -100,10 +102,17 @@ public class basicsPanel extends JPanel{
           png = value + "D" + ".png";
         }
 
-        //add the card png to the game
-      }
+        //todo: add the png to jpanel
+        //code goes here
 
-    }
+
+      }
+      }
+      
+      
+      }
+   
+    
 
 
     public void paintComponent( Graphics g )
@@ -112,92 +121,6 @@ public class basicsPanel extends JPanel{
         g.fillRect(280, 360 , 100, 150);
         g.fillRect(400, 360 , 100, 150);
     }
-
-    /*    Code too long, not deleting for now just in case...
-    public String getPng(int value, String s){
-      String png = null;
-      String suit;
-
-      switch(value){
-        case 1: 
-              switch(s){
-                case "Hearts": png = "AH.png";
-                            break;
-                case "Spades": png = "AS.png";
-                            break;
-                case "Clubs": png = "AC.png";
-                            break;
-                case "Diamonds": png = "AD.png";
-                            break;
-              }
-              break;
-        case 2:
-         switch(s){
-                case "Hearts": png = "2H.png";
-                            break;
-                case "Spades": png = "2S.png";
-                            break;
-                case "Clubs": png = "2C.png";
-                            break;
-                case "Diamonds": png = "2D.png";
-                            break;
-              }
-              break;
-        case 3:
-            switch(s){
-                case "Hearts": png = "3H.png";
-                            break;
-                case "Spades": png = "3S.png";
-                            break;
-                case "Clubs": png = "3C.png";
-                            break;
-                case "Diamonds": png = "3D.png";
-                            break;
-              }
-              break;
-        case 4:
-             switch(s){
-                case "Hearts": png = "4H.png";
-                            break;
-                case "Spades": png = "4S.png";
-                            break;
-                case "Clubs": png = "4C.png";
-                            break;
-                case "Diamonds": png = "4D.png";
-                            break;
-              }
-              break;
-        case 5:
-              switch(s){
-                case "Hearts": png = "5H.png";
-                            break;
-                case "Spades": png = "5S.png";
-                            break;
-                case "Clubs": png = "5C.png";
-                            break;
-                case "Diamonds": png = "5D.png";
-                            break;
-              }
-              break;
-        case 6:
-              switch(s){
-                case "Hearts": png = "6H.png";
-                            break;
-                case "Spades": png = "6S.png";
-                            break;
-                case "Clubs": png = "6C.png";
-                            break;
-                case "Diamonds": png = "6D.png";
-                            break;
-              }
-              break;
-        
-
-
-      }
-      return png;
-    }
-   */
  
 }
 
