@@ -99,6 +99,8 @@ public class basicsPanel extends JPanel{
         else if(suit.equals("Diamonds")){
           png = value + "D" + ".png";
         }
+
+        //add the card png to the game
       }
 
     }
