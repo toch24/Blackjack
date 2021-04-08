@@ -16,8 +16,10 @@ public class basicsPanel extends JPanel{
   private JTextField betField;                      // Using this to get the input from the bets i guess
   private int userBet;
   private Blackjack game = new Blackjack();
+  private Card[] cards;
 
     public basicsPanel(){
+      setCards();                                   //sets the cards images
       bet = new JButton("Bet");
       bet.setBounds(350,400,100,50);
       add(bet);
@@ -72,7 +74,36 @@ public class basicsPanel extends JPanel{
       });
     }
 
-   
+
+    public void setCards(){
+      int cardvalue;
+      String suit;
+
+      cards = game.getPlayerCards();
+      for(Card c : cards){
+        cardvalue = c.getcardValue();
+        suit = c.getcardSuit();
+        String png;
+        String value = String.valueOf(cardvalue);
+        
+        //get the card png (easier way and less code...)
+        if(suit.equals("Heart")){
+          png = value + "H" + ".png";
+        }
+        else if(suit.equals("Spades")){
+          png = value + "S" + ".png";
+        }
+        else if(suit.equals("Clubs")){
+          png = value + "C" + ".png";
+        }
+        else if(suit.equals("Diamonds")){
+          png = value + "D" + ".png";
+        }
+      }
+
+    }
+
+
     public void paintComponent( Graphics g )
     {
         g.setColor(Color.white);
@@ -80,5 +111,91 @@ public class basicsPanel extends JPanel{
         g.fillRect(400, 360 , 100, 150);
     }
 
+    /*    Code too long, not deleting for now just in case...
+    public String getPng(int value, String s){
+      String png = null;
+      String suit;
+
+      switch(value){
+        case 1: 
+              switch(s){
+                case "Hearts": png = "AH.png";
+                            break;
+                case "Spades": png = "AS.png";
+                            break;
+                case "Clubs": png = "AC.png";
+                            break;
+                case "Diamonds": png = "AD.png";
+                            break;
+              }
+              break;
+        case 2:
+         switch(s){
+                case "Hearts": png = "2H.png";
+                            break;
+                case "Spades": png = "2S.png";
+                            break;
+                case "Clubs": png = "2C.png";
+                            break;
+                case "Diamonds": png = "2D.png";
+                            break;
+              }
+              break;
+        case 3:
+            switch(s){
+                case "Hearts": png = "3H.png";
+                            break;
+                case "Spades": png = "3S.png";
+                            break;
+                case "Clubs": png = "3C.png";
+                            break;
+                case "Diamonds": png = "3D.png";
+                            break;
+              }
+              break;
+        case 4:
+             switch(s){
+                case "Hearts": png = "4H.png";
+                            break;
+                case "Spades": png = "4S.png";
+                            break;
+                case "Clubs": png = "4C.png";
+                            break;
+                case "Diamonds": png = "4D.png";
+                            break;
+              }
+              break;
+        case 5:
+              switch(s){
+                case "Hearts": png = "5H.png";
+                            break;
+                case "Spades": png = "5S.png";
+                            break;
+                case "Clubs": png = "5C.png";
+                            break;
+                case "Diamonds": png = "5D.png";
+                            break;
+              }
+              break;
+        case 6:
+              switch(s){
+                case "Hearts": png = "6H.png";
+                            break;
+                case "Spades": png = "6S.png";
+                            break;
+                case "Clubs": png = "6C.png";
+                            break;
+                case "Diamonds": png = "6D.png";
+                            break;
+              }
+              break;
+        
+
+
+      }
+      return png;
+    }
+   */
+ 
 }
 

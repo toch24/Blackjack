@@ -24,4 +24,9 @@ public class Player {
 	public int getCurrentBet(){
 		return bet;
 	}
+
+	public Hand getHand(){
+
+		return hand;
+	}
 }

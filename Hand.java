@@ -19,6 +19,10 @@ public class Hand {
 		int value = hand[1].getcardValue();
 		return value;
 	}
+	
+	public Card[] getCards(){
+		return hand;
+	}
 
 
     //Calculate the total value of cards. This also checks to see whether to use 1 or 11 for ace

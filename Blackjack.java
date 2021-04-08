@@ -49,6 +49,13 @@ public int getUserBet(){
     return player.getCurrentBet();
 }
 
+//returns an array of cards for player
+public Card[] getPlayerCards(){
+    Hand hand;
+    hand = player.getHand();
+    
+    return hand.getCards();
+}
 
 
 } //end of BlackJack class
