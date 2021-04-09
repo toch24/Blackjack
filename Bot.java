@@ -4,6 +4,7 @@ public class Bot {
 
     //A new hand for the bot
     private Hand hand = new Hand();
+	private int botBet;
 
     //Add a card to hand
 	public void addCard(Card card) {

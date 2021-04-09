@@ -15,6 +15,7 @@ public class Blackjack{
     private Bot bot2 = new Bot();
     private Bot dealer = new Bot();
     private Player player = new Player();
+    private Deck deck = new Deck();
 
     public Blackjack(){
         newGame();
@@ -22,7 +23,7 @@ public class Blackjack{
 
 public void newGame(){
     //setting the deck
-    Deck deck = new Deck();
+    
     
 
     deck.shuffle(deck.getDeck());
@@ -57,6 +58,10 @@ public Card[] getPlayerCards(){
     hand = player.getHand();
 
     return hand.getCards();
+}
+
+public void playerHit(){
+    player.addCard(deck.nextCard());
 }
 
 

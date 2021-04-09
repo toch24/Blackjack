@@ -10,18 +10,26 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.border.Border;
 import javax.swing.text.AbstractDocument.Content;
+import javax.imageio.ImageIO;
+import java.awt.Container;
+import java.io.File;
+import java.io.IOException;
 
 public class basicsPanel extends JPanel{
-  private JButton bet;
+  private JButton bet, hit;
   private JTextField betField;                      // Using this to get the input from the bets i guess
   private int userBet;
   private Blackjack game = new Blackjack();
   private Card[] cards;
 
     public basicsPanel(){
-      //setCards();                                   //sets the cards images
+      setCards();                                   //sets the cards images
       bet = new JButton("Bet");
       bet.setBounds(350,400,100,50);
+
+      hit = new JButton("Draw");
+      hit.setBounds(350,500,100,50);
+
       add(bet);
         // Create functionality for the bet button, this will let players place bets.
       bet.addActionListener(new ActionListener(){
@@ -72,7 +80,22 @@ public class basicsPanel extends JPanel{
             });
         }
       });
-    }
+
+
+      add(hit);
+      // Create functionality for the bet button, this will let players place bets.
+    hit.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent e) {
+          game.playerHit();
+          String msg = "Card drawn!";
+          JOptionPane.showMessageDialog(null, msg);
+          //update the set of cards for player
+          setCards();
+  
+      }
+    });
+
+    } //end of basicsPanel class
 
 
     public void setCards(){
@@ -85,29 +108,40 @@ public class basicsPanel extends JPanel{
         if(c != null){
         cardvalue = c.getcardValue();
         suit = c.getcardSuit();
-        String png;                                     //name of the png file
+        String png = "";                                     //name of the png file
         String value = String.valueOf(cardvalue);
 
         //get the card png (easier way and less code...)
         if(suit.equals("Heart")){
-          png = value + "H" + ".png";
+          png = "Cards\\" + value + "H" + ".png";
         }
         else if(suit.equals("Spades")){
-          png = value + "S" + ".png";
+          png = "Cards\\" + value + "S" + ".png";
         }
         else if(suit.equals("Clubs")){
-          png = value + "C" + ".png";
+          png = "Cards\\" + value + "C" + ".png";
         }
         else if(suit.equals("Diamonds")){
-          png = value + "D" + ".png";
+          png = "Cards\\" + value + "D" + ".png";
         }
 
+        /*
         //todo: add the png to jpanel
         //code goes here
+        BufferedImage img = null;
+        try {
+          JLabel picLabel = new JLabel(new ImageIcon(ImageIO.read(new File(png))));
+          picLabel.setPreferredSize(new Dimension(100, 100));
+  
+          add(picLabel);
+          System.out.println("Image opened " + png);
+        } catch (IOException e) {
+          System.out.println("Error = " + e);
+  
+        } */
 
-
-      }
-      }
+      }   //end of if statement
+      }   //end of for loop
 
 
       }
@@ -124,4 +158,4 @@ public class basicsPanel extends JPanel{
 
 }
 
-}
+
