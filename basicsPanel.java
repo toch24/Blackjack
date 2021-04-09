@@ -71,7 +71,7 @@ public class basicsPanel extends JPanel{
         hit.setEnabled(false);
         pass.setEnabled(false);
         wait2.setVisible(true);
-        game.players++;
+        System.out.println("On player: "+ game.players+" In panel");
         }
       });
 

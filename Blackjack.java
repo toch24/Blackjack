@@ -20,7 +20,7 @@ public class Blackjack{
     int players = 1;
 
     public Blackjack(){
-        newGame();
+      newGame();
     }
 
 public void newGame(){
@@ -41,21 +41,24 @@ public void newGame(){
     player.addCard(deck.nextCard());
     player.addCard(deck.nextCard());
 
-    //bot1 plays
+
     if(players == 1){
       //add logic for bot1 to make moves and then eventually pass
-
+      System.out.println("CP1 is playing");
       players++;
     }
+    System.out.println("On player: "+players+" In blackjack");
 
     //bot2 plays
     if(players == 3){
+      System.out.println("CP2 is playing");
       players++;
     }
 
     //Dealers turn
     if(players == 4){
-      
+      System.out.println("Dealer is playing");
+      System.out.println("Dealer hand is: "+dealer.getHand());
     }
 
 }
@@ -93,6 +96,7 @@ public Card[] getBotCards(int b){
     }
     return null;
 }
+
 
 
 } //end of BlackJack class
