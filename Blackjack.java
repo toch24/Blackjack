@@ -99,5 +99,30 @@ public Card[] getBotCards(int b){
     return null;
 }
 
+public void setCurrentBotBet(int bet, int bot){
+    switch(bot){
+        case 1: bot1.setCurrentBotBet(bet);
+                break;
+        case 2: bot2.setCurrentBotBet(bet);
+                break;
+        case 3: dealer.setCurrentBotBet(bet);
+                break;
+    }
+
+}
+
+public boolean setHighestBet(){
+    int bet1 = bot1.getCurrentBotBet();
+    int bet2 = bot2.getCurrentBotBet();
+    int bet3 = dealer.getCurrentBotBet();
+    int bet4 = player.getCurrentBet();
+    
+    if(bet1 >= bet2 && bet1 >= bet3 && bet1 >= bet4){ Pot.setHighestBet(bet1); return true;} 
+    else if(bet2 >= bet1 && bet2 >= bet3 && bet2 >= bet4){ Pot.setHighestBet(bet2); return true;} 
+    else if(bet3 >= bet1 && bet3 >= bet2 && bet3 >= bet4){ Pot.setHighestBet(bet3); return true;} 
+    else if(bet4 >= bet1 && bet4 >= bet2 && bet4 >= bet3){ Pot.setHighestBet(bet4); return true;} 
+ 
+    return false;
+}
 
 } //end of BlackJack class

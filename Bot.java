@@ -40,10 +40,16 @@ public class Bot {
 		Pot.addToPot(botWallet);
 	}
 
-	public void getBotBet(){						// W.I.P
+	public void getRandomBotBet(){						// W.I.P
 		rand = new Random();
 	}
 
+	public void setCurrentBotBet(int bet){
+		botBet =  bet;
+	}
 
+	public int getCurrentBotBet(){
+		return botBet;
+	}
 
 }
