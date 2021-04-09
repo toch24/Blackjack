@@ -88,10 +88,11 @@ public class basicsPanel extends JPanel{
       });
 
 
+      //add hit button
       add(hit);
-      // Create functionality for the bet button, this will let players place bets.
     hit.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent e) {
+        //draw a hard if clicked
           game.playerHit();
           String msg = "Card drawn!";
           JOptionPane.showMessageDialog(null, msg);
