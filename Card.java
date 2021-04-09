@@ -28,15 +28,15 @@ public class Card {
         }
         else if(newcardValue == 11){
             this.specCard = "Jack";
-            this.cardValue = 11;
+            this.cardValue = 10;
         }
         else if(newcardValue == 12){
             this.specCard = "Queen";
-            this.cardValue = 12;
+            this.cardValue = 10;
         }
         else if(newcardValue == 13){
             this.specCard = "King";
-            this.cardValue = 13;
+            this.cardValue = 10;
         }
         } //end of else
     }
