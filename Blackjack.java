@@ -2,6 +2,7 @@
 // Blackjack game
 // Project X
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.awt.event.*;
 import java.awt.*;
@@ -17,6 +18,8 @@ public class Blackjack{
     private Bot dealer = new Bot();
     private Player player = new Player();
     private Deck deck = new Deck();
+
+
     int players = 1;
 
     public Blackjack(){
@@ -24,6 +27,7 @@ public class Blackjack{
     }
 
 public void newGame(){
+
     deck.shuffle(deck.getDeck());
 
     System.out.println("The game has started");
@@ -41,6 +45,7 @@ public void newGame(){
     player.addCard(deck.nextCard());
     player.addCard(deck.nextCard());
 
+    Deck.printUsedCards();
 
     if(players == 1){
       //add logic for bot1 to make moves and then eventually pass

@@ -2,6 +2,7 @@ public class Hand {
     //Maximum cards in hand is 14
     private Card[] hand = new Card[14];
 	private int count = 0;
+	private static int total;
 
     public void addCard(Card card) {
         //add a card to hand
@@ -24,11 +25,10 @@ public class Hand {
 		return hand;
 	}
 
-
     //Calculate the total value of cards. This also checks to see whether to use 1 or 11 for ace
 	public int total() {
         boolean ace = false;
-		int total = 0;
+		total = 0;
 
 		for (int i = 0; i < count; i++) {
 			int value = hand[i].getcardValue();
