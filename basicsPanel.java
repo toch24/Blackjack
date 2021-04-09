@@ -108,7 +108,7 @@ public class basicsPanel extends JPanel{
     public void setCards(){
       int cardvalue;
       String suit;
-      int pos = 300;
+      int pos = 250;
 
       cards = game.getPlayerCards();
       for(Card c : cards){
@@ -134,7 +134,6 @@ public class basicsPanel extends JPanel{
         }
 
         //adding the card images to the JPanel
-        //Issue need fixing... 2nd card and other cards are flipped
         BufferedImage img = null;
         JLabel label = new JLabel();
         try {
@@ -145,7 +144,7 @@ public class basicsPanel extends JPanel{
           ImageIcon imageIcon = new ImageIcon(dimg);
           label.setIcon(imageIcon);
           label.setBounds(pos, 300, 300, 300);
-          pos += 80;
+          pos += 100;
           add(label);
           repaint();
 
