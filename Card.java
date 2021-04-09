@@ -19,9 +19,9 @@ public class Card {
         else{
             this.cardValue = newcardValue;
 
-        if(!newcardSuit.isEmpty()){
-            this.cardSuit = newcardSuit;
-        }
+    
+        this.cardSuit = newcardSuit;
+        
 
         if(newcardValue == 1){
             this.specCard = "Ace";

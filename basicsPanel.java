@@ -14,6 +14,9 @@ import javax.imageio.ImageIO;
 import java.awt.Container;
 import java.io.File;
 import java.io.IOException;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 public class basicsPanel extends JPanel{
   private JButton bet, hit;
@@ -112,7 +115,7 @@ public class basicsPanel extends JPanel{
         String value = String.valueOf(cardvalue);
 
         //get the card png (easier way and less code...)
-        if(suit.equals("Heart")){
+        if(suit.equals("Hearts")){
           png = "Cards\\" + value + "H" + ".png";
         }
         else if(suit.equals("Spades")){
@@ -125,20 +128,25 @@ public class basicsPanel extends JPanel{
           png = "Cards\\" + value + "D" + ".png";
         }
 
-        /*
         //todo: add the png to jpanel
         //code goes here
         BufferedImage img = null;
+        JLabel label = new JLabel();
         try {
-          JLabel picLabel = new JLabel(new ImageIcon(ImageIO.read(new File(png))));
-          picLabel.setPreferredSize(new Dimension(100, 100));
+          img = ImageIO.read(new File(png));
   
-          add(picLabel);
+          //scaling the image to a smaller size and setting it as imageicon for jLabel
+          Image dimg = img.getScaledInstance(100, 120, Image.SCALE_SMOOTH);
+          ImageIcon imageIcon = new ImageIcon(dimg);
+          label.setIcon(imageIcon);
+          add(label);
+
+
           System.out.println("Image opened " + png);
         } catch (IOException e) {
           System.out.println("Error = " + e);
   
-        } */
+        } 
 
       }   //end of if statement
       }   //end of for loop
@@ -148,13 +156,14 @@ public class basicsPanel extends JPanel{
 
 
 
-
+/*
     public void paintComponent( Graphics g )
     {
         g.setColor(Color.white);
         g.fillRect(280, 360 , 100, 150);
         g.fillRect(400, 360 , 100, 150);
     }
+*/
 
 }
 

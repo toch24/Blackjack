@@ -27,7 +27,6 @@ public void newGame(){
     
 
     deck.shuffle(deck.getDeck());
-    deck.printDeck();
 
     //giving two cards to each player
     bot1.addCard(deck.nextCard());
