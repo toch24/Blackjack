@@ -108,8 +108,14 @@ public class basicsPanel extends JPanel{
                     //System.out.println(userBet);
                     if(userBet > 0)
                     {
-                        Pot.addToPot(bet);                               // Add to the pot.
                         game.setUserBet(bet);                           // This sets the current bet from the user for comparison purposes
+                        game.setHighestBet();                           // Setting the highest bet
+
+                        //TODO: if the bet is less than the highest bet, re-prompt the user for a new bet
+
+
+                        Pot.addToPot(bet);                               // Add to the pot.
+                                                  
                         /* int checkPot = Pot.getPot();
                         System.out.println(checkPot);  */
                         betFrame.dispose();                              // Forse the JFrame closed when we successfully make a bet.

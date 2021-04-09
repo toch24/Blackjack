@@ -17,7 +17,11 @@ public class Blackjack{
     private Bot dealer = new Bot();
     private Player player = new Player();
     private Deck deck = new Deck();
+
     int players = 1;
+    private boolean raise = false;
+    private boolean match = false;
+    private boolean fold = false;
 
     public Blackjack(){
         newGame();
@@ -44,25 +48,75 @@ public void newGame(){
     player.addCard(deck.nextCard());
     player.addCard(deck.nextCard());
 
-    //bot1 plays
-    if(players == 1){
-      //add logic for bot1 to make moves and then eventually pass
-
-      try
-      {
-          Thread.sleep(1000);
-      }
-      catch(InterruptedException ex)
-      {
-          Thread.currentThread().interrupt();
-      }
-      players++;
-    }
-
 
 
     System.out.println("Bots1 hand is: "+getBotCards(1));
 
+}
+
+public void play(){
+        //bot1 plays
+        if(players == 1){
+            //add logic for bot1 to make moves and then eventually pass
+      
+            //resetting values for each player turn
+            raise = false;
+            match = false;
+            fold = false;
+            try
+            {
+                Thread.sleep(1000);
+                if(bot1.getBotTotal() >= 16){
+                    //match the bet or raise the bet
+                    if(bot1.getCurrentBotBet() < Pot.getHighestBet() && bot1.getBotWallet() > Pot.getHighestBet()){
+                        if(bot1.getBotTotal() <= 21){
+                            //raise the bet
+                            raise = true;
+                            int rBet;
+                            //get the highest bet
+                            rBet = Pot.getHighestBet();
+                            //getting the difference
+                            rBet = bot1.getBotWallet() - rBet;
+                            //raising half, need more implementation (I'm not sure how much to raise...)
+                            if(rBet/2 > 0) rBet = rBet/2;
+                            else rBet = Pot.getHighestBet();
+      
+                            bot1.setCurrentBotBet(rBet);
+                            int newWallet = bot1.getBotWallet() - rBet;
+                            bot1.setBotWallet(newWallet);
+      
+                        }
+                        else{
+                            //match the bet
+                            match = true; 
+                            int mBet;
+                            mBet = Pot.getHighestBet();
+                            bot1.setCurrentBotBet(mBet);
+                            int newWallet = bot1.getBotWallet() - mBet;
+                            bot1.setBotWallet(newWallet);
+      
+      
+                        }
+      
+      
+                    }
+                    else{
+                        //fold
+                        fold = true;
+                    }
+                }
+                else{
+                  //fold
+                  fold = true;
+      
+                }
+            }
+            catch(InterruptedException ex)
+            {
+                Thread.currentThread().interrupt();
+            }
+            players++;
+          }
 }
 
 public void setUserBet(int bet){
@@ -123,6 +177,19 @@ public boolean setHighestBet(){
     else if(bet4 >= bet1 && bet4 >= bet2 && bet4 >= bet3){ Pot.setHighestBet(bet4); return true;} 
  
     return false;
+}
+
+public boolean getRaise(){
+
+    return raise;
+}
+public boolean getMatch(){
+
+    return match;
+}
+public boolean getFold(){
+    
+    return fold;
 }
 
 } //end of BlackJack class

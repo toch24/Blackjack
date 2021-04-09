@@ -26,6 +26,10 @@ public class Bot {
 		}
 	}
 
+	public int getBotWallet(){
+		return botWallet;
+	}
+
 	//Automate the bots moves. Passing deck as parameter so that it can take a card if needed
 	public void botPlay(Deck deck){
 		if(hand.total() <= 16){
@@ -52,4 +56,12 @@ public class Bot {
 		return botBet;
 	}
 
+	public int getBotTotal(){
+
+		return hand.total();
+	}
+
+	public void setBotWallet(int newWallet){
+		botWallet = newWallet;
+	}
 }
