@@ -27,11 +27,14 @@ public void newGame(){
     //giving two cards to each player
     bot1.addCard(deck.nextCard());
     bot1.addCard(deck.nextCard());
+    bot1.botPlay(deck);
 
     bot2.addCard(deck.nextCard());
     bot2.addCard(deck.nextCard());
+    bot2.botPlay(deck);
 
     dealer.addCard(deck.nextCard());
+    dealer.botPlay(deck);
     //dealer.addCard(deck.nextCard());
 
     player.addCard(deck.nextCard());
