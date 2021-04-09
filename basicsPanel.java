@@ -133,8 +133,7 @@ public class basicsPanel extends JPanel{
           png = "Cards\\" + value + "D" + ".png";
         }
 
-        //todo: add the png to jpanel
-        //code goes here
+        //adding the card images to the JPanel
         BufferedImage img = null;
         JLabel label = new JLabel();
         try {
@@ -155,9 +154,57 @@ public class basicsPanel extends JPanel{
   
         } 
 
-      }   //end of if statement
-      }   //end of for loop
+      }   //end of if statement for c != null
+      }   //end of for loop for iteration of each card in hand
 
+
+        //set bot cards
+
+        int posbot = 20;
+        //iterating each bot
+        for(int i = 1; i <= 3; i++){
+          cards = game.getBotCards(i);
+          for(Card c : cards){
+          //If the card is not null, then get all the data. (Need this error checking because Card array is initialized with size of 14)
+         if(c != null){
+          cardvalue = c.getcardValue();
+          suit = c.getcardSuit();
+          String png = "";                                     //name of the png file
+          String value = String.valueOf(cardvalue);
+
+          //for bot 1 and bot 2, just show the amount of cards with image of the back of the card
+          BufferedImage img = null;
+          JLabel label = new JLabel();
+          try {
+            img = ImageIO.read(new File("Cards\\blue_back.png"));
+    
+            //TODO: Rotate the image clockwise for i = 1 and counterclockwise for i = 2
+            //scaling the image to a smaller size and setting it as imageicon for jLabel
+            Image dimg = img.getScaledInstance(100, 120, Image.SCALE_SMOOTH);
+            ImageIcon imageIcon = new ImageIcon(dimg);
+            label.setIcon(imageIcon);
+            if(i == 1) label.setBounds(posbot, 150, 200, 200);
+            else label.setBounds(0,0,0,0);      //placeholder, NEED TO FIX
+            
+            posbot += 80;
+            add(label);
+  
+
+          } catch (IOException e) {
+            System.out.println("Error = " + e);
+    
+          } 
+  
+
+
+
+
+          } //end of if statement for c != null
+
+
+          } //end of for loop
+
+        }
 
       }
 

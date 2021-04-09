@@ -11,6 +11,11 @@ public class Bot {
 		hand.addCard(card);
 	}
 
+	public Hand getHand(){
+
+		return hand;
+	}
+
     //Return true if the bot has a blackjack
 	public boolean hasBlackjack(){
 		if (hand.total() == 21){

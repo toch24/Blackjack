@@ -22,10 +22,6 @@ public class Blackjack{
     }
 
 public void newGame(){
-    //setting the deck
-    
-    
-
     deck.shuffle(deck.getDeck());
 
     //giving two cards to each player
@@ -61,6 +57,20 @@ public Card[] getPlayerCards(){
 
 public void playerHit(){
     player.addCard(deck.nextCard());
+}
+
+public Card[] getBotCards(int b){
+    Hand hand;
+    
+    switch(b){
+        case 1: hand = bot1.getHand();
+                return hand.getCards();
+        case 2: hand = bot2.getHand();
+                return hand.getCards();
+        case 3: hand = dealer.getHand();
+                return hand.getCards();
+    }
+    return null;
 }
 
 
