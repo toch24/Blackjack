@@ -45,20 +45,18 @@ public void newGame(){
     if(players == 1){
       //add logic for bot1 to make moves and then eventually pass
 
-      try
-      {
-          Thread.sleep(1000);
-      }
-      catch(InterruptedException ex)
-      {
-          Thread.currentThread().interrupt();
-      }
       players++;
     }
 
+    //bot2 plays
+    if(players == 3){
+      players++;
+    }
 
-
-    System.out.println("Bots1 hand is: "+getBotCards(1));
+    //Dealers turn
+    if(players == 4){
+      
+    }
 
 }
 
