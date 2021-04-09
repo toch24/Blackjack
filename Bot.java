@@ -4,10 +4,16 @@ public class Bot {
 
     //A new hand for the bot
     private Hand hand = new Hand();
+	private int botBet;
 
     //Add a card to hand
 	public void addCard(Card card) {
 		hand.addCard(card);
+	}
+
+	public Hand getHand(){
+
+		return hand;
 	}
 
     //Return true if the bot has a blackjack

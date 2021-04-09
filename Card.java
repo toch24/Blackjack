@@ -19,24 +19,24 @@ public class Card {
         else{
             this.cardValue = newcardValue;
 
-        if(!newcardSuit.isEmpty()){
-            this.cardSuit = newcardSuit;
-        }
+    
+        this.cardSuit = newcardSuit;
+        
 
         if(newcardValue == 1){
             this.specCard = "Ace";
         }
         else if(newcardValue == 11){
             this.specCard = "Jack";
-            this.cardValue = 11;
+            this.cardValue = 10;
         }
         else if(newcardValue == 12){
             this.specCard = "Queen";
-            this.cardValue = 12;
+            this.cardValue = 10;
         }
         else if(newcardValue == 13){
             this.specCard = "King";
-            this.cardValue = 13;
+            this.cardValue = 10;
         }
         } //end of else
     }

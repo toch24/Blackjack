@@ -10,18 +10,32 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.border.Border;
 import javax.swing.text.AbstractDocument.Content;
+import javax.imageio.ImageIO;
+import java.awt.Container;
+import java.io.File;
+import java.io.IOException;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 public class basicsPanel extends JPanel{
-  private JButton bet;
+  private JButton bet, hit;
   private JTextField betField;                      // Using this to get the input from the bets i guess
   private int userBet;
   private Blackjack game = new Blackjack();
   private Card[] cards;
 
     public basicsPanel(){
-      //setCards();                                   //sets the cards images
+      setCards();                                   //sets the cards images
+
+      //setting layout to null, default layout is flow layout
+      setLayout(null);
       bet = new JButton("Bet");
-      bet.setBounds(350,400,100,50);
+      bet.setBounds(300,200,100,50);
+
+      hit = new JButton("Draw");
+      hit.setBounds(400,200,100,50);
+
       add(bet);
         // Create functionality for the bet button, this will let players place bets.
       bet.addActionListener(new ActionListener(){
@@ -72,12 +86,29 @@ public class basicsPanel extends JPanel{
             });
         }
       });
-    }
+
+
+      //add hit button
+      add(hit);
+    hit.addActionListener(new ActionListener(){
+      public void actionPerformed(ActionEvent e) {
+        //draw a hard if clicked
+          game.playerHit();
+          String msg = "Card drawn!";
+          JOptionPane.showMessageDialog(null, msg);
+          //update the set of cards for player
+          setCards();
+
+      }
+    });
+
+    } //end of basicsPanel class
 
 
     public void setCards(){
       int cardvalue;
       String suit;
+      int pos = 250;
 
       cards = game.getPlayerCards();
       for(Card c : cards){
@@ -85,41 +116,108 @@ public class basicsPanel extends JPanel{
         if(c != null){
         cardvalue = c.getcardValue();
         suit = c.getcardSuit();
-        String png;                                     //name of the png file
+        String png = "";                                     //name of the png file
         String value = String.valueOf(cardvalue);
 
         //get the card png (easier way and less code...)
-        if(suit.equals("Heart")){
-          png = value + "H" + ".png";
+        if(suit.equals("Hearts")){
+          png = "Cards\\" + value + "H" + ".png";
         }
         else if(suit.equals("Spades")){
-          png = value + "S" + ".png";
+          png = "Cards\\" + value + "S" + ".png";
         }
         else if(suit.equals("Clubs")){
-          png = value + "C" + ".png";
+          png = "Cards\\" + value + "C" + ".png";
         }
         else if(suit.equals("Diamonds")){
-          png = value + "D" + ".png";
+          png = "Cards\\" + value + "D" + ".png";
         }
 
-        //todo: add the png to jpanel
-        //code goes here
+        //adding the card images to the JPanel
+        BufferedImage img = null;
+        JLabel label = new JLabel();
+        try {
+          img = ImageIO.read(new File(png));
 
+          //scaling the image to a smaller size and setting it as imageicon for jLabel
+          Image dimg = img.getScaledInstance(100, 120, Image.SCALE_SMOOTH);
+          ImageIcon imageIcon = new ImageIcon(dimg);
+          label.setIcon(imageIcon);
+          label.setBounds(pos, 300, 300, 300);
+          pos += 100;
+          add(label);
+          repaint();
+
+
+          System.out.println("Image opened " + png);
+        } catch (IOException e) {
+          System.out.println("Error = " + e);
+
+        }
+
+      }   //end of if statement for c != null
+      }   //end of for loop for iteration of each card in hand
+
+
+        //set bot cards
+
+        int posbot = 20;
+        //iterating each bot
+        for(int i = 1; i <= 3; i++){
+          cards = game.getBotCards(i);
+          for(Card c : cards){
+          //If the card is not null, then get all the data. (Need this error checking because Card array is initialized with size of 14)
+         if(c != null){
+          cardvalue = c.getcardValue();
+          suit = c.getcardSuit();
+          String png = "";                                     //name of the png file
+          String value = String.valueOf(cardvalue);
+
+          //for bot 1 and bot 2, just show the amount of cards with image of the back of the card
+          BufferedImage img = null;
+          JLabel label = new JLabel();
+          try {
+            img = ImageIO.read(new File("Cards\\blue_back.png"));
+
+            //TODO: Rotate the image clockwise for i = 1 and counterclockwise for i = 2
+            //scaling the image to a smaller size and setting it as imageicon for jLabel
+            Image dimg = img.getScaledInstance(100, 120, Image.SCALE_SMOOTH);
+            ImageIcon imageIcon = new ImageIcon(dimg);
+            label.setIcon(imageIcon);
+            if(i == 1) label.setBounds(posbot, 150, 200, 200);
+            else label.setBounds(0,0,0,0);      //placeholder, NEED TO FIX
+
+            posbot += 80;
+            add(label);
+
+
+          } catch (IOException e) {
+            System.out.println("Error = " + e);
+
+          }
+
+
+
+
+
+          } //end of if statement for c != null
+
+
+          } //end of for loop
+
+        }
 
       }
-      }
-
-
-      }
 
 
 
-
+/*
     public void paintComponent( Graphics g )
     {
         g.setColor(Color.white);
         g.fillRect(280, 360 , 100, 150);
         g.fillRect(400, 360 , 100, 150);
     }
+*/
 
 }
