@@ -162,9 +162,10 @@ public class basicsPanel extends JPanel{
 
         //set bot cards
 
-        int posbot = 20;
+        int posbot = 150;
+        int posbot2 = 150;
         //iterating each bot
-        for(int i = 1; i <= 3; i++){
+        for(int i = 1; i <= 2; i++){
           cards = game.getBotCards(i);
           for(Card c : cards){
           //If the card is not null, then get all the data. (Need this error checking because Card array is initialized with size of 14)
@@ -180,15 +181,38 @@ public class basicsPanel extends JPanel{
           try {
             img = ImageIO.read(new File("Cards/blue_back.png"));
 
+
+            int height = img.getHeight();
+            int width = img.getWidth();
+            //rotated image (switching height and width)
+            BufferedImage rotateImg = new BufferedImage(height, width, img.getType());
+            for(int y = 0; y < height; y++){
+              for(int x = 0; x < width; x ++){
+                if(i ==1){
+                  rotateImg.setRGB(y, (width-1)-x, img.getRGB(x, y));
+                }
+              else{
+                rotateImg.setRGB((height-1)-y, x, img.getRGB(x, y));
+              }
+                }
+              }
+
             //TODO: Rotate the image clockwise for i = 1 and counterclockwise for i = 2
             //scaling the image to a smaller size and setting it as imageicon for jLabel
-            Image dimg = img.getScaledInstance(100, 120, Image.SCALE_SMOOTH);
+            Image dimg = rotateImg.getScaledInstance(120, 100, Image.SCALE_SMOOTH);
             ImageIcon imageIcon = new ImageIcon(dimg);
+
+
+
             label.setIcon(imageIcon);
-            if(i == 1) label.setBounds(posbot, 150, 200, 200);
-            else label.setBounds(0,0,0,0);      //placeholder, NEED TO FIX
+            if(i == 1) label.setBounds(20, posbot, 200, 200);
+            else {
+              label.setBounds(600,posbot2,200,200);
+              posbot2 += 80;
+            }
 
             posbot += 80;
+
             add(label);
 
 
