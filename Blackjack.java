@@ -8,6 +8,7 @@ import java.awt.*;
 import javax.swing.*;
 
 
+
 import java.util.Scanner;
 
 public class Blackjack{
@@ -16,6 +17,7 @@ public class Blackjack{
     private Bot dealer = new Bot();
     private Player player = new Player();
     private Deck deck = new Deck();
+    int players = 1;
 
     public Blackjack(){
         newGame();
@@ -23,6 +25,8 @@ public class Blackjack{
 
 public void newGame(){
     deck.shuffle(deck.getDeck());
+
+    System.out.println("The game has started");
 
     //giving two cards to each player
     bot1.addCard(deck.nextCard());
@@ -39,6 +43,25 @@ public void newGame(){
 
     player.addCard(deck.nextCard());
     player.addCard(deck.nextCard());
+
+    //bot1 plays
+    if(players == 1){
+      //add logic for bot1 to make moves and then eventually pass
+
+      try
+      {
+          Thread.sleep(1000);
+      }
+      catch(InterruptedException ex)
+      {
+          Thread.currentThread().interrupt();
+      }
+      players++;
+    }
+
+
+
+    System.out.println("Bots1 hand is: "+getBotCards(1));
 
 }
 

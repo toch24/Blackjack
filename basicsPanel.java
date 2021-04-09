@@ -19,11 +19,13 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class basicsPanel extends JPanel{
-  private JButton bet, hit;
+  private JButton bet, hit, pass;
   private JTextField betField;                      // Using this to get the input from the bets i guess
   private int userBet;
   private Blackjack game = new Blackjack();
   private Card[] cards;
+  //private int players = 1;
+  private JLabel wait1, wait2;
 
     public basicsPanel(){
       setCards();                                   //sets the cards images
@@ -32,12 +34,49 @@ public class basicsPanel extends JPanel{
       setLayout(null);
       bet = new JButton("Bet");
       bet.setBounds(300,200,100,50);
+      bet.setEnabled(false);
 
       hit = new JButton("Draw");
       hit.setBounds(400,200,100,50);
+      hit.setEnabled(false);
 
       add(bet);
-        // Create functionality for the bet button, this will let players place bets.
+
+      pass = new JButton("Pass");
+      pass.setBounds(350,250,100,50);
+      pass.setEnabled(false);
+      add(pass);
+
+      wait1 = new JLabel("Waiting for computer player 1 to make moves");
+      wait1.setBounds(300,300,200,50);
+      add(wait1);
+
+      wait2 = new JLabel("Waiting for computer player 2 to make moves");
+      wait2.setBounds(300,300,200,50);
+      wait2.setVisible(false);
+      add(wait2);
+
+
+      //Enable buttons for human player once first bot plays
+      if(game.players == 2){
+        wait1.setVisible(false);
+        bet.setEnabled(true);
+        hit.setEnabled(true);
+        pass.setEnabled(true);
+      }
+
+      pass.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent e) {
+        bet.setEnabled(false);
+        hit.setEnabled(false);
+        pass.setEnabled(false);
+        wait2.setVisible(true);
+        game.players++;
+        }
+      });
+
+
+      // Create functionality for the bet button, this will let players place bets.
       bet.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
             // Make a new frame to display the betting area.
@@ -172,6 +211,9 @@ public class basicsPanel extends JPanel{
          if(c != null){
           cardvalue = c.getcardValue();
           suit = c.getcardSuit();
+          System.out.println("The bot's card value is: "+cardvalue);
+          System.out.println("The bot's card suit is: "+suit);
+
           String png = "";                                     //name of the png file
           String value = String.valueOf(cardvalue);
 
@@ -226,7 +268,7 @@ public class basicsPanel extends JPanel{
 
         //Set Dealer cards
         int dpos = 250;
-        cards = game.getBotCards(2);
+        cards = game.getBotCards(3);
         boolean first_card = true;
         for(Card c : cards){
           //If the card is not null, then get all the data. (Need this error checking because Card array is initialized with size of 14)
