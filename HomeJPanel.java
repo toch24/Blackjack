@@ -72,7 +72,6 @@ public class HomeJPanel extends JPanel
             basicsFrame.setSize( 800, 600 ); 						//set frame size
             basicsFrame.setResizable(false);
             setVisible(true);
-            basicsFrame.setVisible( true ); 						//display frame
 
             // Adding the buyIn frame and its functionality
             JFrame buyInFrame = new JFrame("Buy In");
@@ -105,6 +104,7 @@ public class HomeJPanel extends JPanel
                     //System.out.println(userBet);
                     if(bet >= 100)
                     {
+                        basicsFrame.setVisible( true );                     //display the game
                         Pot.addToPot(bet);                                  // Add to the pot.
                         Player.setWallet(bet);                              // This sets the current bet from the user for comparison purposes
                         /* int checkWallet = Player.getWallet();
