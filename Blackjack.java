@@ -32,7 +32,7 @@ public void newGame(){
     bot2.addCard(deck.nextCard());
 
     dealer.addCard(deck.nextCard());
-    dealer.addCard(deck.nextCard());
+    //dealer.addCard(deck.nextCard());
 
     player.addCard(deck.nextCard());
     player.addCard(deck.nextCard());
@@ -61,7 +61,7 @@ public void playerHit(){
 
 public Card[] getBotCards(int b){
     Hand hand;
-    
+
     switch(b){
         case 1: hand = bot1.getHand();
                 return hand.getCards();
