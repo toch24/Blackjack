@@ -134,6 +134,7 @@ public class basicsPanel extends JPanel{
         }
 
         //adding the card images to the JPanel
+        //Issue need fixing... 2nd card and other cards are flipped
         BufferedImage img = null;
         JLabel label = new JLabel();
         try {
@@ -146,6 +147,7 @@ public class basicsPanel extends JPanel{
           label.setBounds(pos, 300, 300, 300);
           pos += 80;
           add(label);
+          repaint();
 
 
           System.out.println("Image opened " + png);
