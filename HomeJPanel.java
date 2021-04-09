@@ -101,7 +101,7 @@ public class HomeJPanel extends JPanel
                     //System.out.println(userBet);
                     if(bet >= 100)
                     {
-                          //add basicsPanel
+                        //add basicsPanel
                         JPanel basicsPanel = new basicsPanel();
                         basicsFrame.add( basicsPanel ); 					//add screensaverJPanel to frame
                         basicsPanel.setBackground( Color.green.darker());

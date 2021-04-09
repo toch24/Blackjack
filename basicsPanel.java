@@ -134,6 +134,7 @@ public class basicsPanel extends JPanel{
     
       //playing
       playerturns();
+     
     } //end of basicsPanel class
 
     public void playerturns(){

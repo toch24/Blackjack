@@ -108,7 +108,7 @@ public boolean play(int players){
                 }
             }
             catch(InterruptedException ex)
-            {
+           {
                 Thread.currentThread().interrupt();
             }
           //  players++;
@@ -116,6 +116,11 @@ public boolean play(int players){
             return true;
           }
 
+
+    //bot2 plays
+
+
+    //dealer
 
    return false;
 }
