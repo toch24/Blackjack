@@ -45,7 +45,7 @@ public void newGame(){
     player.addCard(deck.nextCard());
     player.addCard(deck.nextCard());
 
-    Deck.printUsedCards();
+    //Deck.printUsedCards();
 
     if(players == 1){
       //add logic for bot1 to make moves and then eventually pass
