@@ -21,6 +21,9 @@ public class HomeJPanel extends JPanel
    private JButton button3;
    private JButton button2;
 
+   private int userBuyIn;
+   JTextField buyInField;
+
    public HomeJPanel()
    {
       setLayout( new FlowLayout() ); 						//set frame layout
@@ -62,15 +65,61 @@ public class HomeJPanel extends JPanel
             JFrame basicsFrame = new JFrame("Basic BlackJack");
             JPanel basicsPanel = new basicsPanel();
             
-            basicsFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+            basicsFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
             basicsFrame.add( basicsPanel ); 					//add screensaverJPanel to frame
             basicsFrame.setBackground( Color.green.darker()); 				//set frame background color
             basicsPanel.setBackground( Color.green.darker());
             basicsFrame.setSize( 800, 600 ); 						//set frame size
             basicsFrame.setResizable(false);
-            setVisible(false);
+            setVisible(true);
             basicsFrame.setVisible( true ); 						//display frame
 
+            // Adding the buyIn frame and its functionality
+            JFrame buyInFrame = new JFrame("Buy In");
+            JPanel buyInPanel = new JPanel();
+            JLabel buyInLabel = new JLabel("Please determine your buy in value (>= 100): ");
+            buyInField = new JTextField();
+
+            buyInFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+            buyInFrame.add( buyInPanel );
+            buyInFrame.setResizable(false);
+            buyInFrame.setSize(300,100);
+
+            // Create JTextField to allow for user inputs
+            buyInField = new JTextField(4);
+            buyInField.setBounds(50,100, 200,30);
+            buyInField.setVisible(true);
+
+            // add the textfield to the JPanel with the label
+            buyInPanel.add(buyInLabel);
+            buyInPanel.add(buyInField);
+            
+            buyInFrame.setVisible(true);                                   // Make it visible.
+            buyInFrame.toFront();                                          // Make it stand out at something that needs to be interacted with.
+            buyInFrame.requestFocus();                                     // Focus the BuyInFrame so the user knows to enter something.
+
+            buyInField.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    userBuyIn = Integer.parseInt(buyInField.getText());     // Take the user bet.
+                    int bet = userBuyIn;
+                    //System.out.println(userBet);
+                    if(bet >= 100)
+                    {
+                        Pot.addToPot(bet);                                  // Add to the pot.
+                        Player.setWallet(bet);                              // This sets the current bet from the user for comparison purposes
+                        /* int checkWallet = Player.getWallet();
+                        System.out.println(checkWallet); */
+                        buyInFrame.dispose();                               // Forse the JFrame closed when we successfully make a bet.
+                        String betAddress = "Buy In Successful.";           // Just let the user know their bet was successfully placed, we can take this out if you guys want.
+                        JOptionPane.showMessageDialog(null, betAddress);
+                    }
+                    else
+                    {   // Use this to error check, the user cannot make bets < 0.
+                        String error = "Error: Please Input A Value Greater Than Or Equal To 100";
+                        JOptionPane.showMessageDialog(null, error);
+                    }
+                }
+            });
           }
       });
 
