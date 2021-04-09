@@ -1,10 +1,14 @@
+import java.util.Random;
+
 public class Bot {
     //Question... Do we need a separate class for the dealer or do we take the dealer as another bot?
 
 
     //A new hand for the bot
     private Hand hand = new Hand();
+	private Random rand;
 	private int botBet;
+	private static int botWallet;
 
     //Add a card to hand
 	public void addCard(Card card) {
@@ -33,6 +37,16 @@ public class Bot {
 		}
 
 	}
+
+	public static void setBotBuyIn(){							// Set the bot buyin to equal the players and add the buyin value to the total pot
+		botWallet = Player.getWallet();
+		Pot.addToPot(botWallet);
+	}
+
+	public void getBotBet(){						// W.I.P
+		rand = new Random();
+	}
+
 
 
 }
