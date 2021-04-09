@@ -121,18 +121,19 @@ public class basicsPanel extends JPanel{
 
         //get the card png (easier way and less code...)
         if(suit.equals("Hearts")){
-          png = "Cards\\" + value + "H" + ".png";
+          png = "Cards/" + value + "H" + ".png";
         }
         else if(suit.equals("Spades")){
-          png = "Cards\\" + value + "S" + ".png";
+          png = "Cards/" + value + "S" + ".png";
         }
         else if(suit.equals("Clubs")){
-          png = "Cards\\" + value + "C" + ".png";
+          png = "Cards/" + value + "C" + ".png";
         }
         else if(suit.equals("Diamonds")){
-          png = "Cards\\" + value + "D" + ".png";
+          png = "Cards/" + value + "D" + ".png";
         }
 
+          //System.out.println("Png is: " +png);
         //adding the card images to the JPanel
         BufferedImage img = null;
         JLabel label = new JLabel();
@@ -177,7 +178,7 @@ public class basicsPanel extends JPanel{
           BufferedImage img = null;
           JLabel label = new JLabel();
           try {
-            img = ImageIO.read(new File("Cards\\blue_back.png"));
+            img = ImageIO.read(new File("Cards/blue_back.png"));
 
             //TODO: Rotate the image clockwise for i = 1 and counterclockwise for i = 2
             //scaling the image to a smaller size and setting it as imageicon for jLabel
