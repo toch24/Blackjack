@@ -27,11 +27,14 @@ public class basicsPanel extends JPanel{
 
     public basicsPanel(){
       setCards();                                   //sets the cards images
+
+      //setting layout to null, default layout is flow layout
+      setLayout(null);
       bet = new JButton("Bet");
-      bet.setBounds(350,400,100,50);
+      bet.setBounds(300,200,100,50);
 
       hit = new JButton("Draw");
-      hit.setBounds(350,500,100,50);
+      hit.setBounds(400,200,100,50);
 
       add(bet);
         // Create functionality for the bet button, this will let players place bets.
@@ -104,6 +107,7 @@ public class basicsPanel extends JPanel{
     public void setCards(){
       int cardvalue;
       String suit;
+      int pos = 300;
 
       cards = game.getPlayerCards();
       for(Card c : cards){
@@ -139,6 +143,8 @@ public class basicsPanel extends JPanel{
           Image dimg = img.getScaledInstance(100, 120, Image.SCALE_SMOOTH);
           ImageIcon imageIcon = new ImageIcon(dimg);
           label.setIcon(imageIcon);
+          label.setBounds(pos, 300, 300, 300);
+          pos += 80;
           add(label);
 
 
