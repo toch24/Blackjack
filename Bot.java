@@ -1,9 +1,6 @@
 import java.util.Random;
 
 public class Bot {
-    //Question... Do we need a separate class for the dealer or do we take the dealer as another bot?
-
-
     //A new hand for the bot
     private Hand hand = new Hand();
 	private Random rand;
