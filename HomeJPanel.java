@@ -63,12 +63,9 @@ public class HomeJPanel extends JPanel
       button1.addActionListener(new ActionListener() { 		
           public void actionPerformed(ActionEvent e) {
             JFrame basicsFrame = new JFrame("Basic BlackJack");
-            JPanel basicsPanel = new basicsPanel();
-            
             basicsFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
-            basicsFrame.add( basicsPanel ); 					//add screensaverJPanel to frame
             basicsFrame.setBackground( Color.green.darker()); 				//set frame background color
-            basicsPanel.setBackground( Color.green.darker());
+    
             basicsFrame.setSize( 800, 600 ); 						//set frame size
             basicsFrame.setResizable(false);
             setVisible(true);
@@ -104,7 +101,12 @@ public class HomeJPanel extends JPanel
                     //System.out.println(userBet);
                     if(bet >= 100)
                     {
+                          //add basicsPanel
+                        JPanel basicsPanel = new basicsPanel();
+                        basicsFrame.add( basicsPanel ); 					//add screensaverJPanel to frame
+                        basicsPanel.setBackground( Color.green.darker());
                         basicsFrame.setVisible( true );                     //display the game
+                        
                         Pot.addToPot(bet);                                  // Add to the pot.
                         Player.setWallet(bet);                              // This sets the current bet from the user for comparison purposes
                         /* int checkWallet = Player.getWallet();
@@ -120,6 +122,8 @@ public class HomeJPanel extends JPanel
                     }
                 }
             });
+
+          
           }
       });
 

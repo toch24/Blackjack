@@ -24,8 +24,8 @@ public class basicsPanel extends JPanel{
   private int userBet;
   private Blackjack game = new Blackjack();
   private Card[] cards;
-  //private int players = 1;
-  private JLabel wait1, wait2;
+  private int players = 1;
+  private JLabel wait1, wait2, wait3;
 
     public basicsPanel(){
       setCards();                                   //sets the cards images
@@ -47,23 +47,6 @@ public class basicsPanel extends JPanel{
       pass.setEnabled(false);
       add(pass);
 
-      wait1 = new JLabel("Waiting for computer player 1 to make moves");
-      wait1.setBounds(300,300,200,50);
-      add(wait1);
-
-      wait2 = new JLabel("Waiting for computer player 2 to make moves");
-      wait2.setBounds(300,300,200,50);
-      wait2.setVisible(false);
-      add(wait2);
-
-
-      //Enable buttons for human player once first bot plays
-      if(game.players == 2){
-        wait1.setVisible(false);
-        bet.setEnabled(true);
-        hit.setEnabled(true);
-        pass.setEnabled(true);
-      }
 
       pass.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
@@ -71,7 +54,7 @@ public class basicsPanel extends JPanel{
         hit.setEnabled(false);
         pass.setEnabled(false);
         wait2.setVisible(true);
-        game.players++;
+        System.out.println("On player: "+ players +" In panel");
         }
       });
 
@@ -147,7 +130,66 @@ public class basicsPanel extends JPanel{
       }
     });
 
+
+    
+      //playing
+      playerturns();
     } //end of basicsPanel class
+
+    public void playerturns(){
+      if(players == 1){
+      wait1 = new JLabel("Waiting for computer player 1 to make moves");
+      wait1.setBounds(300,300,200,50);
+      wait1.setVisible(true);
+      add(wait1);
+      boolean play = game.play(players);
+      if(play){
+        wait1.setVisible(false);
+        players++;
+      }
+      else System.out.println("Computer player 1 is having some problems...");
+
+
+      }
+
+      if(players == 3){
+      wait2 = new JLabel("Waiting for computer player 2 to make moves");
+      wait2.setBounds(300,300,200,50);
+      wait2.setVisible(true);
+      add(wait2);
+
+      boolean play = game.play(players);
+      if(play){
+        wait2.setVisible(false);
+        players++;
+      }
+      else System.out.println("Computer player 2 is having some problems...");
+      }
+
+      if(players == 4){
+        wait3 = new JLabel("Waiting for dealer to make moves");
+        wait3.setBounds(300,300,200,50);
+        wait3.setVisible(true);
+        add(wait3);
+  
+        boolean play = game.play(players);
+        if(play){
+          wait3.setVisible(false);
+          players = 1;
+        }
+        else System.out.println("Dealer is having some problems...");
+      }
+
+
+      //Enable buttons for human player once first bot plays
+      if(players == 2){
+        wait1.setVisible(false);
+        bet.setEnabled(true);
+        hit.setEnabled(true);
+        pass.setEnabled(true);
+        players++;
+      }
+    }
 
 
     public void setCards(){

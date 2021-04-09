@@ -18,13 +18,13 @@ public class Blackjack{
     private Player player = new Player();
     private Deck deck = new Deck();
 
-    int players = 1;
+//    int players = 1;
     private boolean raise = false;
     private boolean match = false;
     private boolean fold = false;
 
     public Blackjack(){
-        newGame();
+      newGame();
     }
 
 public void newGame(){
@@ -48,13 +48,9 @@ public void newGame(){
     player.addCard(deck.nextCard());
     player.addCard(deck.nextCard());
 
-
-
-    System.out.println("Bots1 hand is: "+getBotCards(1));
-
 }
 
-public void play(){
+public boolean play(int players){
         //bot1 plays
         if(players == 1){
             //add logic for bot1 to make moves and then eventually pass
@@ -115,8 +111,13 @@ public void play(){
             {
                 Thread.currentThread().interrupt();
             }
-            players++;
+          //  players++;
+
+            return true;
           }
+
+
+   return false;
 }
 
 public void setUserBet(int bet){
@@ -191,5 +192,6 @@ public boolean getFold(){
     
     return fold;
 }
+
 
 } //end of BlackJack class
