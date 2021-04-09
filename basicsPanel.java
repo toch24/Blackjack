@@ -220,17 +220,68 @@ public class basicsPanel extends JPanel{
             System.out.println("Error = " + e);
 
           }
+        } //end of if statement for c != null
+      } //end of for loop
+}
+
+        //Set Dealer cards
+        int dpos = 250;
+        cards = game.getBotCards(2);
+        boolean first_card = true;
+        for(Card c : cards){
+          //If the card is not null, then get all the data. (Need this error checking because Card array is initialized with size of 14)
+          if(c != null){
+          cardvalue = c.getcardValue();
+          suit = c.getcardSuit();
+          String png = "";                                     //name of the png file
+          String value = String.valueOf(cardvalue);
+
+          //get the card png (easier way and less code...)
+
+          if(suit.equals("Hearts")){
+            png = "Cards/" + value + "H" + ".png";
+          }
+          else if(suit.equals("Spades")){
+            png = "Cards/" + value + "S" + ".png";
+          }
+          else if(suit.equals("Clubs")){
+            png = "Cards/" + value + "C" + ".png";
+          }
+          else if(suit.equals("Diamonds")){
+            png = "Cards/" + value + "D" + ".png";
+          }
+            //System.out.println("Png is: " +png);
+          //adding the card images to the JPanel
+          BufferedImage img = null;
+          JLabel label = new JLabel();
+          try {
+            if(first_card){
+              img = ImageIO.read(new File(png));
+              first_card = false;
+            }
+            else{
+                img = ImageIO.read(new File("Cards/blue_back.png"));
+            }
+            //scaling the image to a smaller size and setting it as imageicon for jLabel
+            Image dimg = img.getScaledInstance(100, 120, Image.SCALE_SMOOTH);
+            ImageIcon imageIcon = new ImageIcon(dimg);
+            label.setIcon(imageIcon);
+            label.setBounds(dpos, -50, 300, 300);
+            dpos += 100;
+            add(label);
+            repaint();
 
 
+            System.out.println("Image opened " + png);
+          } catch (IOException e) {
+            System.out.println("Error = " + e);
+
+          }
+
+        }   //end of if statement for c != null
+        }   //end of for loop for iteration of each card in hand
 
 
-
-          } //end of if statement for c != null
-
-
-          } //end of for loop
-
-        }
 
       }
 
