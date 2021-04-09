@@ -72,7 +72,7 @@ public class basicsPanel extends JPanel{
                         Pot.addToPot(bet);                               // Add to the pot.
                         game.setUserBet(bet);                           // This sets the current bet from the user for comparison purposes
                         /* int checkPot = Pot.getPot();
-                        System.out.println(checkPot); */
+                        System.out.println(checkPot);  */
                         betFrame.dispose();                              // Forse the JFrame closed when we successfully make a bet.
                         String betAddress = "Bet Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
                         JOptionPane.showMessageDialog(null, betAddress);
