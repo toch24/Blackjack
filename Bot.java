@@ -1,9 +1,6 @@
 import java.util.Random;
 
 public class Bot {
-    //Question... Do we need a separate class for the dealer or do we take the dealer as another bot?
-
-
     //A new hand for the bot
     private Hand hand = new Hand();
 	private Random rand;
@@ -28,6 +25,10 @@ public class Bot {
 		}
 	}
 
+	public int getBotWallet(){
+		return botWallet;
+	}
+
 	//Automate the bots moves. Passing deck as parameter so that it can take a card if needed
 	public void botPlay(Deck deck){
 		if(hand.total() <= 16){
@@ -42,10 +43,24 @@ public class Bot {
 		Pot.addToPot(botWallet);
 	}
 
-	public void getBotBet(){						// W.I.P
+	public void getRandomBotBet(){						// W.I.P
 		rand = new Random();
 	}
 
+	public void setCurrentBotBet(int bet){
+		botBet =  bet;
+	}
 
+	public int getCurrentBotBet(){
+		return botBet;
+	}
 
+	public int getBotTotal(){
+
+		return hand.total();
+	}
+
+	public void setBotWallet(int newWallet){
+		botWallet = newWallet;
+	}
 }

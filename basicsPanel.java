@@ -24,8 +24,8 @@ public class basicsPanel extends JPanel{
   private int userBet;
   private Blackjack game;
   private Card[] cards;
-  //private int players = 1;
-  private JLabel wait1, wait2;
+  private int players = 1;
+  private JLabel wait1, wait2, wait3;
 
     public basicsPanel(){
       game = new Blackjack();
@@ -48,23 +48,8 @@ public class basicsPanel extends JPanel{
       pass.setEnabled(false);
       add(pass);
 
-      wait1 = new JLabel("Waiting for computer player 1 to make moves");
-      wait1.setBounds(300,300,200,50);
-      add(wait1);
-
-      wait2 = new JLabel("Waiting for computer player 2 to make moves");
-      wait2.setBounds(300,300,200,50);
-      wait2.setVisible(false);
-      add(wait2);
-
-
-      //Enable buttons for human player once first bot plays
-      if(game.players == 2){
-        wait1.setVisible(false);
-        bet.setEnabled(true);
-        hit.setEnabled(true);
-        pass.setEnabled(true);
-      }
+        //playing
+        playerturns();
 
       pass.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
@@ -72,7 +57,7 @@ public class basicsPanel extends JPanel{
         hit.setEnabled(false);
         pass.setEnabled(false);
         wait2.setVisible(true);
-        System.out.println("On player: "+ game.players+" In panel");
+        System.out.println("On player: "+ players +" In panel");
         }
       });
 
@@ -100,6 +85,8 @@ public class basicsPanel extends JPanel{
             betPanel.add(betField);
 
             betFrame.setVisible(true);                                   // Make it visible.
+            
+          
 
             betField.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
@@ -108,13 +95,22 @@ public class basicsPanel extends JPanel{
                     //System.out.println(userBet);
                     if(userBet > 0)
                     {
-                        Pot.addToPot(bet);                               // Add to the pot.
+                      //TODO: if the bet is less than the highest bet, re-prompt the user for a new bet
+                      if(userBet >= Pot.getHighestBet()){
                         game.setUserBet(bet);                           // This sets the current bet from the user for comparison purposes
+                        Pot.addToPot(bet);                               // Add to the pot.
+                        game.setHighestBet();                           // Check to see who has highest bet
+                        }
+                    
+                        
+                                                  
                         /* int checkPot = Pot.getPot();
                         System.out.println(checkPot);  */
                         betFrame.dispose();                              // Forse the JFrame closed when we successfully make a bet.
                         String betAddress = "Bet Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
                         JOptionPane.showMessageDialog(null, betAddress);
+                        //next player turn
+                        playerturns();
                     }
                     else if(userBet < 0)
                     {   // Use this to error check, the user cannot make bets < 0.
@@ -141,7 +137,77 @@ public class basicsPanel extends JPanel{
       }
     });
 
+
+    
+     
     } //end of basicsPanel class
+
+    public void playerturns(){
+      if(players == 1){
+      bet.setEnabled(false);
+      hit.setEnabled(false);
+      pass.setEnabled(false);
+      wait1 = new JLabel("Waiting for computer player 1 to make moves");
+      wait1.setBounds(300,300,200,50);
+      wait1.setVisible(true);
+      add(wait1);
+      boolean play = game.play(players);
+      if(play){
+        wait1.setVisible(false);
+        players++;
+        playerturns();
+      }
+      else System.out.println("Computer player 1 is having some problems...");
+
+      }
+      //Enable buttons for human player once first bot plays
+      else if(players == 2){
+        wait1.setVisible(false);
+        bet.setEnabled(true);
+        hit.setEnabled(true);
+        pass.setEnabled(true);
+        players++;
+      }
+
+      else if(players == 3){
+      bet.setEnabled(false);
+      hit.setEnabled(false);
+      pass.setEnabled(false);
+      wait2 = new JLabel("Waiting for computer player 2 to make moves");
+      wait2.setBounds(300,300,200,50);
+      wait2.setVisible(true);
+      add(wait2);
+      
+      boolean play = game.play(players);
+      if(play){
+        wait2.setVisible(false);
+        players++;
+        playerturns();
+      }
+      else System.out.println("Computer player 2 is having some problems...");
+      }
+
+      else if(players == 4){
+        bet.setEnabled(false);
+        hit.setEnabled(false);
+        pass.setEnabled(false);
+        wait3 = new JLabel("Waiting for dealer to make moves");
+        wait3.setBounds(300,300,200,50);
+        wait3.setVisible(true);
+        add(wait3);
+  
+        boolean play = game.play(players);
+        if(play){
+          wait3.setVisible(false);
+          players = 1;
+          playerturns();
+        }
+        else System.out.println("Dealer is having some problems...");
+      }
+
+
+ 
+    }
 
 
     public void setCards(){
