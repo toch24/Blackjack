@@ -118,7 +118,7 @@ public boolean play(int players){
             if(bot2.getBotTotal() >= 16){
                 //match the bet or raise the bet
                 if(bot1.getCurrentBotBet() < Pot.getHighestBet() && bot2.getBotWallet() > Pot.getHighestBet()){
-                    if(bot1.getBotTotal() <= 21){
+                    if(bot2.getBotTotal() <= 21){
                         //raise the bet
                         raise = true;
                         int rBet;
@@ -167,8 +167,59 @@ public boolean play(int players){
 
 
     //dealer
+    if(players == 4){
+        //add logic for bot1 to make moves and then eventually pass
 
-   return false;
+        //resetting values for each player turn
+        raise = false;
+        match = false;
+        fold = false;
+            if(dealer.getBotTotal() >= 16){
+                //match the bet or raise the bet
+                if(bot2.getCurrentBotBet() < Pot.getHighestBet() && dealer.getBotWallet() > Pot.getHighestBet()){
+                    if(dealer.getBotTotal() <= 21){
+                        //raise the bet
+                        raise = true;
+                        int rBet;
+                        //get the highest bet
+                        rBet = Pot.getHighestBet();
+                        //getting the difference
+                        rBet = dealer.getBotWallet() - rBet;
+                        //raising half, need more implementation (I'm not sure how much to raise...)
+                        if(rBet/2 > 0) rBet = rBet/2;
+                        else rBet = Pot.getHighestBet();
+
+                        dealer.setCurrentBotBet(rBet);
+                        int newWallet = dealer.getBotWallet() - rBet;
+                        dealer.setBotWallet(newWallet);
+                        setHighestBet();
+
+                    }
+                    else{
+                        //match the bet
+                        match = true;
+                        int mBet;
+                        mBet = Pot.getHighestBet();
+                        dealer.setCurrentBotBet(mBet);
+                        int newWallet = dealer.getBotWallet() - mBet;
+                        dealer.setBotWallet(newWallet);
+                        setHighestBet();
+                    }
+                }
+                else{
+                    //fold
+                    fold = true;
+                }
+            }
+            else{
+              //fold
+              fold = true;
+
+            }
+
+        return true;
+      }
+  return false;
 }
 
 /* public void newRound(){
@@ -189,12 +240,12 @@ public boolean setHighestBet(){
     int bet2 = bot2.getCurrentBotBet();
     int bet3 = dealer.getCurrentBotBet();
     int bet4 = player.getCurrentBet();
-    
-    if(bet1 >= bet2 && bet1 >= bet3 && bet1 >= bet4){ Pot.setHighestBet(bet1); return true;} 
-    else if(bet2 >= bet1 && bet2 >= bet3 && bet2 >= bet4){ Pot.setHighestBet(bet2); return true;} 
-    else if(bet3 >= bet1 && bet3 >= bet2 && bet3 >= bet4){ Pot.setHighestBet(bet3); return true;} 
-    else if(bet4 >= bet1 && bet4 >= bet2 && bet4 >= bet3){ Pot.setHighestBet(bet4); return true;} 
- 
+
+    if(bet1 >= bet2 && bet1 >= bet3 && bet1 >= bet4){ Pot.setHighestBet(bet1); return true;}
+    else if(bet2 >= bet1 && bet2 >= bet3 && bet2 >= bet4){ Pot.setHighestBet(bet2); return true;}
+    else if(bet3 >= bet1 && bet3 >= bet2 && bet3 >= bet4){ Pot.setHighestBet(bet3); return true;}
+    else if(bet4 >= bet1 && bet4 >= bet2 && bet4 >= bet3){ Pot.setHighestBet(bet4); return true;}
+
     return false;
 }
 
