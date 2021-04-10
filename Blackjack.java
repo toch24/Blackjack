@@ -16,7 +16,6 @@ public class Blackjack{
     private Player player = new Player();
     private Deck deck = new Deck();
 
-//    int players = 1;
     private boolean raise = false;
     private boolean match = false;
     private boolean fold = false;
@@ -58,9 +57,6 @@ public boolean play(int players){
             raise = false;
             match = false;
             fold = false;
-          //  try
-          //  {
-           //     Thread.sleep(1000);
                 if(bot1.getBotTotal() >= 16){
                     //match the bet or raise the bet
                     if(bot1.getCurrentBotBet() < Pot.getHighestBet() && bot1.getBotWallet() > Pot.getHighestBet()){
@@ -106,12 +102,6 @@ public boolean play(int players){
                   fold = true;
 
                 }
-          //  }
-          //  catch(InterruptedException ex)
-         //  {
-        //        Thread.currentThread().interrupt();
-         //   }
-          //  players++;
 
             return true;
           }
