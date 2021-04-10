@@ -1,8 +1,8 @@
 public class Hand {
     //Maximum cards in hand is 14
-    private Card[] hand = new Card[14];
+    private  Card[] hand = new Card[14];
 	private int count = 0;
-	private static int total;
+	private int total;
 
     public void addCard(Card card) {
         //add a card to hand

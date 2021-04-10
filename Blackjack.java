@@ -7,9 +7,6 @@ import java.util.Random;
 import java.awt.event.*;
 import java.awt.*;
 import javax.swing.*;
-
-
-
 import java.util.Scanner;
 
 public class Blackjack{
@@ -68,6 +65,11 @@ public void newGame(){
 
 }
 
+/* public void newRound(){
+  deck = new Deck();
+  deck.shuffle(deck.getDeck()); 
+} */
+
 public void setUserBet(int bet){
     player.currentBet(bet);
 }
@@ -86,6 +88,7 @@ public Card[] getPlayerCards(){
 
 public void playerHit(){
     player.addCard(deck.nextCard());
+    checkGameState();
 }
 
 public Card[] getBotCards(int b){
@@ -102,6 +105,33 @@ public Card[] getBotCards(int b){
     return null;
 }
 
+public void checkGameState(){
+    Hand playerHand;      // here we are accessing different hands
+    Hand bot1Hand;        // here we are accessing different hands
+    Hand bot2Hand;        // here we are accessing different hands
+    Hand dealerHand;      // here we are accessing different hands
+    
+    playerHand = player.getHand();
+    bot1Hand = bot1.getHand();
+    bot2Hand = bot2.getHand();
+    dealerHand = dealer.getHand();
 
+    if(playerHand.total() > 21)
+    {
+        HomeJPanel.newRound();
+    }
+    else if(bot1Hand.total() > 21)
+    {
+      HomeJPanel.newRound();
+    }
+    else if(bot2Hand.total() > 21)
+    {
+      HomeJPanel.newRound();
+    }
+    else if(dealerHand.total() > 21)
+    {
+      HomeJPanel.newRound();
+    }
+} 
 
 } //end of BlackJack class

@@ -35,7 +35,6 @@ public class Player {
 	}
 
 	public Hand getHand(){
-
 		return hand;
 	}
 }

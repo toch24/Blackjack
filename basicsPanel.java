@@ -19,15 +19,16 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class basicsPanel extends JPanel{
-  private JButton bet, hit, pass;
+  private JButton bet, hit, pass, newRound;
   private JTextField betField;                      // Using this to get the input from the bets i guess
   private int userBet;
-  private Blackjack game = new Blackjack();
+  private Blackjack game;
   private Card[] cards;
   //private int players = 1;
   private JLabel wait1, wait2;
 
     public basicsPanel(){
+      game = new Blackjack();
       setCards();                                   //sets the cards images
 
       //setting layout to null, default layout is flow layout
@@ -74,7 +75,6 @@ public class basicsPanel extends JPanel{
         System.out.println("On player: "+ game.players+" In panel");
         }
       });
-
 
       // Create functionality for the bet button, this will let players place bets.
       bet.addActionListener(new ActionListener(){
@@ -200,10 +200,18 @@ public class basicsPanel extends JPanel{
                 case "Diamonds"  : {png = "Cards/" + 11 + "D" + ".png";}
               }
             }
+            else if(c.getspecCard() == "Ace"){
+              switch(suit){
+                case "Hearts" : {png = "Cards/" + 1 + "H" + ".png";}
+                case "Clubs"  : {png = "Cards/" + 1 + "C" + ".png";}
+                case "Spades"  : {png = "Cards/" + 1 + "S" + ".png";}
+                case "Diamonds"  : {png = "Cards/" + 1 + "D" + ".png";}
+              }
+            }
           }
 
-          //System.out.println("Png is: " +png);
-        //adding the card images to the JPanel
+         //System.out.println("Png is: " +png);
+         //adding the card images to the JPanel
         BufferedImage img = null;
         JLabel label = new JLabel();
         try {
@@ -350,6 +358,14 @@ public class basicsPanel extends JPanel{
                 case "Clubs"  : {png = "Cards/" + 11 + "C" + ".png";}
                 case "Spades"  : {png = "Cards/" + 11 + "S" + ".png";}
                 case "Diamonds"  : {png = "Cards/" + 11 + "D" + ".png";}
+              }
+            }
+            else if(c.getspecCard() == "Ace"){
+              switch(suit){
+                case "Hearts" : {png = "Cards/" + 1 + "H" + ".png";}
+                case "Clubs"  : {png = "Cards/" + 1 + "C" + ".png";}
+                case "Spades"  : {png = "Cards/" + 1 + "S" + ".png";}
+                case "Diamonds"  : {png = "Cards/" + 1 + "D" + ".png";}
               }
             }
           }

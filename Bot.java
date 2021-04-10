@@ -16,7 +16,6 @@ public class Bot {
 	}
 
 	public Hand getHand(){
-
 		return hand;
 	}
 

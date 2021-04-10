@@ -20,6 +20,8 @@ public class HomeJPanel extends JPanel
    private JButton button1;
    private JButton button3;
    private JButton button2;
+   private static JFrame basicsFrame;
+   private static JPanel basicsPanel;
 
    private int userBuyIn;
    JTextField buyInField;
@@ -62,8 +64,8 @@ public class HomeJPanel extends JPanel
       //play basics button
       button1.addActionListener(new ActionListener() { 		
           public void actionPerformed(ActionEvent e) {
-            JFrame basicsFrame = new JFrame("Basic BlackJack");
-            JPanel basicsPanel = new basicsPanel();
+            basicsFrame = new JFrame("Basic BlackJack");
+            basicsPanel = new basicsPanel();
             
             basicsFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
             basicsFrame.add( basicsPanel ); 					//add screensaverJPanel to frame
@@ -73,6 +75,21 @@ public class HomeJPanel extends JPanel
             basicsFrame.setResizable(false);
             setVisible(true);
             basicsFrame.setVisible( true ); 						//display frame
+
+            // start testing
+
+            JButton newRound = new JButton("newRound");
+            newRound.setBounds(300,300,100,50);
+            newRound.setEnabled(true);
+            basicsPanel.add(newRound);
+    
+            newRound.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent e) {
+            newRound();
+        }
+      });
+
+      // end testing
 
             // Adding the buyIn frame and its functionality
             JFrame buyInFrame = new JFrame("Buy In");
@@ -147,8 +164,29 @@ public class HomeJPanel extends JPanel
             basicsFrame.setVisible( true ); 						//display frame
           }
       });
-
    }
 
-}
+   public static void newRound(){
+    
+            //basicsFrame.dispose();
+
+            //JFrame newRoundFrame = new JFrame();
+            JPanel newRoundPanel = new basicsPanel();
+            
+            basicsFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+            
+            basicsFrame.remove(basicsPanel);
+
+            basicsFrame.add( newRoundPanel ); 					//add screensaverJPanel to frame
+            basicsFrame.setBackground( Color.green.darker()); 				//set frame background color
+            newRoundPanel.setBackground( Color.green.darker());
+            basicsFrame.setSize( 800, 600 ); 						//set frame size
+            basicsFrame.setResizable(false);
+            //HomeJPanel.setVisible(true);
+            basicsFrame.setVisible( true );
+
+            int temp = Pot.getPot();
+            System.out.println(temp);
+        }
+} // End JHomePanel
 
