@@ -25,6 +25,7 @@ public class basicsPanel extends JPanel{
   private Blackjack game;
   private Card[] cards;
   private int players = 1;
+  private JLabel highestbetlabel;
 
     public basicsPanel(){
       game = new Blackjack();
@@ -52,6 +53,10 @@ public class basicsPanel extends JPanel{
       startGame.setVisible(true);
       startGame.setEnabled(true);
       add(startGame);
+
+      highestbetlabel = new JLabel("Highest bet: " + String.valueOf(Pot.getHighestBet()));
+      highestbetlabel.setBounds(470,250,100,50);
+      add(highestbetlabel);
 
       startGame.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
@@ -110,7 +115,8 @@ public class basicsPanel extends JPanel{
                       if(userBet >= Pot.getHighestBet()){
                         game.setUserBet(bet);                           // This sets the current bet from the user for comparison purposes
                         Pot.addToPot(bet);                               // Add to the pot.
-                  //      game.setHighestBet();                           // Check to see who has highest bet
+                        game.setHighestBet();
+                        highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
                         }
 
 
@@ -162,8 +168,9 @@ public class basicsPanel extends JPanel{
       Thread.sleep(10000);
       boolean play = game.play(players);
       if(play){
-        String msg = "Player 1 played";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
+        String msg = "Player 1 played";               
         JOptionPane.showMessageDialog(null, msg);
+        highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
         players++;
       }
       else System.out.println("Computer player 1 is having some problems...");
@@ -174,7 +181,7 @@ public class basicsPanel extends JPanel{
       }
       //Enable buttons for human player once first bot plays
       if(players == 2){
-        String msg = "Your turn!";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
+        String msg = "Your turn!";               
         JOptionPane.showMessageDialog(null, msg);
         bet.setEnabled(true);
         hit.setEnabled(true);
@@ -189,8 +196,9 @@ public class basicsPanel extends JPanel{
       pass.setEnabled(false);
       boolean play = game.play(players);
       if(play){
-        String msg = "Player 2 played";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
+        String msg = "Player 2 played";               
         JOptionPane.showMessageDialog(null, msg);
+        highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
         players++;
  
       }
@@ -210,8 +218,11 @@ public class basicsPanel extends JPanel{
         
         boolean play = game.play(players);
         if(play){
+          String msg = "Dealer played";               
+          JOptionPane.showMessageDialog(null, msg);
+          highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
           players = 1;
-     
+      
         }
         else System.out.println("Dealer is having some problems...");
       }

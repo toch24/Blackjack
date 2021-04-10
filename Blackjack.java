@@ -79,6 +79,7 @@ public boolean play(int players){
                             bot1.setCurrentBotBet(rBet);
                             int newWallet = bot1.getBotWallet() - rBet;
                             bot1.setBotWallet(newWallet);
+                            setHighestBet();
 
                         }
                         else{
@@ -89,7 +90,7 @@ public boolean play(int players){
                             bot1.setCurrentBotBet(mBet);
                             int newWallet = bot1.getBotWallet() - mBet;
                             bot1.setBotWallet(newWallet);
-
+                            setHighestBet();
 
                         }
 
@@ -142,6 +143,7 @@ public boolean play(int players){
                         bot2.setCurrentBotBet(rBet);
                         int newWallet = bot2.getBotWallet() - rBet;
                         bot2.setBotWallet(newWallet);
+                        setHighestBet();
 
                     }
                     else{
@@ -152,7 +154,7 @@ public boolean play(int players){
                         bot2.setCurrentBotBet(mBet);
                         int newWallet = bot2.getBotWallet() - mBet;
                         bot2.setBotWallet(newWallet);
-
+                        setHighestBet();
 
                     }
 
@@ -190,6 +192,20 @@ public void setUserBet(int bet){
 
 public int getUserBet(){
     return player.getCurrentBet();
+}
+
+public boolean setHighestBet(){
+    int bet1 = bot1.getCurrentBotBet();
+    int bet2 = bot2.getCurrentBotBet();
+    int bet3 = dealer.getCurrentBotBet();
+    int bet4 = player.getCurrentBet();
+    
+    if(bet1 >= bet2 && bet1 >= bet3 && bet1 >= bet4){ Pot.setHighestBet(bet1); return true;} 
+    else if(bet2 >= bet1 && bet2 >= bet3 && bet2 >= bet4){ Pot.setHighestBet(bet2); return true;} 
+    else if(bet3 >= bet1 && bet3 >= bet2 && bet3 >= bet4){ Pot.setHighestBet(bet3); return true;} 
+    else if(bet4 >= bet1 && bet4 >= bet2 && bet4 >= bet3){ Pot.setHighestBet(bet4); return true;} 
+ 
+    return false;
 }
 
 //returns an array of cards for player
