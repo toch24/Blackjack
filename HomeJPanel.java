@@ -22,6 +22,7 @@ public class HomeJPanel extends JPanel
    private JButton button2;
    private static JFrame basicsFrame;
    private static JPanel basicsPanel;
+   private static JButton newRound;
 
    private int userBuyIn;
    JTextField buyInField;
@@ -61,6 +62,7 @@ public class HomeJPanel extends JPanel
       add(button2);
       add(button3);
 
+
       //play basics button
       button1.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent e) {
@@ -76,8 +78,8 @@ public class HomeJPanel extends JPanel
 
             // start testing
 
-            JButton newRound = new JButton("newRound");
-            newRound.setBounds(300,300,100,50);
+            newRound = new JButton("newRound");
+            newRound.setBounds(350,300,100,50);
             newRound.setEnabled(true);
             basicsPanel.add(newRound);
 
@@ -190,6 +192,12 @@ public class HomeJPanel extends JPanel
             basicsFrame.setResizable(false);
             //HomeJPanel.setVisible(true);
             basicsFrame.setVisible( true );
+            newRound = new JButton("newRound");
+            newRound.setBounds(350,300,100,50);
+            newRound.setEnabled(true);
+            newRoundPanel.add(newRound);
+
+        
 
             int temp = Pot.getPot();
             System.out.println(temp);

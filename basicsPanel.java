@@ -49,7 +49,7 @@ public class basicsPanel extends JPanel{
       add(pass);
 
       wait2 = new JLabel("Waiting for computer player 2 to make moves");
-      wait2.setBounds(300,300,200,50);
+      wait2.setBounds(300,350,200,50);
       wait2.setVisible(false);
       add(wait2);
         //playing
