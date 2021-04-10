@@ -225,18 +225,48 @@ public class basicsPanel extends JPanel{
         String value = String.valueOf(cardvalue);
 
         //get the card png (easier way and less code...)
-        if(suit.equals("Hearts")){
-          png = "Cards/" + value + "H" + ".png";
-        }
-        else if(suit.equals("Spades")){
-          png = "Cards/" + value + "S" + ".png";
-        }
-        else if(suit.equals("Clubs")){
-          png = "Cards/" + value + "C" + ".png";
-        }
-        else if(suit.equals("Diamonds")){
-          png = "Cards/" + value + "D" + ".png";
-        }
+        if(c.getspecCard() == null)
+          {
+            if(suit.equals("Hearts")){
+              png = "Cards/" + value + "H" + ".png";
+            }
+            else if(suit.equals("Spades")){
+              png = "Cards/" + value + "S" + ".png";
+            }
+            else if(suit.equals("Clubs")){
+              png = "Cards/" + value + "C" + ".png";
+            }
+            else if(suit.equals("Diamonds")){
+              png = "Cards/" + value + "D" + ".png";
+            }
+          }
+          else if(c.getspecCard() != null)        // we are checking if we have a face card :)
+          { // This whole switch statement accounts for if the card has a face (I.E] Jack,Queen,King)
+            if(c.getspecCard() == "King"){
+              switch(suit){
+                case "Hearts" : {png = "Cards/" + 13 + "H" + ".png";}
+                case "Clubs"  : {png = "Cards/" + 13 + "C" + ".png";}
+                case "Spades"  : {png = "Cards/" + 13 + "S" + ".png";}
+                case "Diamonds"  : {png = "Cards/" + 13 + "D" + ".png";}
+              }
+            }
+            else if(c.getspecCard() == "Queen"){
+              switch(suit){
+                case "Hearts" : {png = "Cards/" + 12 + "H" + ".png";}
+                case "Clubs"  : {png = "Cards/" + 12 + "C" + ".png";}
+                case "Spades"  : {png = "Cards/" + 12 + "S" + ".png";}
+                case "Diamonds"  : {png = "Cards/" + 12 + "D" + ".png";}
+              }
+            }
+            else if(c.getspecCard() == "Jack"){
+              switch(suit){
+                case "Hearts" : {png = "Cards/" + 11 + "H" + ".png";}
+                case "Clubs"  : {png = "Cards/" + 11 + "C" + ".png";}
+                case "Spades"  : {png = "Cards/" + 11 + "S" + ".png";}
+                case "Diamonds"  : {png = "Cards/" + 11 + "D" + ".png";}
+              }
+            }
+          }
 
           //System.out.println("Png is: " +png);
         //adding the card images to the JPanel
@@ -279,7 +309,7 @@ public class basicsPanel extends JPanel{
           suit = c.getcardSuit();
           System.out.println("The bot's card value is: "+cardvalue);
           System.out.println("The bot's card suit is: "+suit);
-
+          
           String png = "";                                     //name of the png file
           String value = String.valueOf(cardvalue);
 
@@ -341,22 +371,53 @@ public class basicsPanel extends JPanel{
           if(c != null){
           cardvalue = c.getcardValue();
           suit = c.getcardSuit();
+          System.out.println("The dealer's card value is: " + cardvalue + "The suit is: " + suit);
+
           String png = "";                                     //name of the png file
           String value = String.valueOf(cardvalue);
 
           //get the card png (easier way and less code...)
-
-          if(suit.equals("Hearts")){
-            png = "Cards/" + value + "H" + ".png";
+          if(c.getspecCard() == null)
+          {
+            if(suit.equals("Hearts")){
+              png = "Cards/" + value + "H" + ".png";
+            }
+            else if(suit.equals("Spades")){
+              png = "Cards/" + value + "S" + ".png";
+            }
+            else if(suit.equals("Clubs")){
+              png = "Cards/" + value + "C" + ".png";
+            }
+            else if(suit.equals("Diamonds")){
+              png = "Cards/" + value + "D" + ".png";
+            }
           }
-          else if(suit.equals("Spades")){
-            png = "Cards/" + value + "S" + ".png";
-          }
-          else if(suit.equals("Clubs")){
-            png = "Cards/" + value + "C" + ".png";
-          }
-          else if(suit.equals("Diamonds")){
-            png = "Cards/" + value + "D" + ".png";
+          else if(c.getspecCard() != null)        // we are checking if we have a face card :)
+          {
+            if(c.getspecCard() == "King"){
+              switch(suit){
+                case "Hearts" : {png = "Cards/" + 13 + "H" + ".png";}
+                case "Clubs"  : {png = "Cards/" + 13 + "C" + ".png";}
+                case "Spades"  : {png = "Cards/" + 13 + "S" + ".png";}
+                case "Diamonds"  : {png = "Cards/" + 13 + "D" + ".png";}
+              }
+            }
+            else if(c.getspecCard() == "Queen"){
+              switch(suit){
+                case "Hearts" : {png = "Cards/" + 12 + "H" + ".png";}
+                case "Clubs"  : {png = "Cards/" + 12 + "C" + ".png";}
+                case "Spades"  : {png = "Cards/" + 12 + "S" + ".png";}
+                case "Diamonds"  : {png = "Cards/" + 12 + "D" + ".png";}
+              }
+            }
+            else if(c.getspecCard() == "Jack"){
+              switch(suit){
+                case "Hearts" : {png = "Cards/" + 11 + "H" + ".png";}
+                case "Clubs"  : {png = "Cards/" + 11 + "C" + ".png";}
+                case "Spades"  : {png = "Cards/" + 11 + "S" + ".png";}
+                case "Diamonds"  : {png = "Cards/" + 11 + "D" + ".png";}
+              }
+            }
           }
             //System.out.println("Png is: " +png);
           //adding the card images to the JPanel

@@ -2,6 +2,7 @@
 // Blackjack game
 // Project X
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.awt.event.*;
 import java.awt.*;
@@ -28,6 +29,7 @@ public class Blackjack{
     }
 
 public void newGame(){
+
     deck.shuffle(deck.getDeck());
 
     System.out.println("The game has started");
