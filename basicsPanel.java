@@ -19,13 +19,12 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class basicsPanel extends JPanel{
-  private JButton bet, hit, pass, newRound;
+  private JButton bet, hit, pass, newRound, startGame;
   private JTextField betField;                      // Using this to get the input from the bets i guess
   private int userBet;
   private Blackjack game;
   private Card[] cards;
   private int players = 1;
-  private JLabel wait1, wait2, wait3;
 
     public basicsPanel(){
       game = new Blackjack();
@@ -48,19 +47,27 @@ public class basicsPanel extends JPanel{
       pass.setEnabled(false);
       add(pass);
 
-      wait2 = new JLabel("Waiting for computer player 2 to make moves");
-      wait2.setBounds(300,350,200,50);
-      wait2.setVisible(false);
-      add(wait2);
-        //playing
+      startGame = new JButton("Start Game");
+      startGame.setBounds(350,500,100,50);
+      startGame.setVisible(true);
+      startGame.setEnabled(true);
+      add(startGame);
+
+      startGame.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent e) {
+        startGame.setEnabled(false);
+        startGame.setVisible(false);
         playerturns();
+        }
+      });
 
       pass.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
         bet.setEnabled(false);
         hit.setEnabled(false);
         pass.setEnabled(false);
-        wait2.setVisible(true);
+        players++;
+        playerturns();
         System.out.println("On player: "+ players +" In panel");
         }
       });
@@ -114,6 +121,7 @@ public class basicsPanel extends JPanel{
                         String betAddress = "Bet Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
                         JOptionPane.showMessageDialog(null, betAddress);
                         //next player turn
+                        players++;
                         playerturns();
                     }
                     else if(userBet < 0)
@@ -143,70 +151,73 @@ public class basicsPanel extends JPanel{
 
 
 
-
     } //end of basicsPanel class
 
     public void playerturns(){
       if(players == 1){
+        try{
       bet.setEnabled(false);
       hit.setEnabled(false);
       pass.setEnabled(false);
-      wait1 = new JLabel("Waiting for computer player 1 to make moves");
-      wait1.setBounds(300,300,200,50);
-      wait1.setVisible(true);
-      add(wait1);
+      Thread.sleep(10000);
       boolean play = game.play(players);
       if(play){
-        wait1.setVisible(false);
+        String msg = "Player 1 played";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
+        JOptionPane.showMessageDialog(null, msg);
         players++;
-        playerturns();
       }
       else System.out.println("Computer player 1 is having some problems...");
-
+        }
+        catch(Exception e){
+          
+        }
       }
       //Enable buttons for human player once first bot plays
-      else if(players == 2){
-        wait1.setVisible(false);
+      if(players == 2){
+        String msg = "Your turn!";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
+        JOptionPane.showMessageDialog(null, msg);
         bet.setEnabled(true);
         hit.setEnabled(true);
         pass.setEnabled(true);
-        players++;
       }
 
-      else if(players == 3){
+      if(players == 3){
+        try{
+          Thread.sleep(10000);
       bet.setEnabled(false);
       hit.setEnabled(false);
       pass.setEnabled(false);
-      //wait2 = new JLabel("Waiting for computer player 2 to make moves");
-      //wait2.setBounds(300,300,200,50);
-      wait2.setVisible(true);
-      add(wait2);
-
       boolean play = game.play(players);
       if(play){
-        wait2.setVisible(false);
+        String msg = "Player 2 played";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
+        JOptionPane.showMessageDialog(null, msg);
         players++;
-        playerturns();
+ 
       }
       else System.out.println("Computer player 2 is having some problems...");
+    }
+      catch(InterruptedException ex){
+        Thread.currentThread().interrupt();
+      }
       }
 
-      else if(players == 4){
+      if(players == 4){
+        try{
+          Thread.sleep(10000);
         bet.setEnabled(false);
         hit.setEnabled(false);
         pass.setEnabled(false);
-        wait3 = new JLabel("Waiting for dealer to make moves");
-        wait3.setBounds(300,300,200,50);
-        wait3.setVisible(true);
-        add(wait3);
-
+        
         boolean play = game.play(players);
         if(play){
-          wait3.setVisible(false);
           players = 1;
-          playerturns();
+     
         }
         else System.out.println("Dealer is having some problems...");
+      }
+      catch(InterruptedException ex){
+        Thread.currentThread().interrupt();
+      }
       }
 
 
@@ -474,15 +485,5 @@ public class basicsPanel extends JPanel{
 
       }
 
-
-
-/*
-    public void paintComponent( Graphics g )
-    {
-        g.setColor(Color.white);
-        g.fillRect(280, 360 , 100, 150);
-        g.fillRect(400, 360 , 100, 150);
-    }
-*/
 
 }

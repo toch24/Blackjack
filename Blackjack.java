@@ -58,9 +58,9 @@ public boolean play(int players){
             raise = false;
             match = false;
             fold = false;
-            try
-            {
-                Thread.sleep(1000);
+          //  try
+          //  {
+           //     Thread.sleep(1000);
                 if(bot1.getBotTotal() >= 16){
                     //match the bet or raise the bet
                     if(bot1.getCurrentBotBet() < Pot.getHighestBet() && bot1.getBotWallet() > Pot.getHighestBet()){
@@ -105,11 +105,11 @@ public boolean play(int players){
                   fold = true;
 
                 }
-            }
-            catch(InterruptedException ex)
-           {
-                Thread.currentThread().interrupt();
-            }
+          //  }
+          //  catch(InterruptedException ex)
+         //  {
+        //        Thread.currentThread().interrupt();
+         //   }
           //  players++;
 
             return true;
@@ -124,9 +124,6 @@ public boolean play(int players){
         raise = false;
         match = false;
         fold = false;
-        try
-        {
-            Thread.sleep(10000);
             if(bot2.getBotTotal() >= 16){
                 //match the bet or raise the bet
                 if(bot1.getCurrentBotBet() < Pot.getHighestBet() && bot2.getBotWallet() > Pot.getHighestBet()){
@@ -171,12 +168,7 @@ public boolean play(int players){
               fold = true;
 
             }
-        }
-        catch(InterruptedException ex)
-       {
-            Thread.currentThread().interrupt();
-        }
-      //  players++;
+
 
         return true;
       }

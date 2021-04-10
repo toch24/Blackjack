@@ -124,6 +124,7 @@ public class HomeJPanel extends JPanel
                     {
                   //      add basicsPanel
                     //    JPanel basicsPanel = new basicsPanel();
+                        buyInFrame.dispose();                               // Forse the JFrame closed when we successfully make a bet.
                         basicsFrame.add( basicsPanel ); 					//add screensaverJPanel to frame
                         basicsPanel.setBackground( Color.green.darker());
                         basicsFrame.setVisible( true );                     //display the game
@@ -132,7 +133,7 @@ public class HomeJPanel extends JPanel
                         Player.setWallet(bet);                              // This sets the current bet from the user for comparison purposes
                         /* int checkWallet = Player.getWallet();
                         System.out.println(checkWallet); */
-                        buyInFrame.dispose();                               // Forse the JFrame closed when we successfully make a bet.
+                     
                         String betAddress = "Buy In Successful.";           // Just let the user know their bet was successfully placed, we can take this out if you guys want.
                         JOptionPane.showMessageDialog(null, betAddress);
                     }
