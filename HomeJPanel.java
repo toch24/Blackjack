@@ -29,7 +29,7 @@ public class HomeJPanel extends JPanel
    public HomeJPanel()
    {
       setLayout( new FlowLayout() ); 						//set frame layout
-  
+
       setBackground( Color.green.darker());
 
       welcomeLabel = new JLabel( "BLACKJACK");
@@ -62,14 +62,14 @@ public class HomeJPanel extends JPanel
       add(button3);
 
       //play basics button
-      button1.addActionListener(new ActionListener() { 		
+      button1.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent e) {
             basicsFrame = new JFrame("Basic BlackJack");
             basicsPanel = new basicsPanel();
-            
+
             basicsFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
             basicsFrame.setBackground( Color.green.darker()); 				//set frame background color
-    
+
             basicsFrame.setSize( 800, 600 ); 						//set frame size
             basicsFrame.setResizable(false);
             setVisible(true);
@@ -80,7 +80,7 @@ public class HomeJPanel extends JPanel
             newRound.setBounds(300,300,100,50);
             newRound.setEnabled(true);
             basicsPanel.add(newRound);
-    
+
             newRound.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
             newRound();
@@ -108,7 +108,7 @@ public class HomeJPanel extends JPanel
             // add the textfield to the JPanel with the label
             buyInPanel.add(buyInLabel);
             buyInPanel.add(buyInField);
-            
+
             buyInFrame.setVisible(true);                                   // Make it visible.
             buyInFrame.toFront();                                          // Make it stand out at something that needs to be interacted with.
             buyInFrame.requestFocus();                                     // Focus the BuyInFrame so the user knows to enter something.
@@ -120,12 +120,12 @@ public class HomeJPanel extends JPanel
                     //System.out.println(userBet);
                     if(bet >= 100)
                     {
-                        //add basicsPanel
-                        JPanel basicsPanel = new basicsPanel();
+                  //      add basicsPanel
+                    //    JPanel basicsPanel = new basicsPanel();
                         basicsFrame.add( basicsPanel ); 					//add screensaverJPanel to frame
                         basicsPanel.setBackground( Color.green.darker());
                         basicsFrame.setVisible( true );                     //display the game
-                        
+
                         Pot.addToPot(bet);                                  // Add to the pot.
                         Player.setWallet(bet);                              // This sets the current bet from the user for comparison purposes
                         /* int checkWallet = Player.getWallet();
@@ -142,12 +142,12 @@ public class HomeJPanel extends JPanel
                 }
             });
 
-          
+
           }
       });
 
 
-      button2.addActionListener(new ActionListener() { 		
+      button2.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent e) {
         	  String string = "Insert Rules Here: ";
         	  JOptionPane.showMessageDialog( null, string );
@@ -156,7 +156,7 @@ public class HomeJPanel extends JPanel
 
 
       //play casino button
-      button3.addActionListener(new ActionListener() { 		
+      button3.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent e) {
             JFrame basicsFrame = new JFrame("Casino BlackJack");
             JPanel casinoPanel = new JPanel();
@@ -173,14 +173,14 @@ public class HomeJPanel extends JPanel
    }
 
    public static void newRound(){
-    
+
             //basicsFrame.dispose();
 
             //JFrame newRoundFrame = new JFrame();
             JPanel newRoundPanel = new basicsPanel();
-            
+
             basicsFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
-            
+
             basicsFrame.remove(basicsPanel);
 
             basicsFrame.add( newRoundPanel ); 					//add screensaverJPanel to frame
@@ -195,4 +195,3 @@ public class HomeJPanel extends JPanel
             System.out.println(temp);
         }
 } // End JHomePanel
-

@@ -53,7 +53,7 @@ public boolean play(int players){
         //bot1 plays
         if(players == 1){
             //add logic for bot1 to make moves and then eventually pass
-      
+
             //resetting values for each player turn
             raise = false;
             match = false;
@@ -75,25 +75,25 @@ public boolean play(int players){
                             //raising half, need more implementation (I'm not sure how much to raise...)
                             if(rBet/2 > 0) rBet = rBet/2;
                             else rBet = Pot.getHighestBet();
-      
+
                             bot1.setCurrentBotBet(rBet);
                             int newWallet = bot1.getBotWallet() - rBet;
                             bot1.setBotWallet(newWallet);
-      
+
                         }
                         else{
                             //match the bet
-                            match = true; 
+                            match = true;
                             int mBet;
                             mBet = Pot.getHighestBet();
                             bot1.setCurrentBotBet(mBet);
                             int newWallet = bot1.getBotWallet() - mBet;
                             bot1.setBotWallet(newWallet);
-      
-      
+
+
                         }
-      
-      
+
+
                     }
                     else{
                         //fold
@@ -103,7 +103,7 @@ public boolean play(int players){
                 else{
                   //fold
                   fold = true;
-      
+
                 }
             }
             catch(InterruptedException ex)
@@ -119,7 +119,7 @@ public boolean play(int players){
     //bot2 plays
     if(players == 3){
         //add logic for bot1 to make moves and then eventually pass
-  
+
         //resetting values for each player turn
         raise = false;
         match = false;
@@ -141,25 +141,25 @@ public boolean play(int players){
                         //raising half, need more implementation (I'm not sure how much to raise...)
                         if(rBet/2 > 0) rBet = rBet/2;
                         else rBet = Pot.getHighestBet();
-  
+
                         bot2.setCurrentBotBet(rBet);
                         int newWallet = bot2.getBotWallet() - rBet;
                         bot2.setBotWallet(newWallet);
-  
+
                     }
                     else{
                         //match the bet
-                        match = true; 
+                        match = true;
                         int mBet;
                         mBet = Pot.getHighestBet();
                         bot2.setCurrentBotBet(mBet);
                         int newWallet = bot2.getBotWallet() - mBet;
                         bot2.setBotWallet(newWallet);
-  
-  
+
+
                     }
-  
-  
+
+
                 }
                 else{
                     //fold
@@ -169,7 +169,7 @@ public boolean play(int players){
             else{
               //fold
               fold = true;
-  
+
             }
         }
         catch(InterruptedException ex)
@@ -189,7 +189,7 @@ public boolean play(int players){
 
 /* public void newRound(){
   deck = new Deck();
-  deck.shuffle(deck.getDeck()); 
+  deck.shuffle(deck.getDeck());
 } */
 
 public void setUserBet(int bet){
@@ -232,7 +232,7 @@ public void checkGameState(){
     Hand bot1Hand;        // here we are accessing different hands
     Hand bot2Hand;        // here we are accessing different hands
     Hand dealerHand;      // here we are accessing different hands
-    
+
     playerHand = player.getHand();
     bot1Hand = bot1.getHand();
     bot2Hand = bot2.getHand();
@@ -254,6 +254,6 @@ public void checkGameState(){
     {
       HomeJPanel.newRound();
     }
-} 
+}
 
 } //end of BlackJack class

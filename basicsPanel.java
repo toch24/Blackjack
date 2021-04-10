@@ -48,6 +48,10 @@ public class basicsPanel extends JPanel{
       pass.setEnabled(false);
       add(pass);
 
+      wait2 = new JLabel("Waiting for computer player 2 to make moves");
+      wait2.setBounds(300,300,200,50);
+      wait2.setVisible(false);
+      add(wait2);
         //playing
         playerturns();
 
@@ -85,8 +89,8 @@ public class basicsPanel extends JPanel{
             betPanel.add(betField);
 
             betFrame.setVisible(true);                                   // Make it visible.
-            
-          
+
+
 
             betField.addActionListener(new ActionListener(){
                 public void actionPerformed(ActionEvent e){
@@ -99,11 +103,11 @@ public class basicsPanel extends JPanel{
                       if(userBet >= Pot.getHighestBet()){
                         game.setUserBet(bet);                           // This sets the current bet from the user for comparison purposes
                         Pot.addToPot(bet);                               // Add to the pot.
-                        game.setHighestBet();                           // Check to see who has highest bet
+                  //      game.setHighestBet();                           // Check to see who has highest bet
                         }
-                    
-                        
-                                                  
+
+
+
                         /* int checkPot = Pot.getPot();
                         System.out.println(checkPot);  */
                         betFrame.dispose();                              // Forse the JFrame closed when we successfully make a bet.
@@ -138,8 +142,8 @@ public class basicsPanel extends JPanel{
     });
 
 
-    
-     
+
+
     } //end of basicsPanel class
 
     public void playerturns(){
@@ -173,11 +177,11 @@ public class basicsPanel extends JPanel{
       bet.setEnabled(false);
       hit.setEnabled(false);
       pass.setEnabled(false);
-      wait2 = new JLabel("Waiting for computer player 2 to make moves");
-      wait2.setBounds(300,300,200,50);
+      //wait2 = new JLabel("Waiting for computer player 2 to make moves");
+      //wait2.setBounds(300,300,200,50);
       wait2.setVisible(true);
       add(wait2);
-      
+
       boolean play = game.play(players);
       if(play){
         wait2.setVisible(false);
@@ -195,7 +199,7 @@ public class basicsPanel extends JPanel{
         wait3.setBounds(300,300,200,50);
         wait3.setVisible(true);
         add(wait3);
-  
+
         boolean play = game.play(players);
         if(play){
           wait3.setVisible(false);
@@ -206,7 +210,7 @@ public class basicsPanel extends JPanel{
       }
 
 
- 
+
     }
 
 
@@ -317,7 +321,7 @@ public class basicsPanel extends JPanel{
           suit = c.getcardSuit();
           System.out.println("The bot's card value is: "+cardvalue);
           System.out.println("The bot's card suit is: "+suit);
-          
+
           String png = "";                                     //name of the png file
           String value = String.valueOf(cardvalue);
 
