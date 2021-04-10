@@ -118,6 +118,69 @@ public boolean play(int players){
 
 
     //bot2 plays
+    if(players == 3){
+        //add logic for bot1 to make moves and then eventually pass
+  
+        //resetting values for each player turn
+        raise = false;
+        match = false;
+        fold = false;
+        try
+        {
+            Thread.sleep(10000);
+            if(bot2.getBotTotal() >= 16){
+                //match the bet or raise the bet
+                if(bot1.getCurrentBotBet() < Pot.getHighestBet() && bot2.getBotWallet() > Pot.getHighestBet()){
+                    if(bot1.getBotTotal() <= 21){
+                        //raise the bet
+                        raise = true;
+                        int rBet;
+                        //get the highest bet
+                        rBet = Pot.getHighestBet();
+                        //getting the difference
+                        rBet = bot2.getBotWallet() - rBet;
+                        //raising half, need more implementation (I'm not sure how much to raise...)
+                        if(rBet/2 > 0) rBet = rBet/2;
+                        else rBet = Pot.getHighestBet();
+  
+                        bot2.setCurrentBotBet(rBet);
+                        int newWallet = bot2.getBotWallet() - rBet;
+                        bot2.setBotWallet(newWallet);
+  
+                    }
+                    else{
+                        //match the bet
+                        match = true; 
+                        int mBet;
+                        mBet = Pot.getHighestBet();
+                        bot2.setCurrentBotBet(mBet);
+                        int newWallet = bot2.getBotWallet() - mBet;
+                        bot2.setBotWallet(newWallet);
+  
+  
+                    }
+  
+  
+                }
+                else{
+                    //fold
+                    fold = true;
+                }
+            }
+            else{
+              //fold
+              fold = true;
+  
+            }
+        }
+        catch(InterruptedException ex)
+       {
+            Thread.currentThread().interrupt();
+        }
+      //  players++;
+
+        return true;
+      }
 
 
     //dealer
@@ -184,6 +247,8 @@ public boolean setHighestBet(){
  
     return false;
 }
+
+
 
 public boolean getRaise(){
 
