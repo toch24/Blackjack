@@ -54,7 +54,7 @@ public class basicsPanel extends JPanel{
       startGame.setEnabled(true);
       add(startGame);
 
-      highestbetlabel = new JLabel("Highest bet: " + String.valueOf(Pot.getHighestBet()));
+      highestbetlabel = new JLabel("Current Pot Total: " + String.valueOf(Pot.getPot()));
       highestbetlabel.setBounds(350,150,200,50);
       add(highestbetlabel);
 
@@ -117,7 +117,7 @@ public class basicsPanel extends JPanel{
                         game.setUserBet(bet);                           // This sets the current bet from the user for comparison purposes
                         Pot.addToPot(bet);                               // Add to the pot.
                         game.setHighestBet();
-                        highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
+                        highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
                         }
 
 
@@ -205,7 +205,7 @@ public class basicsPanel extends JPanel{
       if(play){
         String msg = "Player 2 played";
         JOptionPane.showMessageDialog(null, msg);
-        highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
+        highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
         players++;
 
       }
@@ -228,7 +228,7 @@ public class basicsPanel extends JPanel{
           String msg = "Dealer played";
           JOptionPane.showMessageDialog(null, msg);
         //  setCards(2);
-          highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
+          highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
           players = 1;
         }
         else System.out.println("Dealer is having some problems...");
