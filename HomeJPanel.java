@@ -130,6 +130,12 @@ public class HomeJPanel extends JPanel
 
                         Pot.addToPot(bet);                                  // Add to the pot.
                         Player.setWallet(bet);                              // This sets the current bet from the user for comparison purposes
+                        
+                        int temp = 0;
+                        while(temp < 3){
+                            Bot.setBotBuyIn();
+                            temp++;
+                        }
                         /* int checkWallet = Player.getWallet();
                         System.out.println(checkWallet); */
                         buyInFrame.dispose();                               // Forse the JFrame closed when we successfully make a bet.

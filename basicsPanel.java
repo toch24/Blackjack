@@ -37,13 +37,13 @@ public class basicsPanel extends JPanel{
       bet.setBounds(300,200,100,50);
       bet.setEnabled(false);
 
-      hit = new JButton("Draw");
+      hit = new JButton("Hit");
       hit.setBounds(400,200,100,50);
       hit.setEnabled(false);
 
       add(bet);
 
-      pass = new JButton("Pass");
+      pass = new JButton("Hold");
       pass.setBounds(350,250,100,50);
       pass.setEnabled(false);
       add(pass);
@@ -201,7 +201,6 @@ public class basicsPanel extends JPanel{
       }
         }
         catch(Exception e){
-
         }
       }
       //Enable buttons for human player once first bot plays
