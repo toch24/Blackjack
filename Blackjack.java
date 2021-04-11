@@ -49,6 +49,7 @@ public void newGame(){
 }
 
 public boolean play(int players){
+
         //bot1 plays
         if(players == 1){
             //add logic for bot1 to make moves and then eventually pass
@@ -106,8 +107,10 @@ public boolean play(int players){
                   fold = true;
 
                 }
-
-            return true;
+            if(bot1.getBotTotal() > 21)
+              return true;
+            else
+              return false;
           }
 
 
@@ -169,7 +172,10 @@ public boolean play(int players){
             }
 
 
-        return true;
+            if(bot2.getBotTotal() > 21)
+              return true;
+            else
+              return false;
       }
 
 
@@ -227,7 +233,10 @@ public boolean play(int players){
               fold = true;
             }
 
-        return true;
+            if(dealer.getBotTotal() > 21)
+              return true;
+            else
+              return false;
       }
   return false;
 }
@@ -299,24 +308,10 @@ public boolean checkGameState(){
 
     if(playerHand.total() > 21)
     {
-        HomeJPanel.newRound();
+      //  HomeJPanel.newRound();
         return true;
     }
-    else if(bot1Hand.total() > 21)
-    {
-      HomeJPanel.newRound();
-      return true;
-    }
-    else if(bot2Hand.total() > 21)
-    {
-      HomeJPanel.newRound();
-      return true;
-    }
-    else if(dealerHand.total() > 21)
-    {
-      HomeJPanel.newRound();
-      return true;
-    }
+
     int playerWallet = Player.getWallet();
     int bot1Wallet = bot1.getBotWallet();
     int bot2Wallet = bot2.getBotWallet();
