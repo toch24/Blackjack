@@ -391,7 +391,6 @@ public boolean checkGameState(){
 
 }
 
-//returns the current value of wallet
 public int returnWallet(int playerNumber){
   if(playerNumber == 2){
     int playerWallet = Player.getWallet();

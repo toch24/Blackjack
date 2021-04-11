@@ -65,8 +65,8 @@ public class HomeJPanel extends JPanel
       //play basics button
       button1.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent e) {
-           basicsFrame = new JFrame("Basic BlackJack");
-        //    basicsPanel = new basicsPanel();
+            basicsFrame = new JFrame("Basic BlackJack");
+            basicsPanel = new basicsPanel();
 
             basicsFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
             basicsFrame.setBackground( Color.green.darker()); 				//set frame background color
@@ -80,7 +80,7 @@ public class HomeJPanel extends JPanel
             newRound = new JButton("newRound");
             newRound.setBounds(350,300,100,50);
             newRound.setEnabled(true);
-            //basicsPanel.add(newRound);
+            basicsPanel.add(newRound);
 
             newRound.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
@@ -126,7 +126,6 @@ public class HomeJPanel extends JPanel
 
                         Pot.addToPot(bet);                                  // Add to the pot.
                         Player.setWallet(bet);                              // This sets the current bet from the user for comparison purposes
-                        //basicsPanel.addWallet();
 
                         int temp = 0;
                         while(temp < 3){
@@ -134,8 +133,7 @@ public class HomeJPanel extends JPanel
                             temp++;
                         }
 
-                        basicsPanel = new basicsPanel();
-                        basicsFrame.add( basicsPanel );
+                        basicsFrame.add( basicsPanel ); 					//add screensaverJPanel to frame
                         basicsPanel.setBackground( Color.green.darker());
                         basicsFrame.setVisible( true );                     //display the game
                         int checkWallet = Player.getWallet();
@@ -152,6 +150,8 @@ public class HomeJPanel extends JPanel
                     }
                 }
             });
+
+
           }
       });
 

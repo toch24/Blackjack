@@ -49,23 +49,23 @@ public class basicsPanel extends JPanel{
       pass.setEnabled(false);
       add(pass);
 
-      startGame = new JButton("Start Game");
-      startGame.setBounds(350,500,100,50);
-      startGame.setVisible(true);
-      startGame.setEnabled(true);
-      add(startGame);
+      startGame = new JButton("Start Game");     
+      startGame.setBounds(350,500,100,50);     
+      startGame.setVisible(true);               
+      startGame.setEnabled(true);               
+      add(startGame);                          
 
       highestbetlabel = new JLabel("Current Pot Total: " + String.valueOf(Pot.getPot()));
       highestbetlabel.setBounds(350,150,200,50);
       add(highestbetlabel);
 
-     pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
+      pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
       pwallet.setBounds(250,350,200,50);
       add(pwallet);
 
       System.out.println("The buy in price was: "+game.returnWallet(2) );
 
-
+      
       startGame.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
         startGame.setEnabled(false);
@@ -172,17 +172,14 @@ public class basicsPanel extends JPanel{
 
     } //end of basicsPanel class
 
-/*public void addWallet(){
-  pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
-  pwallet.setBounds(250,350,200,50);
-  add(pwallet);
-}*/
-
-
-public void playerturns(int n){
+    public void playerturns(int n){
       boolean bot1Bust = false;
       boolean bot2Bust = false;
       boolean playerBust = false;
+
+
+
+
 
       if (n == 1)
         playerBust = true;
