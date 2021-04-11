@@ -33,15 +33,15 @@ public void newGame(){
     //giving two cards to each player
     bot1.addCard(deck.nextCard());
     bot1.addCard(deck.nextCard());
-    bot1.botPlay(deck);
+    //bot1.botPlay(deck);
 
     bot2.addCard(deck.nextCard());
     bot2.addCard(deck.nextCard());
-    bot2.botPlay(deck);
+    //bot2.botPlay(deck);
 
     dealer.addCard(deck.nextCard());
-    dealer.botPlay(deck);
-    //dealer.addCard(deck.nextCard());
+    //dealer.botPlay(deck);
+    dealer.addCard(deck.nextCard());
 
     player.addCard(deck.nextCard());
     player.addCard(deck.nextCard());
@@ -57,6 +57,10 @@ public boolean play(int players){
             raise = false;
             match = false;
             fold = false;
+            while(bot1.getBotTotal() < 17){
+              bot1.botPlay(deck);
+            }
+
                 if(bot1.getBotTotal() >= 16){
                     //match the bet or raise the bet
                     if(bot1.getCurrentBotBet() < Pot.getHighestBet() && bot1.getBotWallet() > Pot.getHighestBet()){
@@ -115,6 +119,9 @@ public boolean play(int players){
         raise = false;
         match = false;
         fold = false;
+        while(bot2.getBotTotal() < 17){
+          bot2.botPlay(deck);
+        }
             if(bot2.getBotTotal() >= 16){
                 //match the bet or raise the bet
                 if(bot1.getCurrentBotBet() < Pot.getHighestBet() && bot2.getBotWallet() > Pot.getHighestBet()){
@@ -174,6 +181,10 @@ public boolean play(int players){
         raise = false;
         match = false;
         fold = false;
+
+        while(bot2.getBotTotal() < 17){
+          bot2.botPlay(deck);
+        }
             if(dealer.getBotTotal() >= 16){
                 //match the bet or raise the bet
                 if(bot2.getCurrentBotBet() < Pot.getHighestBet() && dealer.getBotWallet() > Pot.getHighestBet()){
@@ -309,10 +320,10 @@ public boolean checkGameState(){
     int playerWallet = Player.getWallet();
     int bot1Wallet = bot1.getBotWallet();
     int bot2Wallet = bot2.getBotWallet();
-    
+
     if(playerWallet == 0){          // Player eliminated
       return false;
-    } 
+    }
     else if(bot1Wallet == 0){       // Bot 1 eliminated
       return false;
     }

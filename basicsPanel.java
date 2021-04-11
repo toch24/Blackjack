@@ -172,7 +172,7 @@ public class basicsPanel extends JPanel{
       bet.setEnabled(false);
       hit.setEnabled(false);
       pass.setEnabled(false);
-      Thread.sleep(1000);
+
       boolean play = game.play(players);
       if(play){
         String msg = "Player 1 played";
@@ -237,6 +237,7 @@ public class basicsPanel extends JPanel{
         Thread.currentThread().interrupt();
     }
   }
+  setCards(1);
 }
 
 
