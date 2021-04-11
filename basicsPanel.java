@@ -25,7 +25,7 @@ public class basicsPanel extends JPanel{
   private Blackjack game;
   private Card[] cards;
   private int players = 1;
-  private JLabel highestbetlabel;
+  private JLabel highestbetlabel, cp1wallet, pwallet, cp2wallet, dealerwallet;
 
     public basicsPanel(){
       game = new Blackjack();
@@ -57,6 +57,7 @@ public class basicsPanel extends JPanel{
       highestbetlabel = new JLabel("Highest bet: " + String.valueOf(Pot.getHighestBet()));
       highestbetlabel.setBounds(350,150,200,50);
       add(highestbetlabel);
+
 
       startGame.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
@@ -176,7 +177,7 @@ public class basicsPanel extends JPanel{
       if(play){
         String msg = "Player 1 played";
         JOptionPane.showMessageDialog(null, msg);
-        highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet())); // This should be the pot total not the highest bet :)
+        highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
         players++;
       }
       else System.out.println("Computer player 1 is having some problems...");
