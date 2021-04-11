@@ -190,17 +190,14 @@ public class basicsPanel extends JPanel{
 
     } //end of basicsPanel class
 
-/*public void addWallet(){
-  pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
-  pwallet.setBounds(250,350,200,50);
-  add(pwallet);
-}*/
-
-
-public void playerturns(int n){
+    public void playerturns(int n){
       boolean bot1Bust = false;
       boolean bot2Bust = false;
       boolean playerBust = false;
+
+
+
+
 
       if (n == 1)
         playerBust = true;
