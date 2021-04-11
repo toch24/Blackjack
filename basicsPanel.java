@@ -63,7 +63,7 @@ public class basicsPanel extends JPanel{
         public void actionPerformed(ActionEvent e) {
         startGame.setEnabled(false);
         startGame.setVisible(false);
-        playerturns();
+        playerturns(0);
         }
       });
 
@@ -73,7 +73,7 @@ public class basicsPanel extends JPanel{
         hit.setEnabled(false);
         pass.setEnabled(false);
         players++;
-        playerturns();
+        playerturns(0);
         System.out.println("On player: "+ players +" In panel");
         }
       });
@@ -128,8 +128,8 @@ public class basicsPanel extends JPanel{
                         String betAddress = "Bet Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
                         JOptionPane.showMessageDialog(null, betAddress);
                         //next player turn
-                        players++;
-                        playerturns();
+                      //  players++;
+                      //  playerturns();
                     }
                     else if(userBet < 0)
                     {   // Use this to error check, the user cannot make bets < 0.
@@ -148,8 +148,10 @@ public class basicsPanel extends JPanel{
       public void actionPerformed(ActionEvent e) {
         //draw a hard if clicked
           if(game.playerHit()){
-            String msg = "Hand is more than 21. New round";
+            String msg = "Your hand is more 21, you busted. Wait till next round";
             JOptionPane.showMessageDialog(null, msg);
+            players++;
+            playerturns(1);
           }
           else{
             String msg = "Card drawn!";
@@ -166,7 +168,15 @@ public class basicsPanel extends JPanel{
 
     } //end of basicsPanel class
 
-    public void playerturns(){
+    public void playerturns(int n){
+      boolean bot1Bust = false;
+      boolean bot2Bust = false;
+      boolean playerBust = false;
+      if (n == 1)
+        playerBust = true;
+      else
+        playerBust = false;
+
       if(players == 1){
         try{
       bet.setEnabled(false);
@@ -174,13 +184,21 @@ public class basicsPanel extends JPanel{
       pass.setEnabled(false);
 
       boolean play = game.play(players);
+      setCards(1);
       if(play){
+        String msg = "Player 1 busted, they are out for this round";
+        JOptionPane.showMessageDialog(null, msg);
+        bot1Bust = true;
+        //highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
+        players++;
+      }
+      else {
         String msg = "Player 1 played";
         JOptionPane.showMessageDialog(null, msg);
         highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
+        bot1Bust = false;
         players++;
       }
-      else System.out.println("Computer player 1 is having some problems...");
         }
         catch(Exception e){
 
@@ -202,14 +220,21 @@ public class basicsPanel extends JPanel{
       hit.setEnabled(false);
       pass.setEnabled(false);
       boolean play = game.play(players);
+      setCards(1);
       if(play){
-        String msg = "Player 2 played";
+        String msg = "Player 3 busted, they are out for this round";
+        JOptionPane.showMessageDialog(null, msg);
+        bot2Bust = true;
+        //highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
+        players++;
+      }
+      else {
+        String msg = "Player 3 played";
         JOptionPane.showMessageDialog(null, msg);
         highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
+        bot2Bust = false;
         players++;
-
       }
-      else System.out.println("Computer player 2 is having some problems...");
     }
       catch(InterruptedException ex){
         Thread.currentThread().interrupt();
@@ -224,20 +249,34 @@ public class basicsPanel extends JPanel{
         pass.setEnabled(false);
 
         boolean play = game.play(players);
+        setCards(2);
         if(play){
+          String msg = "Dealer busted, all players still in the round win!";
+          JOptionPane.showMessageDialog(null, msg);
+          //highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
+          players = 1;
+          if(!bot1Bust){
+            System.out.println("Dealer gives money to bot1");
+          }
+          if(!bot2Bust){
+            System.out.println("Dealer gives money to bot2");
+          }
+          if(!playerBust){
+            System.out.println("Dealer gives money to player");
+          }
+
+        }
+        else {
           String msg = "Dealer played";
           JOptionPane.showMessageDialog(null, msg);
-        //  setCards(2);
           highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
           players = 1;
         }
-        else System.out.println("Dealer is having some problems...");
       }
       catch(InterruptedException ex){
         Thread.currentThread().interrupt();
     }
   }
-  setCards(1);
 }
 
 
