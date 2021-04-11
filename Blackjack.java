@@ -182,8 +182,8 @@ public boolean play(int players){
         match = false;
         fold = false;
 
-        while(bot2.getBotTotal() < 17){
-          bot2.botPlay(deck);
+        while(dealer.getBotTotal() < 17){
+          dealer.botPlay(deck);
         }
             if(dealer.getBotTotal() >= 16){
                 //match the bet or raise the bet
