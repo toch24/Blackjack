@@ -147,9 +147,15 @@ public class basicsPanel extends JPanel{
     hit.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent e) {
         //draw a hard if clicked
-          game.playerHit();
-          String msg = "Card drawn!";
-          JOptionPane.showMessageDialog(null, msg);
+          if(game.playerHit()){
+            String msg = "Hand is more than 21. New round";
+            JOptionPane.showMessageDialog(null, msg);
+          }
+          else{
+            String msg = "Card drawn!";
+            JOptionPane.showMessageDialog(null, msg);
+          }
+
           //update the set of cards for player
           setCards(1);
 

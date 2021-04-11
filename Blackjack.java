@@ -214,7 +214,6 @@ public boolean play(int players){
             else{
               //fold
               fold = true;
-
             }
 
         return true;
@@ -257,9 +256,9 @@ public Card[] getPlayerCards(){
     return hand.getCards();
 }
 
-public void playerHit(){
+public boolean playerHit(){
     player.addCard(deck.nextCard());
-    checkGameState();
+    return checkGameState();
 }
 
 public Card[] getBotCards(int b){
@@ -276,7 +275,7 @@ public Card[] getBotCards(int b){
     return null;
 }
 
-public void checkGameState(){
+public boolean checkGameState(){
     Hand playerHand;      // here we are accessing different hands
     Hand bot1Hand;        // here we are accessing different hands
     Hand bot2Hand;        // here we are accessing different hands
@@ -290,6 +289,7 @@ public void checkGameState(){
     if(playerHand.total() > 21)
     {
         HomeJPanel.newRound();
+        return true;
     }
     else if(bot1Hand.total() > 21)
     {
@@ -303,6 +303,7 @@ public void checkGameState(){
     {
       HomeJPanel.newRound();
     }
+    return false;
 }
 
 } //end of BlackJack class
