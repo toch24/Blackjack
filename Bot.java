@@ -29,6 +29,11 @@ public class Bot {
 		return botWallet;
 	}
 
+	public static void setBotBuyIn(){							// Set the bot buyin to equal the players and add the buyin value to the total pot
+		botWallet = Player.getWallet();
+		Pot.addToPot(botWallet);
+	}
+
 	//Automate the bots moves. Passing deck as parameter so that it can take a card if needed
 	public void botPlay(Deck deck){
 		if(hand.total() <= 16){
@@ -36,11 +41,6 @@ public class Bot {
 			hand.addCard(deck.nextCard());
 		}
 
-	}
-
-	public static void setBotBuyIn(){							// Set the bot buyin to equal the players and add the buyin value to the total pot
-		botWallet = Player.getWallet();
-		Pot.addToPot(botWallet);
 	}
 
 	public void getRandomBotBet(){						// W.I.P
