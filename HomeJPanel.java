@@ -138,6 +138,7 @@ public class HomeJPanel extends JPanel
                         basicsFrame.add( basicsPanel );
                         basicsPanel.setBackground( Color.green.darker());
                         basicsFrame.setVisible( true );                     //display the game
+                        basicsPanel.add(newRound);
                         int checkWallet = Player.getWallet();
                         System.out.println("Players wallet is: "+ checkWallet);
 
