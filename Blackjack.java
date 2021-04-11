@@ -67,6 +67,7 @@ public boolean play(int players){
               {
                 int temp = rand.nextInt((4 + 1) - 1);
                 System.out.println(temp);
+                System.out.println(bot1.getBotWallet());
                 switch(temp)
                 {
                   case 1: {bot1.setCurrentBotBet(5); System.out.println("bot1 bet 5"); break;}
@@ -77,7 +78,7 @@ public boolean play(int players){
               }
               else if(bot1.getBotWallet() >= 500)
               {
-                int temp = rand.nextInt((5 + 1) - 1);
+                int temp = rand.nextInt((5 - 1) + 1);
                 System.out.println(temp);
 
                 switch(temp)
@@ -151,7 +152,34 @@ public boolean play(int players){
         while(bot2.getBotTotal() < 17){
           bot2.botPlay(deck);
         }
-            if(bot2.getBotTotal() >= 16){
+        if(bot2.getBotWallet() >= 100 && bot2.getBotWallet() < 500)
+              {
+                int temp = rand.nextInt((4 - 1) + 1);
+                System.out.println(temp);
+                System.out.println(bot2.getBotWallet());
+                switch(temp)
+                {
+                  case 1: {bot2.setCurrentBotBet(5); System.out.println("bot2 bet 5"); break;}
+                  case 2: {bot2.setCurrentBotBet(10); System.out.println("bot2 bet 10"); break;}
+                  case 3: {bot2.setCurrentBotBet(50); System.out.println("bot2 bet 50"); break;}
+                  case 4: {bot2.setCurrentBotBet(100); System.out.println("bot2 bet 100"); break;}
+                }
+              }
+              else if(bot2.getBotWallet() >= 500)
+              {
+                int temp = rand.nextInt((5 + 1) - 1);
+                System.out.println(temp);
+
+                switch(temp)
+                {
+                  case 1: {bot2.setCurrentBotBet(5); System.out.println("bot2 bet 5"); break;}
+                  case 2: {bot2.setCurrentBotBet(10); System.out.println("bot2 bet 10"); break;}
+                  case 3: {bot2.setCurrentBotBet(50); System.out.println("bot2 bet 50"); break;}
+                  case 4: {bot2.setCurrentBotBet(100); System.out.println("bot2 bet 100"); break;}
+                  case 5: {bot2.setCurrentBotBet(500); System.out.println("bot2 bet 500"); break;}
+                }
+              }
+            /* if(bot2.getBotTotal() >= 16){
                 //match the bet or raise the bet
                 if(bot1.getCurrentBotBet() < Pot.getHighestBet() && bot2.getBotWallet() > Pot.getHighestBet()){
                     if(bot2.getBotTotal() <= 21){
@@ -195,7 +223,7 @@ public boolean play(int players){
               //fold
               fold = true;
 
-            }
+            } */
 
 
             if(bot2.getBotTotal() > 21)
@@ -217,7 +245,7 @@ public boolean play(int players){
         while(dealer.getBotTotal() < 17){
           dealer.botPlay(deck);
         }
-            if(dealer.getBotTotal() >= 16){
+            /* if(dealer.getBotTotal() >= 16){
                 //match the bet or raise the bet
                 if(bot2.getCurrentBotBet() < Pot.getHighestBet() && dealer.getBotWallet() > Pot.getHighestBet()){
                     if(dealer.getBotTotal() <= 21){
@@ -257,7 +285,7 @@ public boolean play(int players){
             else{
               //fold
               fold = true;
-            }
+            } */
 
             if(dealer.getBotTotal() > 21)
               return true;
