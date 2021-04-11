@@ -48,11 +48,11 @@ public class basicsPanel extends JPanel{
       pass.setEnabled(false);
       add(pass);
 
-      startGame = new JButton("Start Game");
-      startGame.setBounds(350,500,100,50);
-      startGame.setVisible(true);
-      startGame.setEnabled(true);
-      add(startGame);
+      startGame = new JButton("Start Game");     
+      startGame.setBounds(350,500,100,50);     
+      startGame.setVisible(true);               
+      startGame.setEnabled(true);               
+      add(startGame);                          
 
       highestbetlabel = new JLabel("Current Pot Total: " + String.valueOf(Pot.getPot()));
       highestbetlabel.setBounds(350,150,200,50);
@@ -110,17 +110,15 @@ public class basicsPanel extends JPanel{
                     userBet = Integer.parseInt(betField.getText());      // Take the user bet.
                     int bet = userBet;
                     //System.out.println(userBet);
-                    if(userBet > 0)
+                    if(userBet == 5 || userBet == 10 || userBet == 50 || userBet == 100 || userBet == 500)
                     {
                       //TODO: if the bet is less than the highest bet, re-prompt the user for a new bet
                       if(userBet >= Pot.getHighestBet()){
-                        game.setUserBet(bet);                           // This sets the current bet from the user for comparison purposes
+                        game.setUserBet(bet);                            // This sets the current bet from the user for comparison purposes
                         Pot.addToPot(bet);                               // Add to the pot.
                         game.setHighestBet();
                         highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
                         }
-
-
 
                         /* int checkPot = Pot.getPot();
                         System.out.println(checkPot);  */
@@ -131,9 +129,9 @@ public class basicsPanel extends JPanel{
                       //  players++;
                       //  playerturns();
                     }
-                    else if(userBet < 0)
+                    else if(userBet < 5)
                     {   // Use this to error check, the user cannot make bets < 0.
-                        String error = "Error: Please Input A Value Greater Than 0";
+                        String error = "Error: Player can bet either: 5,10,50,100,500 ";
                         JOptionPane.showMessageDialog(null, error);
                     }
                 }
@@ -160,7 +158,6 @@ public class basicsPanel extends JPanel{
 
           //update the set of cards for player
           setCards(1);
-
       }
     });
 
