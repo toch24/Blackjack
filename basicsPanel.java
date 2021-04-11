@@ -27,6 +27,7 @@ public class basicsPanel extends JPanel{
   private int players = 1;
   private JLabel highestbetlabel, cp1wallet, pwallet, cp2wallet, dealerwallet;
 
+
     public basicsPanel(){
       game = new Blackjack();
       setCards(1);                                   //sets the cards images
@@ -58,7 +59,13 @@ public class basicsPanel extends JPanel{
       highestbetlabel.setBounds(350,150,200,50);
       add(highestbetlabel);
 
+      pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
+      pwallet.setBounds(250,350,200,50);
+      add(pwallet);
 
+      System.out.println("The buy in price was: "+game.returnWallet(2) );
+
+      
       startGame.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
         startGame.setEnabled(false);
@@ -172,6 +179,11 @@ public class basicsPanel extends JPanel{
       boolean bot1Bust = false;
       boolean bot2Bust = false;
       boolean playerBust = false;
+
+
+
+
+
       if (n == 1)
         playerBust = true;
       else

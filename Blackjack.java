@@ -278,7 +278,12 @@ public Card[] getPlayerCards(){
 
 public boolean playerHit(){
     player.addCard(deck.nextCard());
-    return checkGameState();
+    Hand playerHand = player.getHand();
+    if(playerHand.total() > 21)
+      return true;
+    else
+      return false;
+    //return checkGameState();
 }
 
 public Card[] getBotCards(int b){
@@ -309,8 +314,10 @@ public boolean checkGameState(){
     if(playerHand.total() > 21)
     {
       //  HomeJPanel.newRound();
+
         return true;
     }
+
 
     int playerWallet = Player.getWallet();
     int bot1Wallet = bot1.getBotWallet();
@@ -327,6 +334,18 @@ public boolean checkGameState(){
     }
 
     return true;
+
+}
+
+public int returnWallet(int playerNumber){
+  if(playerNumber == 2){
+    int playerWallet = Player.getWallet();
+    System.out.println("The buy in from player in blackjack is: "+ Player.getWallet() );
+    return Player.getWallet();
+  }
+  else
+    return 0;
+
 }
 
 } //end of BlackJack class

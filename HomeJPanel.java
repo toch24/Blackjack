@@ -124,20 +124,22 @@ public class HomeJPanel extends JPanel
                     {
                   //      add basicsPanel
                     //    JPanel basicsPanel = new basicsPanel();
-                        basicsFrame.add( basicsPanel ); 					//add screensaverJPanel to frame
-                        basicsPanel.setBackground( Color.green.darker());
-                        basicsFrame.setVisible( true );                     //display the game
 
                         Pot.addToPot(bet);                                  // Add to the pot.
                         Player.setWallet(bet);                              // This sets the current bet from the user for comparison purposes
-                        
+
                         int temp = 0;
                         while(temp < 3){
                             Bot.setBotBuyIn();
                             temp++;
                         }
-                        /* int checkWallet = Player.getWallet();
-                        System.out.println(checkWallet); */
+
+                        basicsFrame.add( basicsPanel ); 					//add screensaverJPanel to frame
+                        basicsPanel.setBackground( Color.green.darker());
+                        basicsFrame.setVisible( true );                     //display the game
+                        int checkWallet = Player.getWallet();
+                        System.out.println("Players wallet is: "+ checkWallet);
+
                         buyInFrame.dispose();                               // Forse the JFrame closed when we successfully make a bet.
                         String betAddress = "Buy In Successful.";           // Just let the user know their bet was successfully placed, we can take this out if you guys want.
                         JOptionPane.showMessageDialog(null, betAddress);
@@ -183,7 +185,7 @@ public class HomeJPanel extends JPanel
    public static void newRound(){
 
             //basicsFrame.dispose();
-            //JFrame newRoundFrame = new JFrame();            
+            //JFrame newRoundFrame = new JFrame();
             JPanel newRoundPanel = new basicsPanel();
 
             basicsFrame.remove(newRoundPanel);
