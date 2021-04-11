@@ -29,7 +29,7 @@ public class Hand {
 	public int total() {
         boolean ace = false;
 		total = 0;
-		
+
 		for (int i = 0; i < count; i++) {
 			int value = hand[i].getcardValue();
 
@@ -47,7 +47,7 @@ public class Hand {
 		if (ace && (total + 10 <= 21)) {
 			total += 10;
 		}
-    
+
 		return total;
 	}
 }

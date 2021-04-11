@@ -10,7 +10,7 @@ public class Pot{
     public static int getPot(){                             // Return the total value of the pot
         return potTotal;
     }
-    
+
     public static int getHighestBet(){                      // Return the current highest best
         return highestBet;
     }

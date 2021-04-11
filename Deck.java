@@ -3,10 +3,10 @@ import java.util.Random;
 
 public class Deck {
     private Card[] gameDeck = new Card[52];
-	private static ArrayList<Card> usedCards = new ArrayList<Card>(); 
+	private static ArrayList<Card> usedCards = new ArrayList<Card>();
     private Random rand = new Random();
 	private int next = 0;
-	
+
 	public Deck(){
 
 		int count = 0;
@@ -22,8 +22,8 @@ public class Deck {
 		}
 		for (int i = 1; i <= 13; i++) {
 			gameDeck[count++] = new Card("Diamonds", i);
-		}	
-		
+		}
+
 	}
 
 	//get the next card of the deck
@@ -34,12 +34,12 @@ public class Deck {
 			return gameDeck[next];
 		}
 		//Do people even use the entire deck in blackjack??
-		
+
 		return null;
 	}
 
 	/* // Check if we have duplicated cards when drawing >:( )
-	public static boolean checkDuplicateCards(){		
+	public static boolean checkDuplicateCards(){
 
 
 		return false;
@@ -47,7 +47,7 @@ public class Deck {
 
 	public static void printUsedCards(){
 		for (int i = 0; i < Deck.usedCards.size(); ++i)
-    	{ 
+    	{
       		int temp = usedCards.get(i).getcardValue();
       		String temp2 = usedCards.get(i).getcardSuit();
 			String temp3 = usedCards.get(i).getspecCard();
@@ -59,9 +59,9 @@ public class Deck {
 	} */
 
 	public void shuffle(Card[] gameDeck){                  // Shuffle the deck, this is a core function for blackjack.
-        rand = new Random();	
+        rand = new Random();
 
-        for (int i = 0; i < 4; ++i){	
+        for (int i = 0; i < 4; ++i){
             for (int j = 0; j < 52; ++j){
                 int r = rand.nextInt((52-1) + 1) % 52;
 															// Pretty basic function, just swaps the position of elements within the deck.
@@ -70,8 +70,8 @@ public class Deck {
                 gameDeck[r] = temp;
 			}
             }
-    } 
-	
+    }
+
 	public void printDeck(){        						// tester function - helps make sure the deck is working, preserve this for future work.
 		for (int i = 0; i < 52; ++i){
 			System.out.print(gameDeck[i].getcardSuit());
