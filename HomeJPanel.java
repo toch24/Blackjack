@@ -45,11 +45,11 @@ public class HomeJPanel extends JPanel
       welcomeLabel.setFont( new Font( null, Font.BOLD, 50 ) );
       welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
       welcomeLabel.setVerticalAlignment(JLabel.CENTER);
-      add( welcomeLabel); 									//add label1 to JFrame
+      add( welcomeLabel); 									    //add label1 to JFrame
 
 
       button1 = new JButton("Play Basics"); 					//option for user to play again
-      button2 = new JButton("RULES"); 					//option for user to play again
+      button2 = new JButton("RULES"); 					        //option for user to play again
       button3 = new JButton("Play Casino"); 					//option for user to play again
 
       //setLayout(null);
@@ -61,7 +61,6 @@ public class HomeJPanel extends JPanel
       add(button1);
       add(button2);
       add(button3);
-
 
       //play basics button
       button1.addActionListener(new ActionListener() {
@@ -120,7 +119,7 @@ public class HomeJPanel extends JPanel
                     userBuyIn = Integer.parseInt(buyInField.getText());     // Take the user bet.
                     int bet = userBuyIn;
                     //System.out.println(userBet);
-                    if(bet >= 100)
+                    if(bet >= 100 && bet % 5 == 0)
                     {
                   //      add basicsPanel
                     //    JPanel basicsPanel = new basicsPanel();
@@ -146,7 +145,7 @@ public class HomeJPanel extends JPanel
                     }
                     else
                     {   // Use this to error check, the user cannot make bets < 0.
-                        String error = "Error: Please Input A Value Greater Than Or Equal To 100";
+                        String error = "Error: Please Input A Value Greater Than Or Equal To 100, but a factor of 5";
                         JOptionPane.showMessageDialog(null, error);
                     }
                 }

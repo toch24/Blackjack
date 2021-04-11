@@ -2,7 +2,8 @@ public class Player {
     //A new hand for the player
     private Hand hand = new Hand();
 	private int bet;
-	private static int wallet; 								// hold the "buy in value"
+	private static int wallet; 	
+	private static int currentBet;							// hold the "buy in value"
 
     //Return true if the player has a blackjack
 	public boolean hasBlackjack(){
@@ -12,7 +13,7 @@ public class Player {
 			return false;
 		}
 	}
-    
+
     //Add a card to hand
 	public void addCard(Card card) {
 		hand.addCard(card);
