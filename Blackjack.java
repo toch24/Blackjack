@@ -89,6 +89,10 @@ public boolean play(int players){
                   case 5: {bot1.setCurrentBotBet(500); System.out.println("bot1 bet 500"); break;}
                 }
               }
+
+
+              int newWallet = bot1.getBotWallet() - bot1.getCurrentBotBet();
+              bot1.setBotWallet(newWallet);
                 /* if(bot1.getBotTotal() >= 16){
                     //match the bet or raise the bet
                     if(bot1.getCurrentBotBet() < Pot.getHighestBet() && bot1.getBotWallet() > Pot.getHighestBet()){
@@ -366,13 +370,20 @@ public boolean checkGameState(){
 //returns the current value of wallet
 public int returnWallet(int playerNumber){
   if(playerNumber == 2){
-    int playerWallet = Player.getWallet();
     System.out.println("The buy in from player in blackjack is: "+ Player.getWallet() );
     return Player.getWallet();
+  }
+  else if(playerNumber == 1){
+    return bot1.getBotWallet();
+  }
+  else if(playerNumber == 3){
+    return bot2.getBotWallet();
   }
   else
     return 0;
 
 }
+
+
 
 } //end of BlackJack class

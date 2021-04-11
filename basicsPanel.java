@@ -56,15 +56,20 @@ public class basicsPanel extends JPanel{
       add(startGame);
 
       highestbetlabel = new JLabel("Current Pot Total: " + String.valueOf(Pot.getPot()));
-      highestbetlabel.setBounds(350,150,200,50);
+      highestbetlabel.setBounds(300,150,200,50);
       add(highestbetlabel);
 
-     pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
+      pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
       pwallet.setBounds(250,350,200,50);
       add(pwallet);
 
-      System.out.println("The buy in price was: "+game.returnWallet(2) );
+      cp1wallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(1)));
+      cp1wallet.setBounds(50,150,200,50);
+      add(cp1wallet);
 
+      cp2wallet = new JLabel("Player 3 wallet total: " + String.valueOf(game.returnWallet(3)));
+      cp2wallet.setBounds(600,150,200,50);
+      add(cp2wallet);
 
       startGame.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
@@ -135,8 +140,21 @@ public class basicsPanel extends JPanel{
                         //next player turn
                       //  players++;
                       //  playerturns();
+
+
+
+                      int newWallet = Player.getWallet() - bet;
+
+                      Player.setWalletBet(newWallet);
+
+                      pwallet.setVisible(false);
+                      pwallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(2)));
+                      pwallet.setBounds(250,350,200,50);
+                      pwallet.setVisible(true);
+                      add(pwallet);
+
                     }
-                    else if(userBet < 5)
+                    else
                     {   // Use this to error check, the user cannot make bets < 0.
                         String error = "Error: Player can bet either: 5,10,50,100,500 ";
                         JOptionPane.showMessageDialog(null, error);
@@ -197,6 +215,13 @@ public void playerturns(int n){
 
       boolean play = game.play(players);
       setCards(1);
+
+      cp1wallet.setVisible(false);
+      cp1wallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(1)));
+      cp1wallet.setBounds(50,150,200,50);
+      cp1wallet.setVisible(true);
+      add(cp1wallet);
+
       if(play){
         String msg = "Player 1 busted, they are out for this round";
         JOptionPane.showMessageDialog(null, msg);
@@ -231,6 +256,13 @@ public void playerturns(int n){
       hit.setEnabled(false);
       pass.setEnabled(false);
       boolean play = game.play(players);
+
+      cp2wallet.setVisible(false);
+      cp2wallet = new JLabel("Player 2 wallet total: " + String.valueOf(game.returnWallet(3)));
+      cp2wallet.setBounds(600,150,200,50);
+      cp2wallet.setVisible(true);
+      add(cp2wallet);
+
       setCards(1);
       if(play){
         String msg = "Player 3 busted, they are out for this round";
