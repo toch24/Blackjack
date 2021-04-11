@@ -146,9 +146,15 @@ public class basicsPanel extends JPanel{
     hit.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent e) {
         //draw a hard if clicked
-          game.playerHit();
-          String msg = "Card drawn!";
-          JOptionPane.showMessageDialog(null, msg);
+          if(game.playerHit()){
+            String msg = "Hand is more than 21. New round";
+            JOptionPane.showMessageDialog(null, msg);
+          }
+          else{
+            String msg = "Card drawn!";
+            JOptionPane.showMessageDialog(null, msg);
+          }
+
           //update the set of cards for player
           setCards(1);
 
@@ -165,12 +171,12 @@ public class basicsPanel extends JPanel{
       bet.setEnabled(false);
       hit.setEnabled(false);
       pass.setEnabled(false);
-      Thread.sleep(10000);
+      Thread.sleep(1000);
       boolean play = game.play(players);
       if(play){
         String msg = "Player 1 played";
         JOptionPane.showMessageDialog(null, msg);
-        highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
+        highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet())); // This should be the pot total not the highest bet :)
         players++;
       }
       else System.out.println("Computer player 1 is having some problems...");
@@ -190,7 +196,7 @@ public class basicsPanel extends JPanel{
 
       if(players == 3){
         try{
-          Thread.sleep(10000);
+          Thread.sleep(1000);
       bet.setEnabled(false);
       hit.setEnabled(false);
       pass.setEnabled(false);
@@ -211,7 +217,7 @@ public class basicsPanel extends JPanel{
 
       if(players == 4){
         try{
-        Thread.sleep(10000);
+        Thread.sleep(1000);
         bet.setEnabled(false);
         hit.setEnabled(false);
         pass.setEnabled(false);
@@ -220,7 +226,7 @@ public class basicsPanel extends JPanel{
         if(play){
           String msg = "Dealer played";
           JOptionPane.showMessageDialog(null, msg);
-          setCards(2);
+        //  setCards(2);
           highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
           players = 1;
         }
@@ -400,12 +406,10 @@ public class basicsPanel extends JPanel{
           BufferedImage img = null;
           JLabel label = new JLabel();
           try {
-            if(n==1)
-              img = ImageIO.read(new File("Cards/blue_back.png"));
-            else if(n==2){
+
               img = ImageIO.read(new File(png));
               System.out.println("Show image!!");
-          }
+
 
 
 
@@ -432,20 +436,14 @@ public class basicsPanel extends JPanel{
 
 
             label.setIcon(imageIcon);
-            if(n==1){
+
             if(i == 1) label.setBounds(50, posbot, 200, 200);
             else {
               label.setBounds(600,posbot2,200,200);
               posbot2 += 80;
             }
-          }
-          else if(n==2){
-            if(i == 1) label.setBounds(10, posbot, 200, 200);
-            else {
-              label.setBounds(550,posbot2,200,200);
-              posbot2 += 80;
-            }
-          }
+
+
 
             posbot += 80;
             //label.setVisible(true);
