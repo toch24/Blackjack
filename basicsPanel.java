@@ -227,7 +227,7 @@ public class basicsPanel extends JPanel{
         if(play){
           String msg = "Dealer played";
           JOptionPane.showMessageDialog(null, msg);
-          setCards(2);
+        //  setCards(2);
           highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
           players = 1;
         }
@@ -407,12 +407,10 @@ public class basicsPanel extends JPanel{
           BufferedImage img = null;
           JLabel label = new JLabel();
           try {
-            if(n==1)
-              img = ImageIO.read(new File("Cards/blue_back.png"));
-            else if(n==2){
+
               img = ImageIO.read(new File(png));
               System.out.println("Show image!!");
-          }
+
 
 
 
@@ -439,20 +437,14 @@ public class basicsPanel extends JPanel{
 
 
             label.setIcon(imageIcon);
-            if(n==1){
+
             if(i == 1) label.setBounds(50, posbot, 200, 200);
             else {
               label.setBounds(600,posbot2,200,200);
               posbot2 += 80;
             }
-          }
-          else if(n==2){
-            if(i == 1) label.setBounds(10, posbot, 200, 200);
-            else {
-              label.setBounds(550,posbot2,200,200);
-              posbot2 += 80;
-            }
-          }
+
+
 
             posbot += 80;
             //label.setVisible(true);
