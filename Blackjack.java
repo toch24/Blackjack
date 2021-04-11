@@ -303,6 +303,12 @@ public void checkGameState(){
     {
       HomeJPanel.newRound();
     }
+    int playerWallet = Player.getWallet();
+    int bot1Wallet = bot1.getBotWallet();
+    int bot2Wallet = bot2.getBotWallet();
+    int dealerWallet = dealer.getBotWallet();
+    
+    if()
 }
 
 } //end of BlackJack class

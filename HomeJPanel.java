@@ -178,12 +178,11 @@ public class HomeJPanel extends JPanel
    public static void newRound(){
 
             //basicsFrame.dispose();
-
-            //JFrame newRoundFrame = new JFrame();
+            //JFrame newRoundFrame = new JFrame();            
             JPanel newRoundPanel = new basicsPanel();
 
+            basicsFrame.remove(newRoundPanel);
             basicsFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
-
             basicsFrame.remove(basicsPanel);
 
             basicsFrame.add( newRoundPanel ); 					//add screensaverJPanel to frame

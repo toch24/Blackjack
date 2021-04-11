@@ -58,7 +58,6 @@ public class basicsPanel extends JPanel{
       highestbetlabel.setBounds(350,150,200,50);
       add(highestbetlabel);
 
-
       startGame.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
         startGame.setEnabled(false);
