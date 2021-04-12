@@ -51,8 +51,6 @@ public class basicsPanel extends JPanel{
       startGame.setEnabled(true);
       add(startGame);
       
-      bot1.setIndividualBotWallet();
-      bot2
       highestbetlabel = new JLabel("Current Pot Total: " + String.valueOf(Pot.getPot()));
       highestbetlabel.setBounds(300,150,200,50);
       add(highestbetlabel);
