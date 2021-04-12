@@ -191,11 +191,15 @@ public void playerturns(int n){
         betField.addActionListener(new ActionListener(){
           public void actionPerformed(ActionEvent e){
               userBet = Integer.parseInt(betField.getText());      // Take the user bet.
+              int newWallet;
               if(userBet == 5 || userBet == 10 || userBet == 50 || userBet == 100 || userBet == 500)
               {
                 //TODO: if the bet is less than the highest bet, re-prompt the user for a new bet
                 if(userBet >= Pot.getHighestBet()){
-                  game.setUserBet(userBet);                            // This sets the current bet from the user for comparison purposes
+                  //Checking that user has the money 
+                  if(Player.getWallet() >= userBet){
+                  newWallet = Player.getWallet() - userBet;
+                  Player.setWalletBet(newWallet);    
                   Pot.addToPot(userBet);                               // Add to the pot.
                   game.setHighestBet();
                   highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
@@ -203,20 +207,19 @@ public void playerturns(int n){
                   String betAddress = "Bet Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
                   JOptionPane.showMessageDialog(null, betAddress);
                   }
-                else{
+                  else{
+                    String betAddress = "You dont have that amount to bet.";              
+                    JOptionPane.showMessageDialog(null, betAddress);
+                  }
+
+                  }
+             else{
                   String betAddress = "Bet must match the highest bet or raise it.";              
                   JOptionPane.showMessageDialog(null, betAddress);
-                  betPanel.add(betLabel);
-                  betPanel.add(betField);
           
-                  betFrame.setVisible(true);                                   // Make it visible.
-          
-                }
+            }
 
-                int newWallet = Player.getWallet() - userBet;
-
-                Player.setWalletBet(newWallet);
-
+                
                 pwallet.setVisible(false);
                 pwallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(2)));
                 pwallet.setBounds(250,350,200,50);
@@ -260,7 +263,6 @@ public void playerturns(int n){
         String msg = "Player 3 busted, they are out for this round";
         JOptionPane.showMessageDialog(null, msg);
         bot2Bust = true;
-        //highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
         players++;
       }
       else {
@@ -411,7 +413,6 @@ public void playerturns(int n){
             }
           }
 
-         //System.out.println("Png is: " +png);
          //adding the card images to the JPanel
         BufferedImage img = null;
         JLabel label = new JLabel();

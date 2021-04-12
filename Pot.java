@@ -15,6 +15,10 @@ public class Pot{
         return highestBet;
     }
 
+    public static void resetPot(){
+
+        potTotal = 0;
+    }
     public static void setHighestBet(int bet){
         highestBet = bet;
     }

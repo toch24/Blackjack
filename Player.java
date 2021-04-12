@@ -27,6 +27,10 @@ public static void setWalletBet(int bet){
 		wallet = bet;
 	}
 
+	public static void resetWallet(){
+		wallet = 0;
+	}
+
   public static void revertBet(){
     wallet = wallet + bet;
   }
