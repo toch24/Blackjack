@@ -261,7 +261,7 @@ public int returnWallet(int playerNumber){
     return Player.getWallet();
   }
   else if(playerNumber == 1){
-    
+
     return bot1.getEachBotWallet();
   }
   else if(playerNumber == 3){
@@ -275,11 +275,11 @@ public int returnWallet(int playerNumber){
 public void setBotWallet(int n){
     if(n == 1){
       int newWallet = bot1.getEachBotWallet() + bot1.getCurrentBotBet();
-      bot1.setIndividualBotWallet();
+    //  bot1.setIndividualBotWallet();
     }
     else if(n==2){
       int newWallet = bot2.getBotWallet() + bot2.getCurrentBotBet();
-      bot2.setBotWallet(newWallet);
+    //  bot2.setBotWallet(newWallet);
     }
 }
 

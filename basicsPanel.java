@@ -50,9 +50,9 @@ public class basicsPanel extends JPanel{
       startGame.setVisible(true);
       startGame.setEnabled(true);
       add(startGame);
-      
-      bot1.setIndividualBotWallet();
-      bot2
+
+      //bot1.setIndividualBotWallet();
+      //bot2
       highestbetlabel = new JLabel("Current Pot Total: " + String.valueOf(Pot.getPot()));
       highestbetlabel.setBounds(300,150,200,50);
       add(highestbetlabel);
@@ -216,7 +216,7 @@ public void playerturns(int n){
 
             }
                 pwallet.setVisible(false);
-                pwallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(2)));
+                pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
                 pwallet.setBounds(250,350,200,50);
                 pwallet.setVisible(true);
                 add(pwallet);
@@ -231,7 +231,7 @@ public void playerturns(int n){
 
 
         pwallet.setVisible(false);
-        pwallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(2)));
+        pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
         pwallet.setBounds(250,350,200,50);
         pwallet.setVisible(true);
         add(pwallet);
@@ -246,7 +246,7 @@ public void playerturns(int n){
       boolean play = game.play(players);
 
       cp2wallet.setVisible(false);
-      cp2wallet = new JLabel("Player 2 wallet total: " + String.valueOf(game.returnWallet(3)));
+      cp2wallet = new JLabel("Player 3 wallet total: " + String.valueOf(game.returnWallet(3)));
       cp2wallet.setBounds(600,150,200,50);
       cp2wallet.setVisible(true);
       add(cp2wallet);
