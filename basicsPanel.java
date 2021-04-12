@@ -160,7 +160,7 @@ public void playerturns(int n){
         JOptionPane.showMessageDialog(null, msg);
         hit.setEnabled(true);
         pass.setEnabled(true);
-  
+
         JFrame betFrame = new JFrame("Betting...");
         JPanel betPanel = new JPanel();
         JLabel betLabel = new JLabel("Place your bet: ");           // address the player!
@@ -190,10 +190,11 @@ public void playerturns(int n){
               {
                 //TODO: if the bet is less than the highest bet, re-prompt the user for a new bet
                 if(userBet >= Pot.getHighestBet()){
-                  //Checking that user has the money 
+                  //Checking that user has the money
                   if(Player.getWallet() >= userBet){
+                  game.setUserBet(userBet);
                   newWallet = Player.getWallet() - userBet;
-                  Player.setWalletBet(newWallet);    
+                  Player.setWalletBet(newWallet);
                   Pot.addToPot(userBet);                               // Add to the pot.
                   game.setHighestBet();
                   highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
@@ -202,24 +203,21 @@ public void playerturns(int n){
                   JOptionPane.showMessageDialog(null, betAddress);
                   }
                   else{
-                    String betAddress = "You dont have that amount to bet.";              
+                    String betAddress = "You dont have that amount to bet.";
                     JOptionPane.showMessageDialog(null, betAddress);
                   }
 
                   }
              else{
-                  String betAddress = "Bet must match the highest bet or raise it.";              
+                  String betAddress = "Bet must match the highest bet or raise it.";
                   JOptionPane.showMessageDialog(null, betAddress);
-          
-            }
 
-                
+            }
                 pwallet.setVisible(false);
-                pwallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(2)));
+                pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
                 pwallet.setBounds(250,350,200,50);
                 pwallet.setVisible(true);
                 add(pwallet);
-
               }
               else
               {   // Use this to error check, the user cannot make bets < 0.
@@ -231,7 +229,7 @@ public void playerturns(int n){
 
 
         pwallet.setVisible(false);
-        pwallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(2)));
+        pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
         pwallet.setBounds(250,350,200,50);
         pwallet.setVisible(true);
         add(pwallet);
@@ -246,7 +244,7 @@ public void playerturns(int n){
       boolean play = game.play(players);
 
       cp2wallet.setVisible(false);
-      cp2wallet = new JLabel("Player 2 wallet total: " + String.valueOf(game.returnWallet(3)));
+      cp2wallet = new JLabel("Player 3 wallet total: " + String.valueOf(game.returnWallet(3)));
       cp2wallet.setBounds(600,150,200,50);
       cp2wallet.setVisible(true);
       add(cp2wallet);
@@ -565,9 +563,9 @@ public void playerturns(int n){
           if(c != null){
           cardvalue = c.getcardValue();
           suit = c.getcardSuit();
-          //System.out.println("The dealer's card value is: " + cardvalue + "The suit is: " + suit);
+          System.out.println("The dealer's card value is: " + cardvalue + "The suit is: " + suit);
           String temp = c.getspecCard();
-          //System.out.println("The dealer spec value is: " + temp);
+          System.out.println("The dealer spec value is: " + temp);
 
           String png = "";                                     //name of the png file
           String value = String.valueOf(cardvalue);
