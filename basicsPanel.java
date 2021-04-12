@@ -292,7 +292,7 @@ public void playerturns(int n){
                       Player.setWalletBet(newWallet);
 
                       pwallet.setVisible(false);
-                      pwallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(2)));
+                      pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
                       pwallet.setBounds(250,350,200,50);
                       pwallet.setVisible(true);
                       add(pwallet);
@@ -363,10 +363,14 @@ public void playerturns(int n){
           }
           if(!bot2Bust){
             System.out.println("Dealer gives money to bot2");
+            game.setBotWallet(2);
+            System.out.println("Bot2 wallet is now: "+ game.returnWallet(3));
           }
           if(!playerBust){
             System.out.println("Dealer gives money to player");
-
+            //int payback = Player.getCurrentBet();
+            Player.revertBet();
+            System.out.println("Player wallet is now: "+ game.returnWallet(2));
           }
 
         }
@@ -375,6 +379,24 @@ public void playerturns(int n){
           JOptionPane.showMessageDialog(null, msg);
           highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
           players = 1;
+
+          if(!bot1Bust && game.handMatch(1)){
+            System.out.println("Dealer gives money to bot1");
+            game.setBotWallet(1);
+            System.out.println("Bot1 wallet is now: "+ game.returnWallet(1));
+          }
+          if(!bot2Bust && game.handMatch(2)){
+            System.out.println("Dealer gives money to bot2");
+            game.setBotWallet(2);
+            System.out.println("Bot2 wallet is now: "+ game.returnWallet(3));
+          }
+          if(!playerBust && game.handMatch(3)){
+            System.out.println("Dealer gives money to player");
+            //int payback = Player.getCurrentBet();
+            Player.revertBet();
+            System.out.println("Player wallet is now: "+ game.returnWallet(2));
+          }
+
         }
       }
       catch(InterruptedException ex){
