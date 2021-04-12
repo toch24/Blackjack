@@ -42,7 +42,7 @@ public class basicsPanel extends JPanel{
       hit.setBounds(400,200,100,50);
       hit.setEnabled(false);
 
-      add(bet);
+      //add(bet);
 
       pass = new JButton("Hold");
       pass.setBounds(350,250,100,50);
@@ -91,7 +91,7 @@ public class basicsPanel extends JPanel{
       });
 
       // Create functionality for the bet button, this will let players place bets.
-      bet.addActionListener(new ActionListener(){
+        bet.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
             // Make a new frame to display the betting area.
             JFrame betFrame = new JFrame("Betting...");
@@ -163,7 +163,7 @@ public class basicsPanel extends JPanel{
             });
         }
       });
-
+ 
 
       //add hit button
       add(hit);
@@ -195,10 +195,6 @@ public class basicsPanel extends JPanel{
       boolean bot2Bust = false;
       boolean playerBust = false;
 
-
-
-
-
       if (n == 1)
         playerBust = true;
       else
@@ -206,7 +202,7 @@ public class basicsPanel extends JPanel{
 
       if(players == 1){
         try{
-      bet.setEnabled(false);
+      //bet.setEnabled(false);
       hit.setEnabled(false);
       pass.setEnabled(false);
 
@@ -237,13 +233,77 @@ public class basicsPanel extends JPanel{
         catch(Exception e){
         }
       }
-      //Enable buttons for human player once first bot plays
+      //Enable buttons for human player once player places their bet
       if(players == 2){
         String msg = "Your turn!";
         JOptionPane.showMessageDialog(null, msg);
-        bet.setEnabled(true);
-        hit.setEnabled(true);
-        pass.setEnabled(true);
+        JFrame betFrame = new JFrame("Betting...");
+            JPanel betPanel = new JPanel();
+            JLabel betLabel = new JLabel("Place your bet: ");           // address the player!
+            JOptionPane errorCheck = new JOptionPane("Error");
+
+            betFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+            betFrame.add( betPanel );
+            betFrame.setResizable(false);
+            betFrame.setSize(300,100);
+
+            // Create JTextField to allow for user inputs
+            betField = new JTextField(4);
+            betField.setBounds(50,100, 200,30);
+            betField.setVisible(true);
+
+            // add the textfield to the JPanel with the label
+            betPanel.add(betLabel);
+            betPanel.add(betField);
+
+            betFrame.setVisible(true);                                   // Make it visible.
+
+            betField.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    userBet = Integer.parseInt(betField.getText());      // Take the user bet.
+                    int bet = userBet;
+                    //System.out.println(userBet);
+                    if(userBet == 5 || userBet == 10 || userBet == 50 || userBet == 100 || userBet == 500)
+                    {
+                      //TODO: if the bet is less than the highest bet, re-prompt the user for a new bet
+                      if(userBet >= Pot.getHighestBet()){
+                        game.setUserBet(bet);                            // This sets the current bet from the user for comparison purposes
+                        Pot.addToPot(bet);                               // Add to the pot.
+                        game.setHighestBet();
+                        highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
+                        }
+
+                        /* int checkPot = Pot.getPot();
+                        System.out.println(checkPot);  */
+                        betFrame.dispose();                              // Forse the JFrame closed when we successfully make a bet.
+                        String betAddress = "Bet Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
+                        JOptionPane.showMessageDialog(null, betAddress);
+                        //next player turn
+                      //  players++;
+                      //  playerturns();
+                        //bet.setEnabled(true);
+                        hit.setEnabled(true);
+                        pass.setEnabled(true);
+
+
+                      int newWallet = Player.getWallet() - bet;
+
+                      Player.setWalletBet(newWallet);
+
+                      pwallet.setVisible(false);
+                      pwallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(2)));
+                      pwallet.setBounds(250,350,200,50);
+                      pwallet.setVisible(true);
+                      add(pwallet);
+
+                    }
+                    else
+                    {   // Use this to error check, the user cannot make bets < 0.
+                        String error = "Error: Player can bet either: 5,10,50,100,500 ";
+                        JOptionPane.showMessageDialog(null, error);
+                    }
+                }
+            });
       }
 
       if(players == 3){
@@ -333,6 +393,11 @@ public class basicsPanel extends JPanel{
         suit = c.getcardSuit();
         String png = "";                                     //name of the png file
         String value = String.valueOf(cardvalue);
+        System.out.println("The player's card value is: " + cardvalue);
+        System.out.println("The player's card suit is: " + suit);
+        String temp = c.getspecCard();
+        System.out.println("The player's spec value is: " + temp);
+
 
         //get the card png (easier way and less code...)
         if(c.getspecCard() == null)
@@ -354,34 +419,34 @@ public class basicsPanel extends JPanel{
           { // This whole switch statement accounts for if the card has a face (I.E] Jack,Queen,King)
             if(c.getspecCard() == "King"){
               switch(suit){
-                case "Hearts" : {png = "Cards/" + 13 + "H" + ".png";}
-                case "Clubs"  : {png = "Cards/" + 13 + "C" + ".png";}
-                case "Spades"  : {png = "Cards/" + 13 + "S" + ".png";}
-                case "Diamonds"  : {png = "Cards/" + 13 + "D" + ".png";}
+                case "Hearts" : {png = "Cards/" + 13 + "H" + ".png"; break;}
+                case "Clubs"  : {png = "Cards/" + 13 + "C" + ".png"; break;}
+                case "Spades"  : {png = "Cards/" + 13 + "S" + ".png"; break;}
+                case "Diamonds"  : {png = "Cards/" + 13 + "D" + ".png"; break;}
               }
             }
             else if(c.getspecCard() == "Queen"){
               switch(suit){
-                case "Hearts" : {png = "Cards/" + 12 + "H" + ".png";}
-                case "Clubs"  : {png = "Cards/" + 12 + "C" + ".png";}
-                case "Spades"  : {png = "Cards/" + 12 + "S" + ".png";}
-                case "Diamonds"  : {png = "Cards/" + 12 + "D" + ".png";}
+                case "Hearts" : {png = "Cards/" + 12 + "H" + ".png"; break;}
+                case "Clubs"  : {png = "Cards/" + 12 + "C" + ".png"; break;}
+                case "Spades"  : {png = "Cards/" + 12 + "S" + ".png"; break;}
+                case "Diamonds"  : {png = "Cards/" + 12 + "D" + ".png"; break;}
               }
             }
             else if(c.getspecCard() == "Jack"){
               switch(suit){
-                case "Hearts" : {png = "Cards/" + 11 + "H" + ".png";}
-                case "Clubs"  : {png = "Cards/" + 11 + "C" + ".png";}
-                case "Spades"  : {png = "Cards/" + 11 + "S" + ".png";}
-                case "Diamonds"  : {png = "Cards/" + 11 + "D" + ".png";}
+                case "Hearts" : {png = "Cards/" + 11 + "H" + ".png"; break;}
+                case "Clubs"  : {png = "Cards/" + 11 + "C" + ".png"; break;}
+                case "Spades"  : {png = "Cards/" + 11 + "S" + ".png"; break;}
+                case "Diamonds"  : {png = "Cards/" + 11 + "D" + ".png"; break;}
               }
             }
             else if(c.getspecCard() == "Ace"){
               switch(suit){
-                case "Hearts" : {png = "Cards/" + 1 + "H" + ".png";}
-                case "Clubs"  : {png = "Cards/" + 1 + "C" + ".png";}
-                case "Spades"  : {png = "Cards/" + 1 + "S" + ".png";}
-                case "Diamonds"  : {png = "Cards/" + 1 + "D" + ".png";}
+                case "Hearts" : {png = "Cards/" + 1 + "H" + ".png"; break;}
+                case "Clubs"  : {png = "Cards/" + 1 + "C" + ".png"; break;}
+                case "Spades"  : {png = "Cards/" + 1 + "S" + ".png"; break;}
+                case "Diamonds"  : {png = "Cards/" + 1 + "D" + ".png"; break;}
               }
             }
           }
@@ -425,8 +490,10 @@ public class basicsPanel extends JPanel{
          if(c != null){
           cardvalue = c.getcardValue();
           suit = c.getcardSuit();
-          System.out.println("The bot's card value is: "+cardvalue);
-          System.out.println("The bot's card suit is: "+suit);
+          System.out.println("The bot2's card value is: "+cardvalue);
+          System.out.println("The bot2's card suit is: "+suit);
+          String temp = c.getspecCard();
+          System.out.println("The bot2's spec value is: " + temp);
 
           String png = "";                                     //name of the png file
           String value = String.valueOf(cardvalue);
@@ -450,34 +517,34 @@ public class basicsPanel extends JPanel{
             { // This whole switch statement accounts for if the card has a face (I.E] Jack,Queen,King)
               if(c.getspecCard() == "King"){
                 switch(suit){
-                  case "Hearts" : {png = "Cards/" + 13 + "H" + ".png";}
-                  case "Clubs"  : {png = "Cards/" + 13 + "C" + ".png";}
-                  case "Spades"  : {png = "Cards/" + 13 + "S" + ".png";}
-                  case "Diamonds"  : {png = "Cards/" + 13 + "D" + ".png";}
+                  case "Hearts" : {png = "Cards/" + 13 + "H" + ".png"; break;}
+                  case "Clubs"  : {png = "Cards/" + 13 + "C" + ".png"; break;}
+                  case "Spades"  : {png = "Cards/" + 13 + "S" + ".png"; break;}
+                  case "Diamonds"  : {png = "Cards/" + 13 + "D" + ".png"; break;}
                 }
               }
               else if(c.getspecCard() == "Queen"){
                 switch(suit){
-                  case "Hearts" : {png = "Cards/" + 12 + "H" + ".png";}
-                  case "Clubs"  : {png = "Cards/" + 12 + "C" + ".png";}
-                  case "Spades"  : {png = "Cards/" + 12 + "S" + ".png";}
-                  case "Diamonds"  : {png = "Cards/" + 12 + "D" + ".png";}
+                  case "Hearts" : {png = "Cards/" + 12 + "H" + ".png"; break;}
+                  case "Clubs"  : {png = "Cards/" + 12 + "C" + ".png"; break;}
+                  case "Spades"  : {png = "Cards/" + 12 + "S" + ".png"; break;}
+                  case "Diamonds"  : {png = "Cards/" + 12 + "D" + ".png"; break;}
                 }
               }
               else if(c.getspecCard() == "Jack"){
                 switch(suit){
-                  case "Hearts" : {png = "Cards/" + 11 + "H" + ".png";}
-                  case "Clubs"  : {png = "Cards/" + 11 + "C" + ".png";}
-                  case "Spades"  : {png = "Cards/" + 11 + "S" + ".png";}
-                  case "Diamonds"  : {png = "Cards/" + 11 + "D" + ".png";}
+                  case "Hearts" : {png = "Cards/" + 11 + "H" + ".png"; break;}
+                  case "Clubs"  : {png = "Cards/" + 11 + "C" + ".png"; break;}
+                  case "Spades"  : {png = "Cards/" + 11 + "S" + ".png"; break;}
+                  case "Diamonds"  : {png = "Cards/" + 11 + "D" + ".png"; break;}
                 }
               }
               else if(c.getspecCard() == "Ace"){
                 switch(suit){
-                  case "Hearts" : {png = "Cards/" + 1 + "H" + ".png";}
-                  case "Clubs"  : {png = "Cards/" + 1 + "C" + ".png";}
-                  case "Spades"  : {png = "Cards/" + 1 + "S" + ".png";}
-                  case "Diamonds"  : {png = "Cards/" + 1 + "D" + ".png";}
+                  case "Hearts" : {png = "Cards/" + 1 + "H" + ".png"; break;}
+                  case "Clubs"  : {png = "Cards/" + 1 + "C" + ".png"; break;}
+                  case "Spades"  : {png = "Cards/" + 1 + "S" + ".png"; break;}
+                  case "Diamonds"  : {png = "Cards/" + 1 + "D" + ".png"; break;}
                 }
               }
             }
@@ -490,9 +557,6 @@ public class basicsPanel extends JPanel{
 
               img = ImageIO.read(new File(png));
               System.out.println("Show image!!");
-
-
-
 
             int height = img.getHeight();
             int width = img.getWidth();
@@ -549,6 +613,8 @@ public class basicsPanel extends JPanel{
           cardvalue = c.getcardValue();
           suit = c.getcardSuit();
           System.out.println("The dealer's card value is: " + cardvalue + "The suit is: " + suit);
+          String temp = c.getspecCard();
+          System.out.println("The dealer spec value is: " + temp);
 
           String png = "";                                     //name of the png file
           String value = String.valueOf(cardvalue);
@@ -573,34 +639,34 @@ public class basicsPanel extends JPanel{
           {
             if(c.getspecCard() == "King"){
               switch(suit){
-                case "Hearts" : {png = "Cards/" + 13 + "H" + ".png";}
-                case "Clubs"  : {png = "Cards/" + 13 + "C" + ".png";}
-                case "Spades"  : {png = "Cards/" + 13 + "S" + ".png";}
-                case "Diamonds"  : {png = "Cards/" + 13 + "D" + ".png";}
+                case "Hearts" : {png = "Cards/" + 13 + "H" + ".png"; break;}
+                case "Clubs"  : {png = "Cards/" + 13 + "C" + ".png"; break;}
+                case "Spades"  : {png = "Cards/" + 13 + "S" + ".png"; break;}
+                case "Diamonds"  : {png = "Cards/" + 13 + "D" + ".png"; break;}
               }
             }
             else if(c.getspecCard() == "Queen"){
               switch(suit){
-                case "Hearts" : {png = "Cards/" + 12 + "H" + ".png";}
-                case "Clubs"  : {png = "Cards/" + 12 + "C" + ".png";}
-                case "Spades"  : {png = "Cards/" + 12 + "S" + ".png";}
-                case "Diamonds"  : {png = "Cards/" + 12 + "D" + ".png";}
+                case "Hearts" : {png = "Cards/" + 12 + "H" + ".png"; break;}
+                case "Clubs"  : {png = "Cards/" + 12 + "C" + ".png"; break;}
+                case "Spades"  : {png = "Cards/" + 12 + "S" + ".png"; break;}
+                case "Diamonds"  : {png = "Cards/" + 12 + "D" + ".png"; break;}
               }
             }
             else if(c.getspecCard() == "Jack"){
               switch(suit){
-                case "Hearts" : {png = "Cards/" + 11 + "H" + ".png";}
-                case "Clubs"  : {png = "Cards/" + 11 + "C" + ".png";}
-                case "Spades"  : {png = "Cards/" + 11 + "S" + ".png";}
-                case "Diamonds"  : {png = "Cards/" + 11 + "D" + ".png";}
+                case "Hearts" : {png = "Cards/" + 11 + "H" + ".png"; break;}
+                case "Clubs"  : {png = "Cards/" + 11 + "C" + ".png"; break;}
+                case "Spades"  : {png = "Cards/" + 11 + "S" + ".png"; break;}
+                case "Diamonds"  : {png = "Cards/" + 11 + "D" + ".png"; break;}
               }
             }
             else if(c.getspecCard() == "Ace"){
               switch(suit){
-                case "Hearts" : {png = "Cards/" + 1 + "H" + ".png";}
-                case "Clubs"  : {png = "Cards/" + 1 + "C" + ".png";}
-                case "Spades"  : {png = "Cards/" + 1 + "S" + ".png";}
-                case "Diamonds"  : {png = "Cards/" + 1 + "D" + ".png";}
+                case "Hearts" : {png = "Cards/" + 1 + "H" + ".png"; break;}
+                case "Clubs"  : {png = "Cards/" + 1 + "C" + ".png"; break;}
+                case "Spades"  : {png = "Cards/" + 1 + "S" + ".png"; break;}
+                case "Diamonds"  : {png = "Cards/" + 1 + "D" + ".png"; break;}
               }
             }
           }
