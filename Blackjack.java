@@ -238,8 +238,8 @@ public boolean checkGameState(){
 
 
     int playerWallet = Player.getWallet();
-    int bot1Wallet = bot1.getBotWallet();
-    int bot2Wallet = bot2.getBotWallet();
+    int bot1Wallet = bot1.getEachBotWallet();
+    int bot2Wallet = bot2.getEachBotWallet();
 
     if(playerWallet == 0){          // Player eliminated
       return false;
@@ -261,10 +261,11 @@ public int returnWallet(int playerNumber){
     return Player.getWallet();
   }
   else if(playerNumber == 1){
-    return bot1.getBotWallet();
+    
+    return bot1.getEachBotWallet();
   }
   else if(playerNumber == 3){
-    return bot2.getBotWallet();
+    return bot2.getEachBotWallet();
   }
   else
     return 0;
@@ -273,8 +274,8 @@ public int returnWallet(int playerNumber){
 
 public void setBotWallet(int n){
     if(n == 1){
-      int newWallet = bot1.getBotWallet() + bot1.getCurrentBotBet();
-      bot1.setBotWallet(newWallet);
+      int newWallet = bot1.getEachBotWallet() + bot1.getCurrentBotBet();
+      bot1.setIndividualBotWallet();
     }
     else if(n==2){
       int newWallet = bot2.getBotWallet() + bot2.getCurrentBotBet();

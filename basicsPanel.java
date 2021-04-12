@@ -26,6 +26,7 @@ public class basicsPanel extends JPanel{
   private Card[] cards;
   private int players = 1;
   private JLabel highestbetlabel, cp1wallet, pwallet, cp2wallet, dealerwallet;
+  private int cp1WalletVal, cp2WalletVal;
 
 
     public basicsPanel(){
@@ -49,7 +50,9 @@ public class basicsPanel extends JPanel{
       startGame.setVisible(true);
       startGame.setEnabled(true);
       add(startGame);
-
+      
+      bot1.setIndividualBotWallet();
+      bot2
       highestbetlabel = new JLabel("Current Pot Total: " + String.valueOf(Pot.getPot()));
       highestbetlabel.setBounds(300,150,200,50);
       add(highestbetlabel);

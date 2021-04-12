@@ -4,6 +4,7 @@ public class Bot {
     //A new hand for the bot
   private Hand hand = new Hand();
 	private Random rand;
+	private int cpuWallet;
 	private int botBet;
 	private static int botWallet;
 
@@ -25,6 +26,10 @@ public class Bot {
 		}
 	}
 
+	public int getEachBotWallet(){
+		return cpuWallet;
+	}
+	
 	public int getBotWallet(){
 		return botWallet;
 	}
@@ -44,7 +49,6 @@ public class Bot {
 			//take a card from deck
 			hand.addCard(deck.nextCard());
 		}
-
 	}
 
 	public void getRandomBotBet(){						// W.I.P
