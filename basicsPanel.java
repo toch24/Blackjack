@@ -163,7 +163,7 @@ public class basicsPanel extends JPanel{
             });
         }
       });
- 
+
 
       //add hit button
       add(hit);
@@ -190,7 +190,7 @@ public class basicsPanel extends JPanel{
 
     } //end of basicsPanel class
 
-    public void playerturns(int n){
+public void playerturns(int n){
       boolean bot1Bust = false;
       boolean bot2Bust = false;
       boolean playerBust = false;
@@ -219,6 +219,7 @@ public class basicsPanel extends JPanel{
         String msg = "Player 1 busted, they are out for this round";
         JOptionPane.showMessageDialog(null, msg);
         bot1Bust = true;
+        System.out.println("Player 1 busted" + bot1Bust);
         //highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
         players++;
       }
@@ -357,12 +358,15 @@ public class basicsPanel extends JPanel{
           players = 1;
           if(!bot1Bust){
             System.out.println("Dealer gives money to bot1");
+            game.setBotWallet(1);
+            System.out.println("Bot1 wallet is now: "+ game.returnWallet(1));
           }
           if(!bot2Bust){
             System.out.println("Dealer gives money to bot2");
           }
           if(!playerBust){
             System.out.println("Dealer gives money to player");
+
           }
 
         }
@@ -393,10 +397,10 @@ public class basicsPanel extends JPanel{
         suit = c.getcardSuit();
         String png = "";                                     //name of the png file
         String value = String.valueOf(cardvalue);
-        System.out.println("The player's card value is: " + cardvalue);
-        System.out.println("The player's card suit is: " + suit);
+        //System.out.println("The player's card value is: " + cardvalue);
+        //System.out.println("The player's card suit is: " + suit);
         String temp = c.getspecCard();
-        System.out.println("The player's spec value is: " + temp);
+        //System.out.println("The player's spec value is: " + temp);
 
 
         //get the card png (easier way and less code...)
@@ -468,7 +472,7 @@ public class basicsPanel extends JPanel{
           repaint();
 
 
-          System.out.println("Image opened " + png);
+        //  System.out.println("Image opened " + png);
         } catch (IOException e) {
           System.out.println("Error = " + e);
 
@@ -490,10 +494,10 @@ public class basicsPanel extends JPanel{
          if(c != null){
           cardvalue = c.getcardValue();
           suit = c.getcardSuit();
-          System.out.println("The bot2's card value is: "+cardvalue);
-          System.out.println("The bot2's card suit is: "+suit);
+          //System.out.println("The bot2's card value is: "+cardvalue);
+          //System.out.println("The bot2's card suit is: "+suit);
           String temp = c.getspecCard();
-          System.out.println("The bot2's spec value is: " + temp);
+          //System.out.println("The bot2's spec value is: " + temp);
 
           String png = "";                                     //name of the png file
           String value = String.valueOf(cardvalue);
@@ -556,7 +560,7 @@ public class basicsPanel extends JPanel{
           try {
 
               img = ImageIO.read(new File(png));
-              System.out.println("Show image!!");
+              //System.out.println("Show image!!");
 
             int height = img.getHeight();
             int width = img.getWidth();
@@ -612,9 +616,9 @@ public class basicsPanel extends JPanel{
           if(c != null){
           cardvalue = c.getcardValue();
           suit = c.getcardSuit();
-          System.out.println("The dealer's card value is: " + cardvalue + "The suit is: " + suit);
+          //System.out.println("The dealer's card value is: " + cardvalue + "The suit is: " + suit);
           String temp = c.getspecCard();
-          System.out.println("The dealer spec value is: " + temp);
+          //System.out.println("The dealer spec value is: " + temp);
 
           String png = "";                                     //name of the png file
           String value = String.valueOf(cardvalue);
@@ -695,7 +699,7 @@ public class basicsPanel extends JPanel{
             repaint();
 
 
-            System.out.println("Image opened " + png);
+            //System.out.println("Image opened " + png);
           } catch (IOException e) {
             System.out.println("Error = " + e);
 

@@ -65,7 +65,7 @@ public boolean play(int players){
             }                                       // 100-500
             if(bot1.getBotWallet() >= 100 && bot1.getBotWallet() < 500)
               {
-                int temp = rand.nextInt((4 + 1) - 1);
+                int temp = rand.nextInt(3)+1;
                 System.out.println(temp);
                 System.out.println(bot1.getBotWallet());
                 switch(temp)
@@ -78,7 +78,7 @@ public boolean play(int players){
               }
               else if(bot1.getBotWallet() >= 500)
               {
-                int temp = rand.nextInt((5 - 1) + 1);
+                int temp = rand.nextInt(4)+1;
                 System.out.println(temp);
 
                 switch(temp)
@@ -158,7 +158,7 @@ public boolean play(int players){
         }
         if(bot2.getBotWallet() >= 100 && bot2.getBotWallet() < 500)
               {
-                int temp = rand.nextInt((4 - 1) + 1);
+                int temp = rand.nextInt(3)+1;
                 System.out.println(temp);
                 System.out.println(bot2.getBotWallet());
                 switch(temp)
@@ -171,7 +171,7 @@ public boolean play(int players){
               }
               else if(bot2.getBotWallet() >= 500)
               {
-                int temp = rand.nextInt((5 + 1) - 1);
+                int temp = rand.nextInt(4)+1;
                 System.out.println(temp);
 
                 switch(temp)
@@ -183,6 +183,11 @@ public boolean play(int players){
                   case 5: {bot2.setCurrentBotBet(500); System.out.println("bot2 bet 500"); break;}
                 }
               }
+              System.out.println("Bots wallet before is: "+bot2.getBotWallet() );
+              int newWallet = bot2.getBotWallet() - bot2.getCurrentBotBet();
+              bot2.setBotWallet(newWallet);
+              System.out.println("Bots 2 wallet after  is: "+bot2.getBotWallet() );
+              System.out.println("Bots 1 wallet after  is: "+bot1.getBotWallet() );
             /* if(bot2.getBotTotal() >= 16){
                 //match the bet or raise the bet
                 if(bot1.getCurrentBotBet() < Pot.getHighestBet() && bot2.getBotWallet() > Pot.getHighestBet()){
@@ -409,6 +414,13 @@ public int returnWallet(int playerNumber){
   else
     return 0;
 
+}
+
+public void setBotWallet(int n){
+    if(n == 1){
+      int newWallet = bot1.getBotWallet() + bot1.getCurrentBotBet();
+      bot1.setBotWallet(newWallet);
+    }
 }
 
 

@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Bot {
     //A new hand for the bot
-    private Hand hand = new Hand();
+  private Hand hand = new Hand();
 	private Random rand;
 	private int botBet;
 	private static int botWallet;
