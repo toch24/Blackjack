@@ -52,6 +52,8 @@ public boolean play(int players){
         if(players == 1){
             //add logic for bot1 to make moves and then eventually pass
 
+            System.out.println("This is bot1's wallet: " + bot1.getEachBotWallet());
+
             while(bot1.getBotTotal() < 17){
               bot1.botPlay(deck);
             }                                       // 100-500
@@ -98,6 +100,7 @@ public boolean play(int players){
     if(players == 3){
         //add logic for bot1 to make moves and then eventually pass
 
+        System.out.println("This is bot2's wallet: " + bot2.getEachBotWallet());
 
         while(bot2.getBotTotal() < 17){
           bot2.botPlay(deck);

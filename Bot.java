@@ -27,11 +27,11 @@ public class Bot {
 	}
 
 	public int getEachBotWallet(){
-		return this.cpuWallet;
+		return cpuWallet;
 	}
 
 	public void setIndividualBotWallet(){
-		this.cpuWallet = Player.getWallet();
+		cpuWallet = Player.getWallet();
 	}	
 
 	public int getBotWallet(){
@@ -73,6 +73,6 @@ public class Bot {
 	}
 
 	public void setBotWallet(int newWallet){
-		this.cpuWallet = newWallet;
+		cpuWallet = newWallet;
 	}
 }
