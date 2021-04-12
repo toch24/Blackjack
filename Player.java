@@ -31,14 +31,18 @@ public static void setWalletBet(int bet){
 		wallet = 0;
 	}
 
+  public static void currentBet(int b){
+  bet = b;
+}
+
   public static void revertBet(){
     wallet = wallet + bet;
+    System.out.println("The bet was: "+ bet);
   }
 
 	public static int getWallet(){
 		return wallet;
 	}
-
 
 	public int getCurrentBet(){
 		return bet;
