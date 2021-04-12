@@ -19,9 +19,9 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class basicsPanel extends JPanel{
-  private JButton bet, hit, pass, newRound, startGame;
+  private JButton  hit, pass, newRound, startGame;
   private JTextField betField;                      // Using this to get the input from the bets i guess
-  private int userBet;
+  private int userBet = 0;
   private Blackjack game;
   private Card[] cards;
   private int players = 1;
@@ -35,15 +35,10 @@ public class basicsPanel extends JPanel{
 
       //setting layout to null, default layout is flow layout
       setLayout(null);
-      bet = new JButton("Bet");
-      bet.setBounds(300,200,100,50);
-      bet.setEnabled(false);
 
       hit = new JButton("Hit");
       hit.setBounds(400,200,100,50);
       hit.setEnabled(false);
-
-      //add(bet);
 
       pass = new JButton("Hold");
       pass.setBounds(350,250,100,50);
@@ -84,7 +79,6 @@ public class basicsPanel extends JPanel{
 
       pass.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
-        bet.setEnabled(false);
         hit.setEnabled(false);
         pass.setEnabled(false);
         players++;
@@ -92,81 +86,6 @@ public class basicsPanel extends JPanel{
         System.out.println("On player: "+ players +" In panel");
         }
       });
-
-      // Create functionality for the bet button, this will let players place bets.
-        bet.addActionListener(new ActionListener(){
-        public void actionPerformed(ActionEvent e) {
-            // Make a new frame to display the betting area.
-            JFrame betFrame = new JFrame("Betting...");
-            JPanel betPanel = new JPanel();
-            JLabel betLabel = new JLabel("Place your bet: ");           // address the player!
-            JOptionPane errorCheck = new JOptionPane("Error");
-
-            betFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
-            betFrame.add( betPanel );
-            betFrame.setResizable(false);
-            betFrame.setSize(300,100);
-
-            // Create JTextField to allow for user inputs
-            betField = new JTextField(4);
-            betField.setBounds(50,100, 200,30);
-            betField.setVisible(true);
-
-            // add the textfield to the JPanel with the label
-            betPanel.add(betLabel);
-            betPanel.add(betField);
-
-            betFrame.setVisible(true);                                   // Make it visible.
-
-
-
-            betField.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent e){
-                    userBet = Integer.parseInt(betField.getText());      // Take the user bet.
-                    int bet = userBet;
-                    //System.out.println(userBet);
-                    if(userBet == 5 || userBet == 10 || userBet == 50 || userBet == 100 || userBet == 500)
-                    {
-                      //TODO: if the bet is less than the highest bet, re-prompt the user for a new bet
-                      if(userBet >= Pot.getHighestBet()){
-                        game.setUserBet(bet);                            // This sets the current bet from the user for comparison purposes
-                        Pot.addToPot(bet);                               // Add to the pot.
-                        game.setHighestBet();
-                        highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
-                        }
-
-                        /* int checkPot = Pot.getPot();
-                        System.out.println(checkPot);  */
-                        betFrame.dispose();                              // Forse the JFrame closed when we successfully make a bet.
-                        String betAddress = "Bet Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
-                        JOptionPane.showMessageDialog(null, betAddress);
-                        //next player turn
-                      //  players++;
-                      //  playerturns();
-
-
-
-                      int newWallet = Player.getWallet() - bet;
-
-                      Player.setWalletBet(newWallet);
-
-                      pwallet.setVisible(false);
-                      pwallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(2)));
-                      pwallet.setBounds(250,350,200,50);
-                      pwallet.setVisible(true);
-                      add(pwallet);
-
-                    }
-                    else
-                    {   // Use this to error check, the user cannot make bets < 0.
-                        String error = "Error: Player can bet either: 5,10,50,100,500 ";
-                        JOptionPane.showMessageDialog(null, error);
-                    }
-                }
-            });
-        }
-      });
-
 
       //add hit button
       add(hit);
@@ -241,79 +160,89 @@ public void playerturns(int n){
       if(players == 2){
         String msg = "Your turn!";
         JOptionPane.showMessageDialog(null, msg);
+        hit.setEnabled(true);
+        pass.setEnabled(true);
+  
         JFrame betFrame = new JFrame("Betting...");
-            JPanel betPanel = new JPanel();
-            JLabel betLabel = new JLabel("Place your bet: ");           // address the player!
-            JOptionPane errorCheck = new JOptionPane("Error");
+        JPanel betPanel = new JPanel();
+        JLabel betLabel = new JLabel("Place your bet: ");           // address the player!
+        JOptionPane errorCheck = new JOptionPane("Error");
 
-            betFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
-            betFrame.add( betPanel );
-            betFrame.setResizable(false);
-            betFrame.setSize(300,100);
+        betFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+        betFrame.add( betPanel );
+        betFrame.setResizable(false);
+        betFrame.setSize(300,100);
 
-            // Create JTextField to allow for user inputs
-            betField = new JTextField(4);
-            betField.setBounds(50,100, 200,30);
-            betField.setVisible(true);
+        // Create JTextField to allow for user inputs
+        betField = new JTextField(4);
+        betField.setBounds(50,100, 200,30);
+        betField.setVisible(true);
 
-            // add the textfield to the JPanel with the label
-            betPanel.add(betLabel);
-            betPanel.add(betField);
+        // add the textfield to the JPanel with the label
+        betPanel.add(betLabel);
+        betPanel.add(betField);
 
-            betFrame.setVisible(true);                                   // Make it visible.
+        betFrame.setVisible(true);                                   // Make it visible.
 
-            betField.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent e){
-                    userBet = Integer.parseInt(betField.getText());      // Take the user bet.
-                    int bet = userBet;
-                    //System.out.println(userBet);
-                    if(userBet == 5 || userBet == 10 || userBet == 50 || userBet == 100 || userBet == 500)
-                    {
-                      //TODO: if the bet is less than the highest bet, re-prompt the user for a new bet
-                      if(userBet >= Pot.getHighestBet()){
-                        game.setUserBet(bet);                            // This sets the current bet from the user for comparison purposes
-                        Pot.addToPot(bet);                               // Add to the pot.
-                        game.setHighestBet();
-                        highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
-                        }
+        betField.addActionListener(new ActionListener(){
+          public void actionPerformed(ActionEvent e){
+              userBet = Integer.parseInt(betField.getText());      // Take the user bet.
+              int newWallet;
+              if(userBet == 5 || userBet == 10 || userBet == 50 || userBet == 100 || userBet == 500)
+              {
+                //TODO: if the bet is less than the highest bet, re-prompt the user for a new bet
+                if(userBet >= Pot.getHighestBet()){
+                  //Checking that user has the money 
+                  if(Player.getWallet() >= userBet){
+                  newWallet = Player.getWallet() - userBet;
+                  Player.setWalletBet(newWallet);    
+                  Pot.addToPot(userBet);                               // Add to the pot.
+                  game.setHighestBet();
+                  highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
+                  betFrame.dispose();                              // Forse the JFrame closed when we successfully make a bet.
+                  String betAddress = "Bet Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
+                  JOptionPane.showMessageDialog(null, betAddress);
+                  }
+                  else{
+                    String betAddress = "You dont have that amount to bet.";              
+                    JOptionPane.showMessageDialog(null, betAddress);
+                  }
 
-                        /* int checkPot = Pot.getPot();
-                        System.out.println(checkPot);  */
-                        betFrame.dispose();                              // Forse the JFrame closed when we successfully make a bet.
-                        String betAddress = "Bet Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
-                        JOptionPane.showMessageDialog(null, betAddress);
-                        //next player turn
-                      //  players++;
-                      //  playerturns();
-                        //bet.setEnabled(true);
-                        hit.setEnabled(true);
-                        pass.setEnabled(true);
+                  }
+             else{
+                  String betAddress = "Bet must match the highest bet or raise it.";              
+                  JOptionPane.showMessageDialog(null, betAddress);
+          
+            }
+
+                
+                pwallet.setVisible(false);
+                pwallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(2)));
+                pwallet.setBounds(250,350,200,50);
+                pwallet.setVisible(true);
+                add(pwallet);
+
+              }
+              else
+              {   // Use this to error check, the user cannot make bets < 0.
+                  String error = "Error: Player can bet either: 5,10,50,100,500 ";
+                  JOptionPane.showMessageDialog(null, error);
+              }
+          }
+      });
 
 
-                      int newWallet = Player.getWallet() - bet;
+        pwallet.setVisible(false);
+        pwallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(2)));
+        pwallet.setBounds(250,350,200,50);
+        pwallet.setVisible(true);
+        add(pwallet);
 
-                      Player.setWalletBet(newWallet);
-
-                      pwallet.setVisible(false);
-                      pwallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(2)));
-                      pwallet.setBounds(250,350,200,50);
-                      pwallet.setVisible(true);
-                      add(pwallet);
-
-                    }
-                    else
-                    {   // Use this to error check, the user cannot make bets < 0.
-                        String error = "Error: Player can bet either: 5,10,50,100,500 ";
-                        JOptionPane.showMessageDialog(null, error);
-                    }
-                }
-            });
       }
 
       if(players == 3){
         try{
           Thread.sleep(1000);
-      bet.setEnabled(false);
       hit.setEnabled(false);
       pass.setEnabled(false);
       boolean play = game.play(players);
@@ -329,7 +258,6 @@ public void playerturns(int n){
         String msg = "Player 3 busted, they are out for this round";
         JOptionPane.showMessageDialog(null, msg);
         bot2Bust = true;
-        //highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
         players++;
       }
       else {
@@ -348,7 +276,6 @@ public void playerturns(int n){
       if(players == 4){
         try{
         Thread.sleep(1000);
-        bet.setEnabled(false);
         hit.setEnabled(false);
         pass.setEnabled(false);
 
@@ -366,10 +293,14 @@ public void playerturns(int n){
           }
           if(!bot2Bust){
             System.out.println("Dealer gives money to bot2");
+            game.setBotWallet(2);
+            System.out.println("Bot2 wallet is now: "+ game.returnWallet(3));
           }
           if(!playerBust){
             System.out.println("Dealer gives money to player");
-
+            //int payback = Player.getCurrentBet();
+            Player.revertBet();
+            System.out.println("Player wallet is now: "+ game.returnWallet(2));
           }
 
         }
@@ -378,6 +309,24 @@ public void playerturns(int n){
           JOptionPane.showMessageDialog(null, msg);
           highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
           players = 1;
+
+          if(!bot1Bust && game.handMatch(1)){
+            System.out.println("Dealer gives money to bot1");
+            game.setBotWallet(1);
+            System.out.println("Bot1 wallet is now: "+ game.returnWallet(1));
+          }
+          if(!bot2Bust && game.handMatch(2)){
+            System.out.println("Dealer gives money to bot2");
+            game.setBotWallet(2);
+            System.out.println("Bot2 wallet is now: "+ game.returnWallet(3));
+          }
+          if(!playerBust && game.handMatch(3)){
+            System.out.println("Dealer gives money to player");
+            //int payback = Player.getCurrentBet();
+            Player.revertBet();
+            System.out.println("Player wallet is now: "+ game.returnWallet(2));
+          }
+
         }
       }
       catch(InterruptedException ex){
@@ -458,7 +407,6 @@ public void playerturns(int n){
             }
           }
 
-         //System.out.println("Png is: " +png);
          //adding the card images to the JPanel
         BufferedImage img = null;
         JLabel label = new JLabel();

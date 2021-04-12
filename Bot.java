@@ -34,6 +34,10 @@ public class Bot {
 		return botWallet;
 	}
 
+	public static void resetWallet(){
+		botWallet = 0;
+	}
+
 	public static void setBotBuyIn(){							// Set the bot buyin to equal the players and add the buyin value to the total pot
 		botWallet = Player.getWallet();
 		Pot.addToPot(botWallet);

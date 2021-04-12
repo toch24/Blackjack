@@ -77,6 +77,16 @@ public class HomeJPanel extends JPanel
 
             // start testing
 
+            //resetting values when play basics is clicked
+            Pot.resetPot();;                               
+            Player.resetWallet();;                           
+
+            int temp = 0;
+            while(temp < 3){
+                Bot.resetWallet();;
+                temp++;
+            }
+
             newRound = new JButton("newRound");
             newRound.setBounds(350,300,100,50);
             newRound.setEnabled(true);

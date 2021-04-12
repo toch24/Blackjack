@@ -1,7 +1,7 @@
 public class Player {
     //A new hand for the player
     private Hand hand = new Hand();
-	private int bet;
+	private static int bet;
 	private static int wallet;
 	private static int currentBet;							// hold the "buy in value"
 
@@ -27,13 +27,18 @@ public static void setWalletBet(int bet){
 		wallet = bet;
 	}
 
+	public static void resetWallet(){
+		wallet = 0;
+	}
+
+  public static void revertBet(){
+    wallet = wallet + bet;
+  }
+
 	public static int getWallet(){
 		return wallet;
 	}
 
-	public void currentBet(int b){
-		bet = b;
-	}
 
 	public int getCurrentBet(){
 		return bet;
@@ -41,5 +46,10 @@ public static void setWalletBet(int bet){
 
 	public Hand getHand(){
 		return hand;
+	}
+
+  public int getHandTotal(){
+
+		return hand.total();
 	}
 }
