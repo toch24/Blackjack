@@ -39,9 +39,6 @@ public static void setWalletBet(int bet){
 		return wallet;
 	}
 
-	public void currentBet(int b){
-		bet = b;
-	}
 
 	public int getCurrentBet(){
 		return bet;

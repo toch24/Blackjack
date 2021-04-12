@@ -164,9 +164,6 @@ public boolean play(int players){
   deck.shuffle(deck.getDeck());
 } */
 
-public void setUserBet(int bet){
-    player.currentBet(bet);
-}
 
 public int getUserBet(){
     return player.getCurrentBet();

@@ -19,7 +19,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class basicsPanel extends JPanel{
-  private JButton bet, hit, pass, newRound, startGame;
+  private JButton  hit, pass, newRound, startGame;
   private JTextField betField;                      // Using this to get the input from the bets i guess
   private int userBet = 0;
   private Blackjack game;
@@ -34,15 +34,10 @@ public class basicsPanel extends JPanel{
 
       //setting layout to null, default layout is flow layout
       setLayout(null);
-      bet = new JButton("Bet");
-      bet.setBounds(300,200,100,50);
-      bet.setEnabled(false);
 
       hit = new JButton("Hit");
       hit.setBounds(400,200,100,50);
       hit.setEnabled(false);
-
-      //add(bet);
 
       pass = new JButton("Hold");
       pass.setBounds(350,250,100,50);
@@ -81,7 +76,6 @@ public class basicsPanel extends JPanel{
 
       pass.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
-        bet.setEnabled(false);
         hit.setEnabled(false);
         pass.setEnabled(false);
         players++;
@@ -163,7 +157,6 @@ public void playerturns(int n){
       if(players == 2){
         String msg = "Your turn!";
         JOptionPane.showMessageDialog(null, msg);
-        bet.setEnabled(true);
         hit.setEnabled(true);
         pass.setEnabled(true);
   
@@ -247,7 +240,6 @@ public void playerturns(int n){
       if(players == 3){
         try{
           Thread.sleep(1000);
-      bet.setEnabled(false);
       hit.setEnabled(false);
       pass.setEnabled(false);
       boolean play = game.play(players);
@@ -281,7 +273,6 @@ public void playerturns(int n){
       if(players == 4){
         try{
         Thread.sleep(1000);
-        bet.setEnabled(false);
         hit.setEnabled(false);
         pass.setEnabled(false);
 
