@@ -23,6 +23,7 @@ public class HomeJPanel extends JPanel
    private static JFrame basicsFrame;
    private static JPanel basicsPanel;
    private static JButton newRound;
+   static boolean firstRound = true;
 
    private int userBuyIn;
    JTextField buyInField;
@@ -78,12 +79,12 @@ public class HomeJPanel extends JPanel
             // start testing
 
             //resetting values when play basics is clicked
-            Pot.resetPot();;
-            Player.resetWallet();;
+            Pot.resetPot();
+            Player.resetWallet();
 
             int temp = 0;
             while(temp < 3){
-                Bot.resetWallet();;
+                Bot.resetWallet();
                 temp++;
             }
 

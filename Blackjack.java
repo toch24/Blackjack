@@ -264,9 +264,11 @@ public int returnWallet(int playerNumber){
     return Player.getWallet();
   }
   else if(playerNumber == 1){
+      System.out.println("Bot 1 wallet in returnWallet is: "+ bot1.getEachBotWallet() );
     return bot1.getEachBotWallet();
   }
   else if(playerNumber == 3){
+    System.out.println("Bot 2 wallet in returnWallet is: "+ bot2.getEachBotWallet() );
     return bot2.getEachBotWallet();
   }
   else
@@ -277,10 +279,12 @@ public int returnWallet(int playerNumber){
 public void setBotWallet(int n){
     if(n == 1){
       int newWallet = bot1.getEachBotWallet() + bot1.getCurrentBotBet();
+      System.out.println("Bot 1 bet they will gain is: " + bot1.getCurrentBotBet());
       bot1.setBotWallet(newWallet);
     }
     else if(n==2){
       int newWallet = bot2.getEachBotWallet() + bot2.getCurrentBotBet();
+      System.out.println("Bot 2 bet they will gain is: " + bot2.getCurrentBotBet());
       bot2.setBotWallet(newWallet);
     }
 }
@@ -315,6 +319,15 @@ public void setBothBotBets (int bot){
    }
    else if(bot == 2){
      bot2.setBotBuyIn(bet);
+   }
+ }
+
+ public void walletRound2(int bot, int wallet){
+   if(bot == 1){
+     bot1.setBotWallet(wallet);
+   }
+   else if(bot == 2){
+     bot2.setBotWallet(wallet);
    }
  }
 

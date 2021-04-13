@@ -27,6 +27,11 @@ public class basicsPanel extends JPanel{
   private int players = 1;
   private JLabel highestbetlabel, cp1wallet, pwallet, cp2wallet, dealerwallet;
   private int cp1WalletVal, cp2WalletVal;
+  private static int bot1ResetWallet, bot2ResetWallet;
+  private boolean bot1Bust = false;
+  private boolean bot2Bust = false; 
+  private boolean playerBust = false;
+
 
 
     public basicsPanel(){
@@ -36,8 +41,18 @@ public class basicsPanel extends JPanel{
       //setting layout to null, default layout is flow layout
       setLayout(null);
 
-      game.setBothBotBets(1);
-      game.setBothBotBets(2);
+      if(HomeJPanel.firstRound){
+        game.setBothBotBets(1);
+        game.setBothBotBets(2);
+        HomeJPanel.firstRound = false;
+        System.out.println("The is the first round");
+      }
+      else{
+        System.out.println("The is a new round");
+        game.walletRound2(1, bot1ResetWallet);
+        game.walletRound2(2, bot2ResetWallet);
+      }
+
 
       hit = new JButton("Hit");
       hit.setBounds(400,200,100,50);
@@ -114,10 +129,6 @@ public class basicsPanel extends JPanel{
     } //end of basicsPanel class
 
 public void playerturns(int n){
-      boolean bot1Bust = false;
-      boolean bot2Bust = false;
-      boolean playerBust = false;
-
       if (n == 1)
         playerBust = true;
       else
@@ -292,7 +303,6 @@ public void playerturns(int n){
           }
           if(!bot2Bust){
             System.out.println("Dealer gives money to bot2");
-            game.setBotWallet(2);
             System.out.println("Bot2 wallet is now: "+ game.returnWallet(3));
           }
           if(!playerBust){
@@ -331,6 +341,8 @@ public void playerturns(int n){
       catch(InterruptedException ex){
         Thread.currentThread().interrupt();
     }
+    bot1ResetWallet = game.returnWallet(1);
+    bot2ResetWallet = game.returnWallet(3);
   }
 }
 
@@ -566,9 +578,9 @@ public void playerturns(int n){
           if(c != null){
           cardvalue = c.getcardValue();
           suit = c.getcardSuit();
-          System.out.println("The dealer's card value is: " + cardvalue + "The suit is: " + suit);
+          //System.out.println("The dealer's card value is: " + cardvalue + "The suit is: " + suit);
           String temp = c.getspecCard();
-          System.out.println("The dealer spec value is: " + temp);
+          //System.out.println("The dealer spec value is: " + temp);
 
           String png = "";                                     //name of the png file
           String value = String.valueOf(cardvalue);
