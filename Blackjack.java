@@ -291,19 +291,19 @@ public void setBotWallet(int n){
 
 public boolean handMatch(int n){
   if(n==1){
-    if(bot1.getBotTotal() > dealer.getBotTotal())
+    if(bot1.getBotTotal() >= dealer.getBotTotal())
       return true;
     else
       return false;
   }
   else if(n==2){
-    if(bot2.getBotTotal() > dealer.getBotTotal())
+    if(bot2.getBotTotal() >= dealer.getBotTotal())
       return true;
     else
       return false;
   }
   else if(n==3){
-    if(player.getHandTotal() > dealer.getBotTotal())
+    if(player.getHandTotal() >= dealer.getBotTotal())
       return true;
     else
       return false;
@@ -329,6 +329,22 @@ public void setBothBotBets (int bot){
    else if(bot == 2){
      bot2.setBotWallet(wallet);
    }
+ }
+
+ public int getHandValue(int n){
+   if(n == 1){
+     return bot1.getBotTotal();
+   }
+   else if(n == 2){
+     return player.getHandTotal();
+   }
+   else if(n == 3){
+     return bot2.getBotTotal();
+   }
+   else if(n == 4){
+     return dealer.getBotTotal();
+   }
+   else return 0;
  }
 
 

@@ -25,7 +25,7 @@ public class basicsPanel extends JPanel{
   private Blackjack game;
   private Card[] cards;
   private int players = 1;
-  private JLabel highestbetlabel, cp1wallet, pwallet, cp2wallet, dealerwallet;
+  private JLabel highestbetlabel, cp1wallet, pwallet, cp2wallet, dealerwallet, bot1Value, bot2Value, dealerValue, playerValue;
   private int cp1WalletVal, cp2WalletVal;
   private static int bot1ResetWallet, bot2ResetWallet;
   private boolean bot1Bust = false;
@@ -70,19 +70,19 @@ public class basicsPanel extends JPanel{
       add(startGame);
 
       highestbetlabel = new JLabel("Current Pot Total: " + String.valueOf(Pot.getPot()));
-      highestbetlabel.setBounds(300,200,200,50);
+      highestbetlabel.setBounds(300,210,200,50);
       add(highestbetlabel);
 
       pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
-      pwallet.setBounds(250,350,200,50);
+      pwallet.setBounds(250,375,200,50);
       add(pwallet);
 
       cp1wallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(1)));
-      cp1wallet.setBounds(50,150,200,50);
+      cp1wallet.setBounds(50,175,200,50);
       add(cp1wallet);
 
       cp2wallet = new JLabel("Player 3 wallet total: " + String.valueOf(game.returnWallet(3)));
-      cp2wallet.setBounds(600,150,200,50);
+      cp2wallet.setBounds(600,175,200,50);
       add(cp2wallet);
 
       startGame.addActionListener(new ActionListener(){
@@ -111,6 +111,12 @@ public class basicsPanel extends JPanel{
           if(game.playerHit()){
             String msg = "Your hand is more 21, you busted. Wait till next round";
             JOptionPane.showMessageDialog(null, msg);
+
+            playerValue.setVisible(false);
+            playerValue = new JLabel("Your hand value: " + String.valueOf(game.getHandValue(2)));
+            playerValue.setBounds(250,385,200,50);
+            add(playerValue);
+
             players++;
             playerturns(1);
           }
@@ -121,6 +127,11 @@ public class basicsPanel extends JPanel{
 
           //update the set of cards for player
           setCards(1);
+          playerValue.setVisible(false);
+          playerValue = new JLabel("Your hand value: " + String.valueOf(game.getHandValue(2)));
+          playerValue.setBounds(250,385,200,50);
+          add(playerValue);
+
       }
     });
 
@@ -143,9 +154,13 @@ public void playerturns(int n){
       boolean play = game.play(players);
       setCards(1);
 
+      bot1Value = new JLabel("Player 1 hand value: " + String.valueOf(game.getHandValue(1)));
+      bot1Value.setBounds(50,200,200,50);
+      add(bot1Value);
+
       cp1wallet.setVisible(false);
       cp1wallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(1)));
-      cp1wallet.setBounds(50,150,200,50);
+      cp1wallet.setBounds(50,175,200,50);
       cp1wallet.setVisible(true);
       add(cp1wallet);
 
@@ -229,7 +244,7 @@ public void playerturns(int n){
             }
                 pwallet.setVisible(false);
                 pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
-                pwallet.setBounds(250,350,200,50);
+                pwallet.setBounds(250,360,200,50);
                 pwallet.setVisible(true);
                 add(pwallet);
               }
@@ -241,12 +256,16 @@ public void playerturns(int n){
           }
       });
 
-
         pwallet.setVisible(false);
         pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
-        pwallet.setBounds(250,350,200,50);
+        pwallet.setBounds(250,360,200,50);
         pwallet.setVisible(true);
         add(pwallet);
+
+        playerValue = new JLabel("Your hand value: " + String.valueOf(game.getHandValue(2)));
+        playerValue.setBounds(250,385,200,50);
+        add(playerValue);
+
 
       }
 
@@ -256,14 +275,18 @@ public void playerturns(int n){
       hit.setEnabled(false);
       pass.setEnabled(false);
       boolean play = game.play(players);
+      setCards(1);
+
+      bot2Value = new JLabel("Player 3 hand value: " + String.valueOf(game.getHandValue(3)));
+      bot2Value.setBounds(600,200,200,50);
+      add(bot2Value);
 
       cp2wallet.setVisible(false);
       cp2wallet = new JLabel("Player 3 wallet total: " + String.valueOf(game.returnWallet(3)));
-      cp2wallet.setBounds(600,150,200,50);
+      cp2wallet.setBounds(600,175,200,50);
       cp2wallet.setVisible(true);
       add(cp2wallet);
 
-      setCards(1);
       if(play){
         String msg = "Player 3 busted, they are out for this round";
         JOptionPane.showMessageDialog(null, msg);
@@ -291,6 +314,11 @@ public void playerturns(int n){
 
         boolean play = game.play(players);
         setCards(2);
+
+        dealerValue = new JLabel("Dealer hand value: " + String.valueOf(game.getHandValue(4)));
+        dealerValue.setBounds(260,5,200,50);
+        add(dealerValue);
+
         if(play){
           String msg = "Dealer busted, all players still in the round win!";
           JOptionPane.showMessageDialog(null, msg);
@@ -350,8 +378,8 @@ public void playerturns(int n){
     public void setCards(int n){
       int cardvalue;
       String suit;
-      int pos = 250;
-      int newPos = 250;
+      int pos = 240;
+      int newPos = 240;
       if(n ==1){
       int cardIterator = 1;
       cards = game.getPlayerCards();
@@ -431,10 +459,10 @@ public void playerturns(int n){
           ImageIcon imageIcon = new ImageIcon(dimg);
           label.setIcon(imageIcon);
           if(cardIterator <= 3){
-            label.setBounds(pos, 300, 300, 300);
+            label.setBounds(pos, 350, 300, 300);
           }
           else{
-            label.setBounds(newPos, 425, 300, 300);
+            label.setBounds(newPos, 475, 300, 300);
             newPos += 100;
           }
           pos += 100;
@@ -455,8 +483,8 @@ public void playerturns(int n){
 
         //set bot cards
 
-        int posbot = 150;
-        int posbot2 = 150;
+        int posbot = 200;
+        int posbot2 = 200;
         //iterating each bot
         for(int i = 1; i <= 2; i++){
           cards = game.getBotCards(i);
@@ -671,7 +699,7 @@ public void playerturns(int n){
             }
             else if(n == 2){
               if(iterate == 2){
-                label.setBounds(dpos, 8, 300, 300);
+                label.setBounds(dpos, 5, 300, 300);
               }
               else{
                 label.setBounds(dpos, -50, 300, 300);
