@@ -308,6 +308,16 @@ public boolean handMatch(int n){
     return false;
 }
 
+public void setBothBotBets (int bot){
+   int bet = player.getWallet();
+   if (bot == 1){
+       bot1.setBotBuyIn(bet);
+   }
+   else if(bot == 2){
+     bot2.setBotBuyIn(bet);
+   }
+ }
+
 
 
 } //end of BlackJack class

@@ -78,8 +78,8 @@ public class HomeJPanel extends JPanel
             // start testing
 
             //resetting values when play basics is clicked
-            Pot.resetPot();;                               
-            Player.resetWallet();;                           
+            Pot.resetPot();;
+            Player.resetWallet();;
 
             int temp = 0;
             while(temp < 3){
@@ -138,11 +138,11 @@ public class HomeJPanel extends JPanel
                         Player.setWallet(bet);                              // This sets the current bet from the user for comparison purposes
                         //basicsPanel.addWallet();
 
-                        int temp = 0;
+                      /*  int temp = 0;
                         while(temp < 3){
                             Bot.setBotBuyIn();
                             temp++;
-                        }
+                        } */
 
                         basicsPanel = new basicsPanel();
                         basicsFrame.add( basicsPanel );

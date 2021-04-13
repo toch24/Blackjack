@@ -36,6 +36,9 @@ public class basicsPanel extends JPanel{
       //setting layout to null, default layout is flow layout
       setLayout(null);
 
+      game.setBothBotBets(1);
+      game.setBothBotBets(2);
+
       hit = new JButton("Hit");
       hit.setBounds(400,200,100,50);
       hit.setEnabled(false);
@@ -50,7 +53,7 @@ public class basicsPanel extends JPanel{
       startGame.setVisible(true);
       startGame.setEnabled(true);
       add(startGame);
-      
+
       highestbetlabel = new JLabel("Current Pot Total: " + String.valueOf(Pot.getPot()));
       highestbetlabel.setBounds(300,150,200,50);
       add(highestbetlabel);

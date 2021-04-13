@@ -32,19 +32,19 @@ public class Bot {
 
 	public void setIndividualBotWallet(){
 		cpuWallet = Player.getWallet();
-	}	
+	}
 
 	public int getBotWallet(){
-		return botWallet;
+		return cpuWallet;
 	}
 
 	public static void resetWallet(){
 		botWallet = 0;
 	}
 
-	public static void setBotBuyIn(){							// Set the bot buyin to equal the players and add the buyin value to the total pot
-		botWallet = Player.getWallet();
-		Pot.addToPot(botWallet);
+	public void setBotBuyIn(int buyIn){							// Set the bot buyin to equal the players and add the buyin value to the total pot
+		cpuWallet = Player.getWallet();
+		Pot.addToPot(cpuWallet);
 	}
 
 	//Automate the bots moves. Passing deck as parameter so that it can take a card if needed
