@@ -29,7 +29,7 @@ public class basicsPanel extends JPanel{
   private int cp1WalletVal, cp2WalletVal;
   private static int bot1ResetWallet, bot2ResetWallet;
   private boolean bot1Bust = false;
-  private boolean bot2Bust = false; 
+  private boolean bot2Bust = false;
   private boolean playerBust = false;
 
 
@@ -55,7 +55,7 @@ public class basicsPanel extends JPanel{
 
 
       hit = new JButton("Hit");
-      hit.setBounds(400,200,100,50);
+      hit.setBounds(250,250,100,50);
       hit.setEnabled(false);
 
       pass = new JButton("Hold");
@@ -64,13 +64,13 @@ public class basicsPanel extends JPanel{
       add(pass);
 
       startGame = new JButton("Start Game");
-      startGame.setBounds(350,500,100,50);
+      startGame.setBounds(323,600,100,50);
       startGame.setVisible(true);
       startGame.setEnabled(true);
       add(startGame);
 
       highestbetlabel = new JLabel("Current Pot Total: " + String.valueOf(Pot.getPot()));
-      highestbetlabel.setBounds(300,150,200,50);
+      highestbetlabel.setBounds(300,200,200,50);
       add(highestbetlabel);
 
       pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
@@ -99,7 +99,7 @@ public class basicsPanel extends JPanel{
         pass.setEnabled(false);
         players++;
         playerturns(0);
-        System.out.println("On player: "+ players +" In panel");
+        //System.out.println("On player: "+ players +" In panel");
         }
       });
 
@@ -351,7 +351,9 @@ public void playerturns(int n){
       int cardvalue;
       String suit;
       int pos = 250;
+      int newPos = 250;
       if(n ==1){
+      int cardIterator = 1;
       cards = game.getPlayerCards();
       for(Card c : cards){
         //If the card is not null, then get all the data. (Need this error checking because Card array is initialized with size of 14)
@@ -428,7 +430,13 @@ public void playerturns(int n){
           Image dimg = img.getScaledInstance(100, 120, Image.SCALE_SMOOTH);
           ImageIcon imageIcon = new ImageIcon(dimg);
           label.setIcon(imageIcon);
-          label.setBounds(pos, 300, 300, 300);
+          if(cardIterator <= 3){
+            label.setBounds(pos, 300, 300, 300);
+          }
+          else{
+            label.setBounds(newPos, 425, 300, 300);
+            newPos += 100;
+          }
           pos += 100;
           add(label);
           repaint();
@@ -441,6 +449,7 @@ public void playerturns(int n){
         }
 
       }   //end of if statement for c != null
+      cardIterator++;
     }   //end of for loop for iteration of each card in hand
 }
 
@@ -573,6 +582,7 @@ public void playerturns(int n){
         int dpos = 250;
         cards = game.getBotCards(3);
         boolean first_card = true;
+        int iterate = 1;
         for(Card c : cards){
           //If the card is not null, then get all the data. (Need this error checking because Card array is initialized with size of 14)
           if(c != null){
@@ -648,14 +658,25 @@ public void playerturns(int n){
             else{
                 if(n == 1)
                   img = ImageIO.read(new File("Cards/blue_back.png"));
-                else if(n==2)
+                else if(n==2){
                   img = ImageIO.read(new File(png));
+                }
             }
             //scaling the image to a smaller size and setting it as imageicon for jLabel
             Image dimg = img.getScaledInstance(100, 120, Image.SCALE_SMOOTH);
             ImageIcon imageIcon = new ImageIcon(dimg);
             label.setIcon(imageIcon);
-            label.setBounds(dpos, -50, 300, 300);
+            if(n == 1){
+              label.setBounds(dpos, -50, 300, 300);
+            }
+            else if(n == 2){
+              if(iterate == 2){
+                label.setBounds(dpos, 8, 300, 300);
+              }
+              else{
+                label.setBounds(dpos, -50, 300, 300);
+              }
+            }
             dpos += 100;
             add(label);
             repaint();
@@ -668,10 +689,8 @@ public void playerturns(int n){
           }
 
         }   //end of if statement for c != null
+        iterate++;
         }   //end of for loop for iteration of each card in hand
-
-
-
 }
 
 }

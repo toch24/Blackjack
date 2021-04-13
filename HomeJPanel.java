@@ -72,7 +72,7 @@ public class HomeJPanel extends JPanel
             basicsFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
             basicsFrame.setBackground( Color.green.darker()); 				//set frame background color
 
-            basicsFrame.setSize( 800, 600 ); 						//set frame size
+            basicsFrame.setSize( 800, 750 ); 						//set frame size
             basicsFrame.setResizable(false);
             setVisible(true);
 
@@ -89,7 +89,7 @@ public class HomeJPanel extends JPanel
             }
 
             newRound = new JButton("newRound");
-            newRound.setBounds(350,300,100,50);
+            newRound.setBounds(325,300,100,50);
             newRound.setEnabled(true);
             //basicsPanel.add(newRound);
 
@@ -149,6 +149,7 @@ public class HomeJPanel extends JPanel
                         basicsFrame.add( basicsPanel );
                         basicsPanel.setBackground( Color.green.darker());
                         basicsFrame.setVisible( true );                     //display the game
+
                         basicsPanel.add(newRound);
                         int checkWallet = Player.getWallet();
                         System.out.println("Players wallet is: "+ checkWallet);
@@ -206,7 +207,7 @@ public class HomeJPanel extends JPanel
             basicsFrame.add( newRoundPanel ); 					//add screensaverJPanel to frame
             basicsFrame.setBackground( Color.green.darker()); 				//set frame background color
             newRoundPanel.setBackground( Color.green.darker());
-            basicsFrame.setSize( 800, 600 ); 						//set frame size
+            basicsFrame.setSize( 800, 750 ); 						//set frame size
             basicsFrame.setResizable(false);
             //HomeJPanel.setVisible(true);
             basicsFrame.setVisible( true );
