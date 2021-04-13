@@ -35,6 +35,10 @@ public class basicsPanel extends JPanel{
 
 
     public basicsPanel(){
+      removeAll();
+      revalidate();
+      repaint();
+
       game = new Blackjack();
       setCards(1);                                   //sets the cards images
 
@@ -62,7 +66,18 @@ public class basicsPanel extends JPanel{
       pass.setBounds(350,250,100,50);
       pass.setEnabled(false);
       add(pass);
+      
+      newRound = new JButton("Next Round");
+      newRound.setBounds(300,300,100,50);
+      newRound.setEnabled(true);
+      add(newRound);
 
+        newRound.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+
+            HomeJPanel.newRound();
+        }
+      });
       startGame = new JButton("Start Game");
       startGame.setBounds(323,600,100,50);
       startGame.setVisible(true);
@@ -339,7 +354,10 @@ public void playerturns(int n){
             Player.revertBet();
             System.out.println("Player wallet is now: "+ game.returnWallet(2));
           }
-
+          // make the next round button appear, to reset the round!
+          String message = "Round Over: Press 'New Round' To Continue.";
+          JOptionPane.showMessageDialog(null, message);
+          newRound.setEnabled(true);
         }
         else {
           String msg = "Dealer played";
@@ -363,7 +381,10 @@ public void playerturns(int n){
             Player.revertBet();
             System.out.println("Player wallet is now: "+ game.returnWallet(2));
           }
-
+          // Tell the user the round is over, let them play another if they hit the button.
+          String message = "Round Over: Press 'New Round' To Continue.";
+          JOptionPane.showMessageDialog(null, message);
+          newRound.setEnabled(true);
         }
       }
       catch(InterruptedException ex){
@@ -373,7 +394,6 @@ public void playerturns(int n){
     bot2ResetWallet = game.returnWallet(3);
   }
 }
-
 
     public void setCards(int n){
       int cardvalue;
