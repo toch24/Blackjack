@@ -19,7 +19,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class basicsPanel extends JPanel{
-  private JButton  hit, pass, newRound, startGame;
+  private JButton  hit, pass, startGame, newRound;
   private JTextField betField;                      // Using this to get the input from the bets i guess
   private int userBet = 0;
   private Blackjack game;
@@ -35,6 +35,7 @@ public class basicsPanel extends JPanel{
 
 
     public basicsPanel(){
+
       game = new Blackjack();
       setCards(1);                                   //sets the cards images
 
@@ -68,6 +69,19 @@ public class basicsPanel extends JPanel{
       startGame.setVisible(true);
       startGame.setEnabled(true);
       add(startGame);
+
+      newRound = new JButton("newRound");
+      newRound.setBounds(325,300,100,50);
+      newRound.setEnabled(true);
+      add(newRound);
+      //basicsPanel.add(newRound);
+
+      newRound.addActionListener(new ActionListener(){
+  public void actionPerformed(ActionEvent e) {
+    System.out.println("Starting a new round!!!!");
+      HomeJPanel.newRound();
+  }
+});
 
       highestbetlabel = new JLabel("Current Pot Total: " + String.valueOf(Pot.getPot()));
       highestbetlabel.setBounds(300,210,200,50);
