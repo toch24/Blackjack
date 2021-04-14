@@ -27,11 +27,13 @@ public class basicsPanel extends JPanel{
   private int players = 1;
   private JLabel highestbetlabel, cp1wallet, pwallet, cp2wallet, dealerwallet, bot1Value, bot2Value, dealerValue, playerValue;
   private int cp1WalletVal, cp2WalletVal;
-  private static int bot1ResetWallet, bot2ResetWallet;
+  private static double bot1ResetWallet, bot2ResetWallet;
   private boolean bot1Bust = false;
   private boolean bot2Bust = false;
   private boolean playerBust = false;
-
+  private boolean bot1BJ, bot2BJ;
+  static boolean naturalbot1BlackJack = false;
+  static boolean naturalbot2BlackJack = false;
 
 
     public basicsPanel(){
@@ -42,12 +44,12 @@ public class basicsPanel extends JPanel{
       //setting layout to null, default layout is flow layout
       setLayout(null);
 
-      if(HomeJPanel.firstRound){
+    if(HomeJPanel.firstRound){
         game.setBothBotBets(1);
         game.setBothBotBets(2);
         HomeJPanel.firstRound = false;
         System.out.println("The is the first round");
-      }
+        }
       else{
         System.out.println("The is a new round");
         game.walletRound2(1, bot1ResetWallet);
@@ -77,7 +79,7 @@ public class basicsPanel extends JPanel{
 
       newRound.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent e) {
-      System.out.println("Starting a new round!!!!");
+    //  System.out.println("Starting a new round!!!!");
       HomeJPanel.newRound();
   }
 });
@@ -159,6 +161,7 @@ public void playerturns(int n){
         playerBust = false;
 
       if(players == 1){
+      bot1BJ = false;
         try{
       //bet.setEnabled(false);
       hit.setEnabled(false);
@@ -166,6 +169,13 @@ public void playerturns(int n){
 
       boolean play = game.play(players);
       setCards(1);
+
+      if(naturalbot1BlackJack && game.blackjackHand(1)){
+         bot1BJ = true;
+         String msg = "Player 1 got blackjack. They get 1.5 times their bet back";
+         JOptionPane.showMessageDialog(null, msg);
+         players++;
+      }
 
       bot1Value = new JLabel("Player 1 hand value: " + String.valueOf(game.getHandValue(1)));
       bot1Value.setBounds(50,200,200,50);
@@ -177,7 +187,7 @@ public void playerturns(int n){
       cp1wallet.setVisible(true);
       add(cp1wallet);
 
-      if(play){
+      if(play && bot1BJ != true){
         String msg = "Player 1 busted, they are out for this round";
         JOptionPane.showMessageDialog(null, msg);
         bot1Bust = true;
@@ -185,7 +195,7 @@ public void playerturns(int n){
         //highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
         players++;
       }
-      else {
+      else if(play != true && bot1BJ != true) {
         String msg = "Player 1 played";
         JOptionPane.showMessageDialog(null, msg);
         highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
@@ -283,12 +293,21 @@ public void playerturns(int n){
       }
 
       if(players == 3){
+        bot2BJ = false;
         try{
           Thread.sleep(1000);
       hit.setEnabled(false);
       pass.setEnabled(false);
+
       boolean play = game.play(players);
       setCards(1);
+
+      if(naturalbot2BlackJack && game.blackjackHand(2)){
+         bot2BJ = true;
+         String msg = "Player 3 got blackjack. They get 1.5 times their bet back";
+         JOptionPane.showMessageDialog(null, msg);
+         players++;
+      }
 
       bot2Value = new JLabel("Player 3 hand value: " + String.valueOf(game.getHandValue(3)));
       bot2Value.setBounds(600,200,200,50);
@@ -300,13 +319,13 @@ public void playerturns(int n){
       cp2wallet.setVisible(true);
       add(cp2wallet);
 
-      if(play){
+      if(play && bot2BJ != true){
         String msg = "Player 3 busted, they are out for this round";
         JOptionPane.showMessageDialog(null, msg);
         bot2Bust = true;
         players++;
       }
-      else {
+      else if(play != true && bot2BJ != true) {
         String msg = "Player 3 played";
         JOptionPane.showMessageDialog(null, msg);
         highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
@@ -333,16 +352,19 @@ public void playerturns(int n){
         add(dealerValue);
 
         if(play){
-          String msg = "Dealer busted, all players still in the round win!";
+          String msg = "Dealer busted, all players still in the round get their bets!";
           JOptionPane.showMessageDialog(null, msg);
           //highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
           players = 1;
-          if(!bot1Bust){
+
+          //payouts(bot1Bust, bot2Bust, playerBust);
+
+          if(!bot1Bust && !bot1BJ){
             System.out.println("Dealer gives money to bot1");
             game.setBotWallet(1);
             System.out.println("Bot1 wallet is now: "+ game.returnWallet(1));
           }
-          if(!bot2Bust){
+          if(!bot2Bust && !bot2BJ){
             System.out.println("Dealer gives money to bot2");
             System.out.println("Bot2 wallet is now: "+ game.returnWallet(3));
           }
@@ -359,22 +381,8 @@ public void playerturns(int n){
           highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
           players = 1;
 
-          if(!bot1Bust && game.handMatch(1)){
-            System.out.println("Dealer gives money to bot1");
-            game.setBotWallet(1);
-            System.out.println("Bot1 wallet is now: "+ game.returnWallet(1));
-          }
-          if(!bot2Bust && game.handMatch(2)){
-            System.out.println("Dealer gives money to bot2");
-            game.setBotWallet(2);
-            System.out.println("Bot2 wallet is now: "+ game.returnWallet(3));
-          }
-          if(!playerBust && game.handMatch(3)){
-            System.out.println("Dealer gives money to player");
-            //int payback = Player.getCurrentBet();
-            Player.revertBet();
-            System.out.println("Player wallet is now: "+ game.returnWallet(2));
-          }
+          payouts(bot1Bust, bot2Bust, playerBust);
+
         }
         String message = "Round Over: Press 'Next Round' to Continue.";
         JOptionPane.showMessageDialog(null,message);
@@ -385,6 +393,40 @@ public void playerturns(int n){
     }
     bot1ResetWallet = game.returnWallet(1);
     bot2ResetWallet = game.returnWallet(3);
+  }
+}
+
+public void payouts(boolean bot1Bust, boolean bot2Bust, boolean playerBust){
+  if(!bot1BJ && !bot1Bust && game.greaterHand(1)){
+    System.out.println("Dealer gives twice bet to bot1");
+    game.winningHand(1);
+    System.out.println("Bot1 wallet is now: "+ game.returnWallet(1));
+  }
+  if(!bot2BJ && !bot2Bust && game.greaterHand(2)){
+    System.out.println("Dealer gives twice bet to bot2");
+    game.winningHand(2);
+    System.out.println("Bot2 wallet is now: "+ game.returnWallet(3));
+  }
+  if(!playerBust && game.greaterHand(3)){
+    System.out.println("Dealer twice bet to player");
+    //int payback = Player.getCurrentBet();
+    Player.winningPHand();
+    System.out.println("Player wallet is now: "+ game.returnWallet(2));
+  }
+  if(!bot1Bust && game.handMatch(1)){
+       System.out.println("Dealer gives bet back to bot1");
+       game.setBotWallet(1);
+       System.out.println("Bot1 wallet is now: "+ game.returnWallet(1));
+     }
+  if(!bot2Bust && game.handMatch(2)){
+       System.out.println("Dealer gives bet back to bot2");
+       game.setBotWallet(2);
+       System.out.println("Bot2 wallet is now: "+ game.returnWallet(3));
+     }
+  if(!playerBust && game.handMatch(3)){
+       System.out.println("Dealer gives bet back to player");
+       Player.revertBet();
+       System.out.println("Player wallet is now: "+ game.returnWallet(2));
   }
 }
 

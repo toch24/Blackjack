@@ -40,6 +40,11 @@ public static void setWalletBet(int bet){
     System.out.println("The bet was: "+ bet);
   }
 
+  public static void winningPHand(){
+    wallet = wallet + (2*bet);
+  //  System.out.println("Player's hand is higher than dealer's "+ 2*bet);
+  }
+
 	public static int getWallet(){
 		return wallet;
 	}
