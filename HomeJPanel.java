@@ -22,6 +22,7 @@ public class HomeJPanel extends JPanel
    private JButton button2;
    private static JFrame basicsFrame;
    private static JPanel basicsPanel;
+   private static JPanel casinoPanel;
   // private static JButton newRound;
    static boolean firstRound = true;
    static boolean firstNewRound = true;
@@ -81,7 +82,6 @@ public class HomeJPanel extends JPanel
       button1.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent e) {
            basicsFrame = new JFrame("Basic BlackJack");
-        //    basicsPanel = new basicsPanel();
 
             basicsFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
             basicsFrame.setBackground( Color.green.darker()); 				//set frame background color
@@ -136,18 +136,9 @@ public class HomeJPanel extends JPanel
                     //System.out.println(userBet);
                     if(bet >= 100 && bet % 5 == 0)
                     {
-                  //      add basicsPanel
-                    //    JPanel basicsPanel = new basicsPanel();
-
                         Pot.addToPot(bet);                                  // Add to the pot.
                         Player.setWallet(bet);                              // This sets the current bet from the user for comparison purposes
-                        //basicsPanel.addWallet();
-
-                      /*  int temp = 0;
-                        while(temp < 3){
-                            Bot.setBotBuyIn();
-                            temp++;
-                        } */
+                  
 
                         basicsPanel = new basicsPanel();
                         basicsFrame.add( basicsPanel );
@@ -184,16 +175,84 @@ public class HomeJPanel extends JPanel
       //play casino button
       button3.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent e) {
-            JFrame basicsFrame = new JFrame("Casino BlackJack");
-            JPanel casinoPanel = new JPanel();
-            basicsFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-            basicsFrame.add( casinoPanel ); 					//add screensaverJPanel to frame
-            basicsFrame.setBackground( Color.green.darker() ); 				//set frame background color
-            casinoPanel.setBackground( Color.green.darker());
-            basicsFrame.setSize( 800, 600 ); 						//set frame size
+            basicsFrame = new JFrame("Casino BlackJack");
+
+            basicsFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+            basicsFrame.setBackground( Color.green.darker()); 				//set frame background color
+
+            basicsFrame.setSize( 800, 750 ); 						//set frame size
             basicsFrame.setResizable(false);
-            setVisible(false );
-            basicsFrame.setVisible( true ); 						//display frame
+            setVisible(true);
+
+            // start testing
+
+            //resetting values when play basics is clicked
+            Pot.resetPot();
+            Player.resetWallet();
+
+            int temp = 0;
+            while(temp < 3){
+                Bot.resetWallet();
+                temp++;
+            }
+
+
+      // end testing
+
+            // Adding the buyIn frame and its functionality
+            JFrame buyInFrame = new JFrame("Buy In");
+            JPanel buyInPanel = new JPanel();
+            JLabel buyInLabel = new JLabel("Please determine your buy in value (>= 100): ");
+            buyInField = new JTextField();
+
+            buyInFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+            buyInFrame.add( buyInPanel );
+            buyInFrame.setResizable(false);
+            buyInFrame.setSize(300,100);
+
+            // Create JTextField to allow for user inputs
+            buyInField = new JTextField(4);
+            buyInField.setBounds(50,100, 200,30);
+            buyInField.setVisible(true);
+
+            // add the textfield to the JPanel with the label
+            buyInPanel.add(buyInLabel);
+            buyInPanel.add(buyInField);
+
+            buyInFrame.setVisible(true);                                   // Make it visible.
+            buyInFrame.toFront();                                          // Make it stand out at something that needs to be interacted with.
+            buyInFrame.requestFocus();                                     // Focus the BuyInFrame so the user knows to enter something.
+
+            buyInField.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e){
+                    userBuyIn = Integer.parseInt(buyInField.getText());     // Take the user bet.
+                    int bet = userBuyIn;
+                    //System.out.println(userBet);
+                    if(bet >= 100 && bet % 5 == 0)
+                    {
+                        Pot.addToPot(bet);                                  // Add to the pot.
+                        Player.setWallet(bet);                              // This sets the current bet from the user for comparison purposes
+                
+                        casinoPanel = new casinoPanel();
+                        basicsFrame.add( casinoPanel );
+                        casinoPanel.setBackground( Color.green.darker());
+                        basicsFrame.setVisible( true );                     //display the game
+
+                        //basicsPanel.add(newRound);
+                        int checkWallet = Player.getWallet();
+                        System.out.println("Players wallet is: "+ checkWallet);
+
+                        buyInFrame.dispose();                               // Forse the JFrame closed when we successfully make a bet.
+                        String betAddress = "Buy In Successful.";           // Just let the user know their bet was successfully placed, we can take this out if you guys want.
+                        JOptionPane.showMessageDialog(null, betAddress);
+                    }
+                    else
+                    {   // Use this to error check, the user cannot make bets < 0.
+                        String error = "Error: Please Input A Value Greater Than Or Equal To 100, but a factor of 5";
+                        JOptionPane.showMessageDialog(null, error);
+                    }
+                }
+            });
           }
       });
    }
