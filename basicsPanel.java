@@ -231,7 +231,6 @@ public void playerturns(int n){
               if(userBet == 5 || userBet == 10 || userBet == 50 || userBet == 100 || userBet == 500)
               {
                 //TODO: if the bet is less than the highest bet, re-prompt the user for a new bet
-                if(userBet >= Pot.getHighestBet()){
                   //Checking that user has the money
                   if(Player.getWallet() >= userBet){
                   game.setUserBet(userBet);
@@ -249,12 +248,7 @@ public void playerturns(int n){
                     JOptionPane.showMessageDialog(null, betAddress);
                   }
 
-                  }
-             else{
-                  String betAddress = "Bet must match the highest bet or raise it.";
-                  JOptionPane.showMessageDialog(null, betAddress);
-
-            }
+          
                 pwallet.setVisible(false);
                 pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
                 pwallet.setBounds(250,360,200,50);
