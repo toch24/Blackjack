@@ -1,20 +1,9 @@
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.util.Random;
 import java.awt.event.ActionEvent;
-import java.awt.*;
 import javax.swing.*;
-import java.awt.Color;
-import java.awt.Dimension;
-import javax.swing.border.Border;
-import javax.swing.text.AbstractDocument.Content;
 import javax.imageio.ImageIO;
-import java.awt.Container;
 import java.io.File;
 import java.io.IOException;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
