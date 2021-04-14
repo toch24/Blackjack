@@ -21,6 +21,13 @@ public class Hand {
 		return value;
 	}
 
+	public int firstCard() {
+
+        //Peek the card that is face down
+		int value = hand[0].getcardValue();
+		return value;
+	}
+
 	public Card[] getCards(){
 		return hand;
 	}

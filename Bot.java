@@ -71,4 +71,10 @@ public class Bot {
 	public void setBotWallet(double newWallet){
 		cpuWallet = newWallet;
 	}
+
+	//returns the value of first card of the dealer, for double down checking purposes
+	public int getFirstCard(){
+		int firstcard = hand.firstCard();
+		return firstcard;
+	}
 }

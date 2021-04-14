@@ -429,6 +429,28 @@ public void setBothBotBets (int bot){
    }
  }
 
+ public boolean checkDoubleDown(int player){
+  switch(player){
+    //higher chance of getting 21 if the total value is 11
+    //play it safe, if the the dealer has an ace. Don't double down.
+    case 1: if(bot1.getBotTotal() < 12 && dealer.getFirstCard() != 1){
+              //todo: if the bot has an ace and its other card value is less than 9
+              
+              return true;
+            }
+    
+    case 2: if(bot2.getBotTotal() < 12 && dealer.getFirstCard() != 1){
+              //todo: if the bot has an ace and its other card value is less than 9
+              
+              return true;
+            }
+
+  }
+
+  
+  return false;
+ }
+
  public int getHandValue(int n){
    if(n == 1){
      return bot1.getBotTotal();
