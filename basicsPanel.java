@@ -70,15 +70,14 @@ public class basicsPanel extends JPanel{
       startGame.setEnabled(true);
       add(startGame);
 
-      newRound = new JButton("newRound");
-      newRound.setBounds(325,300,100,50);
-      newRound.setEnabled(true);
+      newRound = new JButton("Next Round");
+      newRound.setBounds(300,300,100,50);
+      newRound.setEnabled(false);
       add(newRound);
-      //basicsPanel.add(newRound);
 
       newRound.addActionListener(new ActionListener(){
-  public void actionPerformed(ActionEvent e) {
-    System.out.println("Starting a new round!!!!");
+      public void actionPerformed(ActionEvent e) {
+      System.out.println("Starting a new round!!!!");
       HomeJPanel.newRound();
   }
 });
@@ -353,7 +352,6 @@ public void playerturns(int n){
             Player.revertBet();
             System.out.println("Player wallet is now: "+ game.returnWallet(2));
           }
-
         }
         else {
           String msg = "Dealer played";
@@ -377,8 +375,10 @@ public void playerturns(int n){
             Player.revertBet();
             System.out.println("Player wallet is now: "+ game.returnWallet(2));
           }
-
         }
+        String message = "Round Over: Press 'Next Round' to Continue.";
+        JOptionPane.showMessageDialog(null,message);
+        newRound.setEnabled(true);
       }
       catch(InterruptedException ex){
         Thread.currentThread().interrupt();

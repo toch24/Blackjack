@@ -222,8 +222,8 @@ public class HomeJPanel extends JPanel
               //  newRound.setEnabled(true);
               //  newRoundPanel.add(newRound);
 
-                int temp = Pot.getPot();
-                System.out.println(temp);
+                /* int temp = Pot.getPot();
+                System.out.println(temp); */
                 firstNewRound = false;
 
             }
@@ -246,8 +246,8 @@ public class HomeJPanel extends JPanel
               //  newRound.setEnabled(true);
               //  newRoundPanel.add(newRound);
 
-                int temp = Pot.getPot();
-                System.out.println(temp);
+                /* int temp = Pot.getPot();
+                System.out.println(temp); */
             }
 
 
