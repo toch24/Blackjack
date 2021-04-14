@@ -1,7 +1,9 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Deck {
     private Card[] gameDeck = new Card[52];
+	private static ArrayList<Card> usedCards = new ArrayList<Card>();
     private Random rand = new Random();
 	private int next = 0;
 

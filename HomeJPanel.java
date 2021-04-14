@@ -3,7 +3,6 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 import java.awt.*;
@@ -25,11 +24,9 @@ public class HomeJPanel extends JPanel
    private static JPanel basicsPanel;
    private static JButton newRound;
    static boolean firstRound = true;
-   private int userBuyIn;
-   private static int counter = -1;
-   private JTextField buyInField;
 
-   private static JPanel[] newRoundPanel = new JPanel[100];
+   private int userBuyIn;
+   JTextField buyInField;
 
    public HomeJPanel()
    {
@@ -91,6 +88,19 @@ public class HomeJPanel extends JPanel
                 temp++;
             }
 
+            newRound = new JButton("newRound");
+            newRound.setBounds(325,300,100,50);
+            newRound.setEnabled(true);
+            //basicsPanel.add(newRound);
+
+            newRound.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent e) {
+            newRound();
+        }
+      });
+
+      // end testing
+
             // Adding the buyIn frame and its functionality
             JFrame buyInFrame = new JFrame("Buy In");
             JPanel buyInPanel = new JPanel();
@@ -143,11 +153,10 @@ public class HomeJPanel extends JPanel
                         basicsPanel.add(newRound);
                         int checkWallet = Player.getWallet();
                         System.out.println("Players wallet is: "+ checkWallet);
-                        buyInFrame.dispose();                               // Force the JFrame closed when we successfully make a bet.
 
+                        buyInFrame.dispose();                               // Forse the JFrame closed when we successfully make a bet.
                         String betAddress = "Buy In Successful.";           // Just let the user know their bet was successfully placed, we can take this out if you guys want.
                         JOptionPane.showMessageDialog(null, betAddress);
-
                     }
                     else
                     {   // Use this to error check, the user cannot make bets < 0.
@@ -187,35 +196,27 @@ public class HomeJPanel extends JPanel
 
    public static void newRound(){
 
-            counter++;
+            //basicsFrame.dispose();
+            //JFrame newRoundFrame = new JFrame();
+            JPanel newRoundPanel = new basicsPanel();
 
-            newRoundPanel[counter] = new basicsPanel();
-
-            basicsFrame.remove(basicsPanel);
+            basicsFrame.remove(newRoundPanel);
             basicsFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
-              
-            basicsFrame.add( newRoundPanel[counter]);
-            
+            basicsFrame.remove(basicsPanel);
+
+            basicsFrame.add( newRoundPanel ); 					//add screensaverJPanel to frame
             basicsFrame.setBackground( Color.green.darker()); 				//set frame background color
-            newRoundPanel[counter].setBackground( Color.green.darker());
-            basicsFrame.setSize( 800, 750 ); 						              //set frame size
+            newRoundPanel.setBackground( Color.green.darker());
+            basicsFrame.setSize( 800, 750 ); 						//set frame size
             basicsFrame.setResizable(false);
+            //HomeJPanel.setVisible(true);
             basicsFrame.setVisible( true );
-
-            newRound = new JButton("Next Round");
-            newRound.setBounds(300,300,100,50);
+            newRound = new JButton("newRound");
+            newRound.setBounds(350,300,100,50);
             newRound.setEnabled(true);
-
-            newRoundPanel[counter].add(newRound);
-
-            newRound.addActionListener(new ActionListener(){
-              public void actionPerformed(ActionEvent e) {     
-                newRound();
-                }
-            });
-            System.out.println(counter);
+            newRoundPanel.add(newRound);
 
             int temp = Pot.getPot();
-            System.out.println("This is the current pot: " + temp);
+            System.out.println(temp);
         }
 } // End JHomePanel
