@@ -4,7 +4,7 @@ public class Bot {
     //A new hand for the bot
   private Hand hand = new Hand();
 	private Random rand;
-	private int cpuWallet;
+	private static int cpuWallet;
 	private int botBet;
 	private static int botWallet;
 
@@ -39,7 +39,7 @@ public class Bot {
 	}
 
 	public static void resetWallet(){
-		botWallet = 0;
+		cpuWallet = 0;
 	}
 
 	public void setBotBuyIn(int buyIn){							// Set the bot buyin to equal the players and add the buyin value to the total pot
@@ -72,7 +72,7 @@ public class Bot {
 		return hand.total();
 	}
 
-	public void setBotWallet(int newWallet){
+	public static void setBotWallet(int newWallet){
 		cpuWallet = newWallet;
 	}
 }

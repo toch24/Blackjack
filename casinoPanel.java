@@ -64,8 +64,9 @@ public class casinoPanel extends JPanel{
   
         newRound.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
+        HomeJPanel.firstRound = false;
         System.out.println("Starting a new round!!!!");
-        HomeJPanel.newRound();
+        HomeJPanel.newRoundCasino();
     }
   });
   

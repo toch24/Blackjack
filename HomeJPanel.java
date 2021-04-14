@@ -96,11 +96,8 @@ public class HomeJPanel extends JPanel
             Pot.resetPot();
             Player.resetWallet();
 
-            int temp = 0;
-            while(temp < 3){
-                Bot.resetWallet();
-                temp++;
-            }
+        
+            firstRound = true;
 
 
       // end testing
@@ -138,7 +135,7 @@ public class HomeJPanel extends JPanel
                     {
                         Pot.addToPot(bet);                                  // Add to the pot.
                         Player.setWallet(bet);                              // This sets the current bet from the user for comparison purposes
-                  
+              
 
                         basicsPanel = new basicsPanel();
                         basicsFrame.add( basicsPanel );
@@ -232,7 +229,11 @@ public class HomeJPanel extends JPanel
                     {
                         Pot.addToPot(bet);                                  // Add to the pot.
                         Player.setWallet(bet);                              // This sets the current bet from the user for comparison purposes
-                
+                        int temp = 0;
+                        while(temp < 3){
+                            Bot.setBotWallet(bet);;
+                            temp++;
+                        }
                         casinoPanel = new casinoPanel();
                         basicsFrame.add( casinoPanel );
                         casinoPanel.setBackground( Color.green.darker());
@@ -257,66 +258,33 @@ public class HomeJPanel extends JPanel
       });
    }
 
-   public static void newRound(){
-
-            //basicsFrame.dispose();
-            //JFrame newRoundFrame = new JFrame();
-            //basicsFrame.remove(newRoundPanel);
-            if(firstNewRound){
-              newRoundPanel = new basicsPanel();
-
+   public static void newRoundBasics(){
                 //basicsFrame.remove(newRoundPanel);
-                basicsFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
                 basicsFrame.remove(basicsPanel);
-
-                basicsFrame.add( newRoundPanel ); 					//add screensaverJPanel to frame
+                basicsPanel = new basicsPanel();
+                basicsFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+                basicsFrame.add( basicsPanel ); 					//add screensaverJPanel to frame
                 basicsFrame.setBackground( Color.green.darker()); 				//set frame background color
-                newRoundPanel.setBackground( Color.green.darker());
+                basicsPanel.setBackground( Color.green.darker());
                 basicsFrame.setSize( 800, 750 ); 						//set frame size
                 basicsFrame.setResizable(false);
-                //HomeJPanel.setVisible(true);
                 basicsFrame.setVisible( true );
-              //  newRound = new JButton("newRound");
-              //  newRound.setBounds(350,300,100,50);
-              //  newRound.setEnabled(true);
-              //  newRoundPanel.add(newRound);
-
-                /* int temp = Pot.getPot();
-                System.out.println(temp); */
-                firstNewRound = false;
-
-            }
-            else{
-              basicsFrame.remove(newRoundPanel);
-                newRoundPanel = new basicsPanel();
-                //basicsFrame.remove(newRoundPanel);
-                basicsFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
-                basicsFrame.remove(basicsPanel);
-
-                basicsFrame.add( newRoundPanel ); 					//add screensaverJPanel to frame
-                basicsFrame.setBackground( Color.green.darker()); 				//set frame background color
-                newRoundPanel.setBackground( Color.green.darker());
-                basicsFrame.setSize( 800, 750 ); 						//set frame size
-                basicsFrame.setResizable(false);
-                //HomeJPanel.setVisible(true);
-                basicsFrame.setVisible( true );
-              //  newRound = new JButton("newRound");
-              //  newRound.setBounds(350,300,100,50);
-              //  newRound.setEnabled(true);
-              //  newRoundPanel.add(newRound);
-
-                /* int temp = Pot.getPot();
-                System.out.println(temp); */
-            }
-
-
-
-
+  
         }
+
+  public static void newRoundCasino(){
+          //basicsFrame.remove(newRoundPanel);
+          basicsFrame.remove(casinoPanel);
+          casinoPanel = new casinoPanel();
+          basicsFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+          basicsFrame.add( casinoPanel ); 					//add screensaverJPanel to frame
+          basicsFrame.setBackground( Color.green.darker()); 				//set frame background color
+          casinoPanel.setBackground( Color.green.darker());
+          basicsFrame.setSize( 800, 750 ); 						//set frame size
+          basicsFrame.setResizable(false);
+          basicsFrame.setVisible( true );
+
+  }
+
 } // End JHomePanel
 
-/* public static JPanel newPanel(){
-  JPanel otherPanel = new basicsPanel();
-  basicsFrame.remove(newRoundPanel);
-
-}*/

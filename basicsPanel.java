@@ -66,8 +66,10 @@ public class basicsPanel extends JPanel{
 
       newRound.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent e) {
+      HomeJPanel.firstRound = false;
       System.out.println("Starting a new round!!!!");
-      HomeJPanel.newRound();
+      
+      HomeJPanel.newRoundBasics();
   }
 });
 
@@ -369,6 +371,7 @@ public void playerturns(int n){
     bot1ResetWallet = game.returnWallet(1);
     bot2ResetWallet = game.returnWallet(3);
   }
+
 }
 
 
