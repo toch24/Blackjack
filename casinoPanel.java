@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.event.*;  
 
 public class casinoPanel extends JPanel{
     private JButton  hit, pass, startGame, newRound;
@@ -20,6 +21,7 @@ public class casinoPanel extends JPanel{
     private boolean bot1Bust = false;
     private boolean bot2Bust = false;
     private boolean playerBust = false;
+    private boolean playerDoubleDown = false;
 
 
     public casinoPanel(){
@@ -190,12 +192,13 @@ public class casinoPanel extends JPanel{
           JOptionPane.showMessageDialog(null, msg);
           hit.setEnabled(true);
           pass.setEnabled(true);
-  
+          
           JFrame betFrame = new JFrame("Betting...");
           JPanel betPanel = new JPanel();
           JLabel betLabel = new JLabel("Place your bet: ");           // address the player!
           JOptionPane errorCheck = new JOptionPane("Error");
-  
+          JCheckBox doubleDownBox = new JCheckBox("Double Down");  
+
           betFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
           betFrame.add( betPanel );
           betFrame.setResizable(false);
@@ -209,9 +212,16 @@ public class casinoPanel extends JPanel{
           // add the textfield to the JPanel with the label
           betPanel.add(betLabel);
           betPanel.add(betField);
-  
+          betPanel.add(doubleDownBox);
           betFrame.setVisible(true);                                   // Make it visible.
   
+          //checking if double down checkbox is true or false
+          doubleDownBox.addItemListener(new ItemListener() {    
+            public void itemStateChanged(ItemEvent e) {                 
+                
+            }    
+         });    
+
           betField.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 userBet = Integer.parseInt(betField.getText());      // Take the user bet.
