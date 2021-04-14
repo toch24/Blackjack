@@ -187,12 +187,7 @@ public class HomeJPanel extends JPanel
             Pot.resetPot();
             Player.resetWallet();
 
-            int temp = 0;
-            while(temp < 3){
-                Bot.resetWallet();
-                temp++;
-            }
-
+        
 
       // end testing
 
@@ -229,11 +224,7 @@ public class HomeJPanel extends JPanel
                     {
                         Pot.addToPot(bet);                                  // Add to the pot.
                         Player.setWallet(bet);                              // This sets the current bet from the user for comparison purposes
-                        int temp = 0;
-                        while(temp < 3){
-                            Bot.setBotWallet(bet);;
-                            temp++;
-                        }
+                  
                         casinoPanel = new casinoPanel();
                         basicsFrame.add( casinoPanel );
                         casinoPanel.setBackground( Color.green.darker());

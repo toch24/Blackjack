@@ -16,7 +16,7 @@ public class casinoPanel extends JPanel{
     private int players = 1;
     private JLabel highestbetlabel, cp1wallet, pwallet, cp2wallet, dealerwallet, bot1Value, bot2Value, dealerValue, playerValue;
     private int cp1WalletVal, cp2WalletVal;
-    private static int bot1ResetWallet, bot2ResetWallet;
+    private static double bot1ResetWallet, bot2ResetWallet;
     private boolean bot1Bust = false;
     private boolean bot2Bust = false;
     private boolean playerBust = false;
