@@ -16,6 +16,7 @@ public class Blackjack{
     private Player player = new Player();
     private Deck deck = new Deck();
     private boolean casino = false;
+    private boolean noDoubleDown = false;
 
     private Random rand = new Random();
 
@@ -58,6 +59,7 @@ public boolean play(int players){
               basicsPanel.naturalbot1BlackJack = true;
             }
 
+            if(!noDoubleDown){
             //if we are in casino panel
             if(casino){
               //check conditions for doubling down
@@ -66,12 +68,15 @@ public boolean play(int players){
               doubledown = true;
               }
             }
+            } // end of nodoubledown if statement
 
             if(!doubledown){
             while(bot1.getBotTotal() < 17){
               bot1.botPlay(deck);
               }               
-            }                                           // 100-500
+            }  
+                                
+                           
             if(bot1.getEachBotWallet() >= 100 && bot1.getEachBotWallet() < 500)
               {
                 int temp = rand.nextInt(3)+1;
@@ -118,12 +123,20 @@ public boolean play(int players){
               }
 
               //if double down is true, then double the bet and give bot1 another card
-              if(casino && doubledown){
+              if(casino && doubledown && !noDoubleDown){
                 int temp = bot1.getCurrentBotBet();
-                temp *= 2;
-                bot1.setCurrentBotBet(temp);
-                bot1.setNextCard(deck);
-
+                temp *= 2; 
+                if(temp <= bot1.getEachBotWallet()){
+                  bot1.setCurrentBotBet(temp);
+                  bot1.setNextCard(deck);
+                  noDoubleDown = false;
+                  System.out.println("Double down bot 1 = " + temp);
+                }
+                else {
+                  //if bot doesnt have enough money for doubling, call play again but without double down
+                  noDoubleDown = true;
+                  play(1); 
+                  }      
               }
 
               setHighestBet();
@@ -142,14 +155,31 @@ public boolean play(int players){
         //add logic for bot1 to make moves and then eventually pass
 
         System.out.println("This is bot2's wallet: " + bot2.getEachBotWallet());
+        //initializing doubledown boolean
+        boolean doubledown = false;
 
         if(bot2.getBotTotal() == 21){
           basicsPanel.naturalbot2BlackJack = true;
         }
 
+        if(!noDoubleDown){
+            //if we are in casino panel
+            if(casino){
+              //check conditions for doubling down
+            if(checkDoubleDown(2)){
+              //doubledown is true
+              doubledown = true;
+              }
+            }
+            } // end of nodoubledown if statement
+
+        if(!doubledown){
         while(bot2.getBotTotal() < 17){
           bot2.botPlay(deck);
         }
+        }
+
+
         if(bot2.getEachBotWallet() >= 100 && bot2.getEachBotWallet() < 500)
               {
                 int temp = rand.nextInt(3)+1;
@@ -194,6 +224,23 @@ public boolean play(int players){
                   case 2: {bot2.setCurrentBotBet(10); System.out.println("bot2 bet 10"); break;}
                 }
               }
+
+              //if double down is true, then double the bet and give bot1 another card
+             if(casino && doubledown && !noDoubleDown){
+                int temp = bot2.getCurrentBotBet();
+                temp *= 2; 
+                if(temp <= bot2.getEachBotWallet()){
+                    bot2.setCurrentBotBet(temp);
+                    bot2.setNextCard(deck);
+                    noDoubleDown = false;
+                    System.out.println("Double down bot 2 = " + temp);
+                  }
+                else {
+                    //if bot doesnt have enough money for doubling, call play again but without double down
+                    noDoubleDown = true;
+                    play(2); 
+                   }      
+                  }
 
               setHighestBet();
           //    System.out.println("Bots wallet before is: "+bot2.getEachBotWallet() );
