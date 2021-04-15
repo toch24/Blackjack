@@ -26,6 +26,8 @@ public class casinoPanel extends JPanel{
 
     public casinoPanel(){
         game = new Blackjack();
+        //let the game know that we are in casino rules
+        game.setCasino();
         setCards(1);                                   //sets the cards images
   
         //setting layout to null, default layout is flow layout

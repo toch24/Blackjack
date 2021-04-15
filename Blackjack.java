@@ -15,6 +15,7 @@ public class Blackjack{
     private Bot dealer = new Bot();
     private Player player = new Player();
     private Deck deck = new Deck();
+    private boolean casino = false;
 
     private Random rand = new Random();
 
@@ -50,14 +51,27 @@ public boolean play(int players){
             //add logic for bot1 to make moves and then eventually pass
 
             System.out.println("This is bot1's wallet: " + bot1.getEachBotWallet());
+            //initializing doubledown boolean
+            boolean doubledown = false;
 
             if(bot1.getBotTotal() == 21){
               basicsPanel.naturalbot1BlackJack = true;
             }
 
+            //if we are in casino panel
+            if(casino){
+              //check conditions for doubling down
+            if(checkDoubleDown(1)){
+              //doubledown is true
+              doubledown = true;
+              }
+            }
+
+            if(!doubledown){
             while(bot1.getBotTotal() < 17){
               bot1.botPlay(deck);
-            }                                       // 100-500
+              }               
+            }                                           // 100-500
             if(bot1.getEachBotWallet() >= 100 && bot1.getEachBotWallet() < 500)
               {
                 int temp = rand.nextInt(3)+1;
@@ -101,6 +115,15 @@ public boolean play(int players){
                   case 1: {bot1.setCurrentBotBet(5); System.out.println("bot1 bet 5"); break;}
                   case 2: {bot1.setCurrentBotBet(10); System.out.println("bot1 bet 10"); break;}
                 }
+              }
+
+              //if double down is true, then double the bet and give bot1 another card
+              if(casino && doubledown){
+                int temp = bot1.getCurrentBotBet();
+                temp *= 2;
+                bot1.setCurrentBotBet(temp);
+                bot1.setNextCard(deck);
+
               }
 
               setHighestBet();
@@ -292,6 +315,10 @@ public boolean checkGameState(){
 
     return true;
 
+}
+
+public void setCasino(){
+  casino = true;
 }
 
 public double returnWallet(int playerNumber){

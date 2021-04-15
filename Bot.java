@@ -51,6 +51,10 @@ public class Bot {
 		}
 	}
 
+	public void setNextCard(Deck deck){
+		hand.addCard(deck.nextCard());
+	}
+
 	public void getRandomBotBet(){						// W.I.P
 		rand = new Random();
 	}
@@ -77,4 +81,6 @@ public class Bot {
 		int firstcard = hand.firstCard();
 		return firstcard;
 	}
+
+
 }
