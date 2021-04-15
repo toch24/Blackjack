@@ -37,7 +37,7 @@ public static void setWalletBet(double bet){
 
   public static void revertBet(){
     wallet = wallet + bet;
-    System.out.println("The bet was: "+ bet);
+  //  System.out.println("The bet was: "+ bet);
   }
 
   public static void winningPHand(){
