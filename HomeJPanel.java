@@ -111,7 +111,7 @@ public class HomeJPanel extends JPanel
             buyInFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
             buyInFrame.add( buyInPanel );
             buyInFrame.setResizable(false);
-            buyInFrame.setSize(300,100);
+            buyInFrame.setSize(300,200);
 
             // Create JTextField to allow for user inputs
             buyInField = new JTextField(4);
@@ -144,7 +144,7 @@ public class HomeJPanel extends JPanel
 
                         //basicsPanel.add(newRound);
                         double checkWallet = Player.getWallet();
-                        System.out.println("Players wallet is: "+ checkWallet);
+                    //    System.out.println("Players wallet is: "+ checkWallet);
 
                         buyInFrame.dispose();                               // Forse the JFrame closed when we successfully make a bet.
                         String betAddress = "Buy In Successful.";           // Just let the user know their bet was successfully placed, we can take this out if you guys want.
@@ -232,7 +232,7 @@ public class HomeJPanel extends JPanel
 
                         //basicsPanel.add(newRound);
                         double checkWallet = Player.getWallet();
-                        System.out.println("Players wallet is: "+ checkWallet);
+                      //  System.out.println("Players wallet is: "+ checkWallet);
 
                         buyInFrame.dispose();                               // Forse the JFrame closed when we successfully make a bet.
                         String betAddress = "Buy In Successful.";           // Just let the user know their bet was successfully placed, we can take this out if you guys want.
