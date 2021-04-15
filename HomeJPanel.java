@@ -183,10 +183,12 @@ public class HomeJPanel extends JPanel
 
             // start testing
 
-            //resetting values when play basics is clicked
+            //resetting values when play casino is clicked
             Pot.resetPot();
             Player.resetWallet();
 
+
+            firstRound = true;
 
 
       // end testing
