@@ -142,7 +142,7 @@ public class casinoPanel extends JPanel{
 
 
 
-      } //end of basicsPanel class
+      } //end of casinoPanel class
 
       public void playerturns(int n){
         if (n == 1)
@@ -313,6 +313,34 @@ public class casinoPanel extends JPanel{
                 }
             }
         });
+          // Making insurance stuff
+          if(insurance()){
+            JFrame insuranceFrame = new JFrame("Insurance");
+            JPanel insurancePanel = new JPanel();
+            JLabel insuranceLabel = new JLabel("The dealer has an Ace; Place an Insurance Bet?");
+
+            JButton yes = new JButton("Yes");
+            JButton no = new JButton("No");
+
+            insuranceLabel.setAlignmentX(JLabel.CENTER);
+            yes.setBounds(250,250,100,50);
+            no.setBounds(250,250,100,50);
+
+            insuranceFrame.add(insurancePanel);
+            insurancePanel.add(yes);
+            insurancePanel.add(no);
+
+            insuranceFrame.setVisible(true);
+            insurancePanel.setVisible(true);
+            yes.setVisible(true);
+            no.setVisible(true);
+
+            no.addActionListener(new ActionListener(){
+              public void actionPerformed(ActionEvent e){
+                insuranceFrame.dispose();
+              }
+            });
+          }
 
           pwallet.setVisible(false);
           pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
@@ -676,7 +704,7 @@ public class casinoPanel extends JPanel{
             cardvalue = c.getcardValue();
             suit = c.getcardSuit();
             //System.out.println("The dealer's card value is: " + cardvalue + "The suit is: " + suit);
-            String temp = c.getspecCard();
+            //String temp = c.getspecCard();
             //System.out.println("The dealer spec value is: " + temp);
 
             String png = "";                                     //name of the png file
@@ -780,4 +808,11 @@ public class casinoPanel extends JPanel{
           }   //end of for loop for iteration of each card in hand
   }
 
+  public boolean insurance(){
+    Card cards[] = game.getBotCards(3);
+    if(cards[0].getspecCard() == "Ace")
+      return true;
+    else 
+      return false;
+  }
 }
