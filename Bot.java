@@ -38,7 +38,7 @@ public class Bot {
 		return cpuWallet;
 	}
 
-	public void setBotBuyIn(int buyIn){							// Set the bot buyin to equal the players and add the buyin value to the total pot
+	public void setBotBuyIn(double buyIn){							// Set the bot buyin to equal the players and add the buyin value to the total pot
 		cpuWallet = Player.getWallet();
 		Pot.addToPot(cpuWallet);
 	}

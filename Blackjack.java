@@ -207,15 +207,15 @@ public void setUserBet(int bet){
     player.currentBet(bet);
 }
 
-public int getUserBet(){
+public double getUserBet(){
     return player.getCurrentBet();
 }
 
 public boolean setHighestBet(){
-    int bet1 = bot1.getCurrentBotBet();
-    int bet2 = bot2.getCurrentBotBet();
-    int bet3 = dealer.getCurrentBotBet();
-    int bet4 = player.getCurrentBet();
+    double bet1 = (double) bot1.getCurrentBotBet();
+    double bet2 = (double) bot2.getCurrentBotBet();
+    double bet3 = (double) dealer.getCurrentBotBet();
+    double bet4 = (double) player.getCurrentBet();
 
     if(bet1 >= bet2 && bet1 >= bet3 && bet1 >= bet4){ Pot.setHighestBet(bet1); return true;}
     else if(bet2 >= bet1 && bet2 >= bet3 && bet2 >= bet4){ Pot.setHighestBet(bet2); return true;}
@@ -276,7 +276,7 @@ public boolean checkGameState(){
     }
 
 
-    int playerWallet = Player.getWallet();
+    double playerWallet = Player.getWallet();
     double bot1Wallet = bot1.getEachBotWallet();
     double bot2Wallet = bot2.getEachBotWallet();
 
@@ -359,6 +359,18 @@ public boolean blackjackHand(int n){
     }
     else return false;
   }
+  else if(n ==3){
+    if(player.hasBlackjack()){
+      double bet = 1.5 * player.getCurrentBet();
+      System.out.println("Player got black jack, current bet is:  " + player.getCurrentBet());
+      System.out.println("Player got black jack, dealer pays:  " + bet);
+      double newWallet = player.getWallet() + player.getCurrentBet() + bet;
+      System.out.println("Player got blackjack. They will get: " + newWallet);
+      player.setWalletBet(newWallet);
+      return true;
+    }
+    else return false;
+  }
   return false;
 }
 
@@ -411,7 +423,7 @@ public boolean handMatch(int n){
 
 
 public void setBothBotBets (int bot){
-   int bet = player.getWallet();
+   double bet = player.getWallet();
    if (bot == 1){
        bot1.setBotBuyIn(bet);
    }

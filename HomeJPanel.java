@@ -96,7 +96,7 @@ public class HomeJPanel extends JPanel
             Pot.resetPot();
             Player.resetWallet();
 
-        
+
             firstRound = true;
 
 
@@ -135,7 +135,7 @@ public class HomeJPanel extends JPanel
                     {
                         Pot.addToPot(bet);                                  // Add to the pot.
                         Player.setWallet(bet);                              // This sets the current bet from the user for comparison purposes
-              
+
 
                         basicsPanel = new basicsPanel();
                         basicsFrame.add( basicsPanel );
@@ -143,7 +143,7 @@ public class HomeJPanel extends JPanel
                         basicsFrame.setVisible( true );                     //display the game
 
                         //basicsPanel.add(newRound);
-                        int checkWallet = Player.getWallet();
+                        double checkWallet = Player.getWallet();
                         System.out.println("Players wallet is: "+ checkWallet);
 
                         buyInFrame.dispose();                               // Forse the JFrame closed when we successfully make a bet.
@@ -187,7 +187,7 @@ public class HomeJPanel extends JPanel
             Pot.resetPot();
             Player.resetWallet();
 
-        
+
 
       // end testing
 
@@ -224,14 +224,14 @@ public class HomeJPanel extends JPanel
                     {
                         Pot.addToPot(bet);                                  // Add to the pot.
                         Player.setWallet(bet);                              // This sets the current bet from the user for comparison purposes
-                  
+
                         casinoPanel = new casinoPanel();
                         basicsFrame.add( casinoPanel );
                         casinoPanel.setBackground( Color.green.darker());
                         basicsFrame.setVisible( true );                     //display the game
 
                         //basicsPanel.add(newRound);
-                        int checkWallet = Player.getWallet();
+                        double checkWallet = Player.getWallet();
                         System.out.println("Players wallet is: "+ checkWallet);
 
                         buyInFrame.dispose();                               // Forse the JFrame closed when we successfully make a bet.
@@ -260,7 +260,7 @@ public class HomeJPanel extends JPanel
                 basicsFrame.setSize( 800, 750 ); 						//set frame size
                 basicsFrame.setResizable(false);
                 basicsFrame.setVisible( true );
-  
+
         }
 
   public static void newRoundCasino(){
@@ -278,4 +278,3 @@ public class HomeJPanel extends JPanel
   }
 
 } // End JHomePanel
-
