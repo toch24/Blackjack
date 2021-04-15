@@ -29,10 +29,10 @@ public class casinoPanel extends JPanel{
         //let the game know that we are in casino rules
         game.setCasino();
         setCards(1);                                   //sets the cards images
-  
+
         //setting layout to null, default layout is flow layout
         setLayout(null);
-  
+
         if(HomeJPanel.firstRound){
           game.setBothBotBets(1);
           game.setBothBotBets(2);
@@ -44,28 +44,28 @@ public class casinoPanel extends JPanel{
           game.walletRound2(1, bot1ResetWallet);
           game.walletRound2(2, bot2ResetWallet);
         }
-  
-  
+
+
         hit = new JButton("Hit");
         hit.setBounds(250,250,100,50);
         hit.setEnabled(false);
-  
+
         pass = new JButton("Hold");
         pass.setBounds(350,250,100,50);
         pass.setEnabled(false);
         add(pass);
-  
+
         startGame = new JButton("Start Game");
         startGame.setBounds(323,600,100,50);
         startGame.setVisible(true);
         startGame.setEnabled(true);
         add(startGame);
-  
+
         newRound = new JButton("Next Round");
         newRound.setBounds(300,300,100,50);
         newRound.setEnabled(false);
         add(newRound);
-  
+
         newRound.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
         HomeJPanel.firstRound = false;
@@ -73,23 +73,23 @@ public class casinoPanel extends JPanel{
         HomeJPanel.newRoundCasino();
     }
   });
-  
+
         highestbetlabel = new JLabel("Current Pot Total: " + String.valueOf(Pot.getPot()));
         highestbetlabel.setBounds(300,210,200,50);
         add(highestbetlabel);
-  
+
         pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
         pwallet.setBounds(250,375,200,50);
         add(pwallet);
-  
+
         cp1wallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(1)));
         cp1wallet.setBounds(50,175,200,50);
         add(cp1wallet);
-  
+
         cp2wallet = new JLabel("Player 3 wallet total: " + String.valueOf(game.returnWallet(3)));
         cp2wallet.setBounds(600,175,200,50);
         add(cp2wallet);
-  
+
         startGame.addActionListener(new ActionListener(){
           public void actionPerformed(ActionEvent e) {
           startGame.setEnabled(false);
@@ -97,7 +97,7 @@ public class casinoPanel extends JPanel{
           playerturns(0);
           }
         });
-  
+
         pass.addActionListener(new ActionListener(){
           public void actionPerformed(ActionEvent e) {
           hit.setEnabled(false);
@@ -107,7 +107,7 @@ public class casinoPanel extends JPanel{
           //System.out.println("On player: "+ players +" In panel");
           }
         });
-  
+
         //add hit button
         add(hit);
       hit.addActionListener(new ActionListener(){
@@ -116,12 +116,12 @@ public class casinoPanel extends JPanel{
             if(game.playerHit()){
               String msg = "Your hand is more 21, you busted. Wait till next round";
               JOptionPane.showMessageDialog(null, msg);
-  
+
               playerValue.setVisible(false);
               playerValue = new JLabel("Your hand value: " + String.valueOf(game.getHandValue(2)));
               playerValue.setBounds(250,385,200,50);
               add(playerValue);
-  
+
               players++;
               playerturns(1);
             }
@@ -129,19 +129,19 @@ public class casinoPanel extends JPanel{
               String msg = "Card drawn!";
               JOptionPane.showMessageDialog(null, msg);
             }
-  
+
             //update the set of cards for player
             setCards(1);
             playerValue.setVisible(false);
             playerValue = new JLabel("Your hand value: " + String.valueOf(game.getHandValue(2)));
             playerValue.setBounds(250,385,200,50);
             add(playerValue);
-  
+
         }
       });
-  
-  
-  
+
+
+
       } //end of basicsPanel class
 
       public void playerturns(int n){
@@ -149,26 +149,26 @@ public class casinoPanel extends JPanel{
           playerBust = true;
         else
           playerBust = false;
-  
+
         if(players == 1){
           try{
         //bet.setEnabled(false);
         hit.setEnabled(false);
         pass.setEnabled(false);
-  
+
         boolean play = game.play(players);
         setCards(1);
-  
+
         bot1Value = new JLabel("Player 1 hand value: " + String.valueOf(game.getHandValue(1)));
         bot1Value.setBounds(50,200,200,50);
         add(bot1Value);
-  
+
         cp1wallet.setVisible(false);
         cp1wallet = new JLabel("Player 1 wallet total: " + String.valueOf(game.returnWallet(1)));
         cp1wallet.setBounds(50,175,200,50);
         cp1wallet.setVisible(true);
         add(cp1wallet);
-  
+
         if(play){
           String msg = "Player 1 busted, they are out for this round";
           JOptionPane.showMessageDialog(null, msg);
@@ -205,12 +205,12 @@ public class casinoPanel extends JPanel{
           betFrame.add( betPanel );
           betFrame.setResizable(false);
           betFrame.setSize(300,100);
-  
+
           // Create JTextField to allow for user inputs
           betField = new JTextField(4);
           betField.setBounds(50,100, 200,30);
           betField.setVisible(true);
-  
+
           // add the textfield to the JPanel with the label
           betPanel.add(betLabel);
           betPanel.add(betField);
@@ -227,7 +227,7 @@ public class casinoPanel extends JPanel{
           betField.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 userBet = Integer.parseInt(betField.getText());      // Take the user bet.
-                int newWallet;
+                double newWallet;
                 if(userBet == 5 || userBet == 10 || userBet == 50 || userBet == 100 || userBet == 500)
                 {
                   //TODO: if the bet is less than the highest bet, re-prompt the user for a new bet
@@ -247,8 +247,8 @@ public class casinoPanel extends JPanel{
                       String betAddress = "You dont have that amount to bet.";
                       JOptionPane.showMessageDialog(null, betAddress);
                     }
-  
-            
+
+
                   pwallet.setVisible(false);
                   pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
                   pwallet.setBounds(250,360,200,50);
@@ -262,20 +262,20 @@ public class casinoPanel extends JPanel{
                 }
             }
         });
-  
+
           pwallet.setVisible(false);
           pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
           pwallet.setBounds(250,360,200,50);
           pwallet.setVisible(true);
           add(pwallet);
-  
+
           playerValue = new JLabel("Your hand value: " + String.valueOf(game.getHandValue(2)));
           playerValue.setBounds(250,385,200,50);
           add(playerValue);
-  
-  
+
+
         }
-  
+
         if(players == 3){
           try{
             Thread.sleep(1000);
@@ -283,17 +283,17 @@ public class casinoPanel extends JPanel{
         pass.setEnabled(false);
         boolean play = game.play(players);
         setCards(1);
-  
+
         bot2Value = new JLabel("Player 3 hand value: " + String.valueOf(game.getHandValue(3)));
         bot2Value.setBounds(600,200,200,50);
         add(bot2Value);
-  
+
         cp2wallet.setVisible(false);
         cp2wallet = new JLabel("Player 3 wallet total: " + String.valueOf(game.returnWallet(3)));
         cp2wallet.setBounds(600,175,200,50);
         cp2wallet.setVisible(true);
         add(cp2wallet);
-  
+
         if(play){
           String msg = "Player 3 busted, they are out for this round";
           JOptionPane.showMessageDialog(null, msg);
@@ -312,20 +312,20 @@ public class casinoPanel extends JPanel{
           Thread.currentThread().interrupt();
         }
         }
-  
+
         if(players == 4){
           try{
           Thread.sleep(1000);
           hit.setEnabled(false);
           pass.setEnabled(false);
-  
+
           boolean play = game.play(players);
           setCards(2);
-  
+
           dealerValue = new JLabel("Dealer hand value: " + String.valueOf(game.getHandValue(4)));
           dealerValue.setBounds(260,5,200,50);
           add(dealerValue);
-  
+
           if(play){
             String msg = "Dealer busted, all players still in the round win!";
             JOptionPane.showMessageDialog(null, msg);
@@ -352,7 +352,7 @@ public class casinoPanel extends JPanel{
             JOptionPane.showMessageDialog(null, msg);
             highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
             players = 1;
-  
+
             if(!bot1Bust && game.handMatch(1)){
               System.out.println("Dealer gives money to bot1");
               game.setBotWallet(1);
@@ -381,8 +381,8 @@ public class casinoPanel extends JPanel{
       bot2ResetWallet = game.returnWallet(3);
     }
   }
-  
-  
+
+
       public void setCards(int n){
         int cardvalue;
         String suit;
@@ -402,8 +402,8 @@ public class casinoPanel extends JPanel{
           //System.out.println("The player's card suit is: " + suit);
           String temp = c.getspecCard();
           //System.out.println("The player's spec value is: " + temp);
-  
-  
+
+
           //get the card png (easier way and less code...)
           if(c.getspecCard() == null)
             {
@@ -455,13 +455,13 @@ public class casinoPanel extends JPanel{
                 }
               }
             }
-  
+
            //adding the card images to the JPanel
           BufferedImage img = null;
           JLabel label = new JLabel();
           try {
             img = ImageIO.read(new File(png));
-  
+
             //scaling the image to a smaller size and setting it as imageicon for jLabel
             Image dimg = img.getScaledInstance(100, 120, Image.SCALE_SMOOTH);
             ImageIcon imageIcon = new ImageIcon(dimg);
@@ -476,21 +476,21 @@ public class casinoPanel extends JPanel{
             pos += 100;
             add(label);
             repaint();
-  
-  
+
+
           //  System.out.println("Image opened " + png);
           } catch (IOException e) {
             System.out.println("Error = " + e);
-  
+
           }
-  
+
         }   //end of if statement for c != null
         cardIterator++;
       }   //end of for loop for iteration of each card in hand
   }
-  
+
           //set bot cards
-  
+
           int posbot = 200;
           int posbot2 = 200;
           //iterating each bot
@@ -505,10 +505,10 @@ public class casinoPanel extends JPanel{
             //System.out.println("The bot2's card suit is: "+suit);
             String temp = c.getspecCard();
             //System.out.println("The bot2's spec value is: " + temp);
-  
+
             String png = "";                                     //name of the png file
             String value = String.valueOf(cardvalue);
-  
+
             if(c.getspecCard() == null)
               {
                 if(suit.equals("Hearts")){
@@ -559,16 +559,16 @@ public class casinoPanel extends JPanel{
                   }
                 }
               }
-  
-  
+
+
             //for bot 1 and bot 2, just show the amount of cards with image of the back of the card
             BufferedImage img = null;
             JLabel label = new JLabel();
             try {
-  
+
                 img = ImageIO.read(new File(png));
                 //System.out.println("Show image!!");
-  
+
               int height = img.getHeight();
               int width = img.getWidth();
               //rotated image (switching height and width)
@@ -583,37 +583,37 @@ public class casinoPanel extends JPanel{
                 }
                   }
                 }
-  
+
               //TODO: Rotate the image clockwise for i = 1 and counterclockwise for i = 2
               //scaling the image to a smaller size and setting it as imageicon for jLabel
               Image dimg = rotateImg.getScaledInstance(120, 100, Image.SCALE_SMOOTH);
               ImageIcon imageIcon = new ImageIcon(dimg);
-  
-  
-  
+
+
+
               label.setIcon(imageIcon);
-  
+
               if(i == 1) label.setBounds(50, posbot, 200, 200);
               else {
                 label.setBounds(600,posbot2,200,200);
                 posbot2 += 80;
               }
-  
-  
-  
+
+
+
               posbot += 80;
               //label.setVisible(true);
               add(label);
-  
-  
+
+
             } catch (IOException e) {
               System.out.println("Error = " + e);
-  
+
             }
           } //end of if statement for c != null
         } //end of for loop
   }
-  
+
           //Set Dealer cards
           int dpos = 250;
           cards = game.getBotCards(3);
@@ -627,10 +627,10 @@ public class casinoPanel extends JPanel{
             //System.out.println("The dealer's card value is: " + cardvalue + "The suit is: " + suit);
             String temp = c.getspecCard();
             //System.out.println("The dealer spec value is: " + temp);
-  
+
             String png = "";                                     //name of the png file
             String value = String.valueOf(cardvalue);
-  
+
             //get the card png (easier way and less code...)
             if(c.getspecCard() == null)
             {
@@ -716,17 +716,17 @@ public class casinoPanel extends JPanel{
               dpos += 100;
               add(label);
               repaint();
-  
-  
+
+
               //System.out.println("Image opened " + png);
             } catch (IOException e) {
               System.out.println("Error = " + e);
-  
+
             }
-  
+
           }   //end of if statement for c != null
           iterate++;
           }   //end of for loop for iteration of each card in hand
   }
-  
+
 }

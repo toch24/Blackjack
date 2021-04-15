@@ -1,9 +1,9 @@
 public class Player {
     //A new hand for the player
     private Hand hand = new Hand();
-	private static int bet;
-	private static int wallet;
-	private static int currentBet;							// hold the "buy in value"
+	private static double bet;
+	private static double wallet;
+	private static double currentBet;							// hold the "buy in value"
 
     //Return true if the player has a blackjack
 	public boolean hasBlackjack(){
@@ -23,7 +23,7 @@ public class Player {
 		wallet += buyIn;
 	}
 
-public static void setWalletBet(int bet){
+public static void setWalletBet(double bet){
 		wallet = bet;
 	}
 
@@ -45,11 +45,11 @@ public static void setWalletBet(int bet){
   //  System.out.println("Player's hand is higher than dealer's "+ 2*bet);
   }
 
-	public static int getWallet(){
+	public static double getWallet(){
 		return wallet;
 	}
 
-	public int getCurrentBet(){
+	public double getCurrentBet(){
 		return bet;
 	}
 

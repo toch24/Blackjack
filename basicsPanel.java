@@ -20,7 +20,7 @@ public class basicsPanel extends JPanel{
   private boolean bot1Bust = false;
   private boolean bot2Bust = false;
   private boolean playerBust = false;
-  private boolean bot1BJ, bot2BJ;
+  private boolean bot1BJ, bot2BJ, playerBJ;
   static boolean naturalbot1BlackJack = false;
   static boolean naturalbot2BlackJack = false;
 
@@ -63,14 +63,14 @@ public class basicsPanel extends JPanel{
 
       newRound = new JButton("Next Round");
       newRound.setBounds(300,300,100,50);
-      newRound.setEnabled(false);
+      newRound.setEnabled(true);
       add(newRound);
 
       newRound.addActionListener(new ActionListener(){
       public void actionPerformed(ActionEvent e) {
       HomeJPanel.firstRound = false;
       System.out.println("Starting a new round!!!!");
-      
+
       HomeJPanel.newRoundBasics();
   }
 });
@@ -199,6 +199,7 @@ public void playerturns(int n){
       }
       //Enable buttons for human player once player places their bet
       if(players == 2){
+        playerBJ = false;
         String msg = "Your turn!";
         JOptionPane.showMessageDialog(null, msg);
         hit.setEnabled(true);
@@ -228,7 +229,7 @@ public void playerturns(int n){
         betField.addActionListener(new ActionListener(){
           public void actionPerformed(ActionEvent e){
               userBet = Integer.parseInt(betField.getText());      // Take the user bet.
-              int newWallet;
+              double newWallet;
               if(userBet == 5 || userBet == 10 || userBet == 50 || userBet == 100 || userBet == 500)
               {
                 //TODO: if the bet is less than the highest bet, re-prompt the user for a new bet
@@ -249,12 +250,18 @@ public void playerturns(int n){
                     JOptionPane.showMessageDialog(null, betAddress);
                   }
 
-          
-                pwallet.setVisible(false);
-                pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
-                pwallet.setBounds(250,360,200,50);
-                pwallet.setVisible(true);
-                add(pwallet);
+                if(game.blackjackHand(3)){
+                  String blackjackMessage = "You got blackjack!";
+                  JOptionPane.showMessageDialog(null, blackjackMessage);
+                  playerBJ = true;
+                  players++;
+                }
+
+                  pwallet.setVisible(false);
+                  pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
+                  pwallet.setBounds(250,360,200,50);
+                  pwallet.setVisible(true);
+                  add(pwallet);
               }
               else
               {   // Use this to error check, the user cannot make bets < 0.
@@ -337,7 +344,7 @@ public void playerturns(int n){
         add(dealerValue);
 
         if(play){
-          String msg = "Dealer busted, all players still in the round get their bets!";
+          String msg = "Dealer busted, all players still in this round win!";
           JOptionPane.showMessageDialog(null, msg);
           //highestbetlabel.setText("Highest bet: " + String.valueOf(Pot.getHighestBet()));
           players = 1;
@@ -346,17 +353,18 @@ public void playerturns(int n){
 
           if(!bot1Bust && !bot1BJ){
             System.out.println("Dealer gives money to bot1");
-            game.setBotWallet(1);
+            game.winningHand(1);
             System.out.println("Bot1 wallet is now: "+ game.returnWallet(1));
           }
           if(!bot2Bust && !bot2BJ){
             System.out.println("Dealer gives money to bot2");
+            game.winningHand(2);
             System.out.println("Bot2 wallet is now: "+ game.returnWallet(3));
           }
-          if(!playerBust){
+          if(!playerBust && !playerBJ){
             System.out.println("Dealer gives money to player");
             //int payback = Player.getCurrentBet();
-            Player.revertBet();
+            Player.winningPHand();
             System.out.println("Player wallet is now: "+ game.returnWallet(2));
           }
         }
