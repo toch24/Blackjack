@@ -155,8 +155,10 @@ public class casinoPanel extends JPanel{
         //bet.setEnabled(false);
         hit.setEnabled(false);
         pass.setEnabled(false);
+        boolean play = false;
 
-        boolean play = game.play(players);
+
+        play = game.play(players); 
         setCards(1);
 
         bot1Value = new JLabel("Player 1 hand value: " + String.valueOf(game.getHandValue(1)));
@@ -220,7 +222,7 @@ public class casinoPanel extends JPanel{
           //checking if double down checkbox is true or false
           doubleDownBox.addItemListener(new ItemListener() {    
             public void itemStateChanged(ItemEvent e) {                 
-                
+                playerDoubleDown = true;
             }    
          });    
 
@@ -233,15 +235,64 @@ public class casinoPanel extends JPanel{
                   //TODO: if the bet is less than the highest bet, re-prompt the user for a new bet
                     //Checking that user has the money
                     if(Player.getWallet() >= userBet){
-                    game.setUserBet(userBet);
-                    newWallet = Player.getWallet() - userBet;
-                    Player.setWalletBet(newWallet);
-                    Pot.addToPot(userBet);                               // Add to the pot.
-                    game.setHighestBet();
-                    highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
-                    betFrame.dispose();                              // Forse the JFrame closed when we successfully make a bet.
-                    String betAddress = "Bet Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
-                    JOptionPane.showMessageDialog(null, betAddress);
+                    
+                    if(playerDoubleDown){
+                        int temp = userBet;
+                        temp *= 2;
+                        if(temp <= Player.getWallet()){
+                            game.setUserBet(temp);
+                            newWallet = Player.getWallet() - temp;
+                            Player.setWalletBet(newWallet);
+                            Pot.addToPot(temp);                               // Add to the pot.
+
+                            //disable hit button and give a card to player
+                            hit.setEnabled(false);
+                            if(game.playerHit()){
+                                String msg = "Your hand is more 21, you busted. Wait till next round";
+                                JOptionPane.showMessageDialog(null, msg);
+                  
+                                playerValue.setVisible(false);
+                                playerValue = new JLabel("Your hand value: " + String.valueOf(game.getHandValue(2)));
+                                playerValue.setBounds(250,385,200,50);
+                                add(playerValue);
+                  
+                                players++;
+                                playerturns(1);
+                              }
+                            else{
+                                String msg = "Dealer gave card to you!";
+                                JOptionPane.showMessageDialog(null, msg);
+                              }
+                              setCards(1);
+                              playerValue.setVisible(false);
+                              playerValue = new JLabel("Your hand value: " + String.valueOf(game.getHandValue(2)));
+                              playerValue.setBounds(250,385,200,50);
+                              add(playerValue);
+
+                              game.setHighestBet();
+                              highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
+                              betFrame.dispose();                              // Forse the JFrame closed when we successfully make a bet.
+                              String betAddress = "Bet Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
+                              JOptionPane.showMessageDialog(null, betAddress);
+                        }
+                        else{
+                            String doublebet = "Can't double bet because bet will surprass wallet";
+                            JOptionPane.showMessageDialog(null, doublebet);
+                        }
+
+                    }
+                    else{
+                        game.setUserBet(userBet);
+                        newWallet = Player.getWallet() - userBet;
+                        Player.setWalletBet(newWallet);
+                        Pot.addToPot(userBet);                               // Add to the pot.
+                        game.setHighestBet();
+                        highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
+                        betFrame.dispose();                              // Forse the JFrame closed when we successfully make a bet.
+                        String betAddress = "Bet Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
+                        JOptionPane.showMessageDialog(null, betAddress);
+                    }
+            
                     }
                     else{
                       String betAddress = "You dont have that amount to bet.";

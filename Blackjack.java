@@ -532,10 +532,12 @@ public void setBothBotBets (int bot){
             }
 
   }
-
-  
   return false;
  }
+
+public void giveCardPlayer(){
+  player.addCard(deck.nextCard());
+}
 
  public int getHandValue(int n){
    if(n == 1){

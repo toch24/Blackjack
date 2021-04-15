@@ -45,6 +45,8 @@ public static void setWalletBet(double bet){
   //  System.out.println("Player's hand is higher than dealer's "+ 2*bet);
   }
 
+
+
 	public static double getWallet(){
 		return wallet;
 	}
