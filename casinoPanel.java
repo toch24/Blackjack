@@ -71,13 +71,13 @@ public class casinoPanel extends JPanel{
         startGame = new JButton("Start Game");
         startGame.setBounds(323,600,100,50);
         startGame.setVisible(true);
-        startGame.setEnabled(false);
+        startGame.setEnabled(true);
         add(startGame);
 
         // add Next Round button to the JPanel
         newRound = new JButton("Next Round");
         newRound.setBounds(250,300,100,50);
-        newRound.setEnabled(true);
+        newRound.setEnabled(false);
         add(newRound);
 
         surrender = new JButton("Surrender");
