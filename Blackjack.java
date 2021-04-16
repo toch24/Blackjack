@@ -17,7 +17,7 @@ public class Blackjack{
     private boolean surrender2 = false;
 
     private Random rand = new Random();
-    
+
     public Blackjack(){
       newGame();
     }
@@ -787,6 +787,6 @@ public void giveCardPlayer(){
       }
       else
         return false;
-  } 
+  }
 
 } //end of BlackJack class

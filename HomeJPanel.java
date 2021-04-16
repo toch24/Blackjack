@@ -116,7 +116,7 @@ public class HomeJPanel extends JPanel
             buyInFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
             buyInFrame.add( buyInPanel );
             buyInFrame.setResizable(false);
-            buyInFrame.setSize(300,200);
+            buyInFrame.setSize(300,100);
 
             // Create JTextField to allow for user inputs
             buyInField = new JTextField(4);
@@ -303,7 +303,7 @@ public class HomeJPanel extends JPanel
     JScrollPane scrollPane = new JScrollPane(textArea);
     textArea.setLineWrap(true);
     textArea.setWrapStyleWord(true);
-    scrollPane.setPreferredSize( new Dimension( 200, 400 ) );
+    scrollPane.setPreferredSize( new Dimension( 400, 400 ) );
     JOptionPane.showMessageDialog(null, scrollPane, "RULES:", JOptionPane.PLAIN_MESSAGE);
   }
 

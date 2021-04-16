@@ -56,7 +56,7 @@ public class casinoPanel extends JPanel{
           game.walletRound2(2, bot2ResetWallet);
         }
 
-        // add the hit button 
+        // add the hit button
         hit = new JButton("Hit");
         hit.setBounds(250,250,100,50);
         hit.setEnabled(false);
@@ -354,13 +354,6 @@ public class casinoPanel extends JPanel{
                       surrender.setEnabled(true);
                       pass.setEnabled(true);
 
-                      if(game.blackjackHand(3)){
-                      String blackjackMessage = "You got blackjack!";
-                      JOptionPane.showMessageDialog(null, blackjackMessage);
-                      playerBJ = true;
-                      players++;
-                    }
-
                     if(playerDoubleDown){
                         int temp = userBet;
                         temp *= 2;
@@ -407,6 +400,7 @@ public class casinoPanel extends JPanel{
                         }
 
                     }
+
                     else{
                         game.setUserBet(userBet);
                         newWallet = Player.getWallet() - userBet;
@@ -699,68 +693,80 @@ public class casinoPanel extends JPanel{
     if(pinsurance && game.blackjackHand(4) && !playerBust){
       Player.revertBet();
     }
-    if(pinsurance && game.blackjackHand(4) && game.handMatch(3)){
+
+//if insurance and dealer does not have blackjack
+    if(pinsurance && !game.blackjackHand(4) && game.handMatch(3)){
       game.setInsurance(3);
     }
-//if insurance and dealer does not have black jack, and
+//if insurance and dealer does not have black jack
     if(pinsurance && !game.blackjackHand(4) && !playerBust && game.greaterHand(3)){
       game.setInsurance(3);
     }
 
+    //if insurance and dealer has black jack
     if(bot1insurance && game.blackjackHand(4) && !bot1Bust){
       game.botInsurancePay(1);
     }
 
-    if(bot1insurance && game.blackjackHand(4) && game.handMatch(1)){
+    //if insurance and dealer does not have black jack
+    if(bot1insurance && !game.blackjackHand(4) && game.handMatch(1)){
       game.setInsurance(1);
     }
-//if insurance and dealer does not have black jack, and
+//if insurance and dealer does not have black jack
     if(bot1insurance && !game.blackjackHand(4) && !bot1Bust && game.greaterHand(1)){
       game.setInsurance(1);
     }
 
-
+    //if insurance and dealer has black jack
     if(bot2insurance && game.blackjackHand(4) && !bot2Bust){
       game.botInsurancePay(2);
     }
 
-    if(bot2insurance && game.blackjackHand(4) && game.handMatch(2)){
+    //if insurance and dealer does not have black jack
+    if(bot2insurance && !game.blackjackHand(4) && game.handMatch(2)){
       game.setInsurance(2);
     }
-  //if insurance and dealer does not have black jack, and
+  //if insurance and dealer does not have black jack
     if(bot2insurance && !game.blackjackHand(4) && !bot2Bust && game.greaterHand(2)){
       game.setInsurance(1);
     }
 
-
+    //if not natural blackjack, bot1 didnt bust, and has greater hand than dealer
   if(!bot1BJ && !bot1Bust && game.greaterHand(1) && !bot1insurance){
   //  System.out.println("Dealer gives twice bet to bot1");
     game.winningHand(1);
 //    System.out.println("Bot1 wallet is now: "+ game.returnWallet(1));
   }
+
+  //if not natural blackjack, bot2 didnt bust, and has greater hand than dealer
   if(!bot2BJ && !bot2Bust && game.greaterHand(2) && !bot2insurance){
   //  System.out.println("Dealer gives twice bet to bot2");
     game.winningHand(2);
 //    System.out.println("Bot2 wallet is now: "+ game.returnWallet(3));
   }
 
-  if(!playerBust && game.greaterHand(3) && !pinsurance){
+  //if not natural blackjack, player didnt bust, and has greater hand than dealer
+  if(!playerBJ && !playerBust && game.greaterHand(3) && !pinsurance){
   //  System.out.println("Dealer twice bet to player");
     Player.winningPHand();
   //  System.out.println("Player wallet is now: "+ game.returnWallet(2));
   }
-  if(!bot1Bust && game.handMatch(1) && !bot1insurance){
+
+  //if bot1 didnt bust, and has equal hand as dealer
+  if(!bot1BJ && !bot1Bust && game.handMatch(1) && !bot1insurance){
   //     System.out.println("Dealer gives bet back to bot1");
        game.setBotWallet(1);
   //     System.out.println("Bot1 wallet is now: "+ game.returnWallet(1));
      }
-  if(!bot2Bust && game.handMatch(2) && !bot2insurance){
+
+  //if bot2 didnt bust, and has equal hand as dealer
+  if(!bot2BJ && !bot2Bust && game.handMatch(2) && !bot2insurance){
     //   System.out.println("Dealer gives bet back to bot2");
        game.setBotWallet(2);
     //   System.out.println("Bot2 wallet is now: "+ game.returnWallet(3));
      }
 
-  if(!playerBust && game.handMatch(3) && !pinsurance){
+  if(!playerBJ && !playerBust && game.handMatch(3) && !pinsurance){
   //     System.out.println("Dealer gives bet back to player");
        Player.revertBet();
   //     System.out.println("Player wallet is now: "+ game.returnWallet(2));
