@@ -14,6 +14,7 @@ public class HomePage
       frame.add( homeJPanel );
       frame.setBackground( Color.green.darker() ); 				//set frame background color
       frame.setSize( 800, 750 ); 						//set frame size
+      frame.setLocationRelativeTo(null);
       frame.setResizable(false);
       frame.setVisible( true ); 						//display frame
    } // end main
