@@ -3,6 +3,7 @@
 // Project X
 
 import java.util.Random;
+import javax.swing.*;
 
 public class Blackjack{
     private Bot bot1 = new Bot();
@@ -120,6 +121,18 @@ public boolean play(int players){
                   case 1: {bot1.setCurrentBotBet(5); break;}
                   case 2: {bot1.setCurrentBotBet(10); break;}
                 }
+              }
+
+              Card[] bot1Cards = getBotCards(1);
+              if(casino && checkIfBotShouldSurrender(bot1Cards, bot1.getBotTotal()));
+              {
+                int temp = bot1.getCurrentBotBet();
+                temp = temp/2;
+                bot1.setCurrentBotBet(temp);
+                players++;
+                casinoPanel.bot1surrenderCase = true;
+                String botSurrender = "Bot2 Surrendered the Round.";
+                JOptionPane.showMessageDialog(null,botSurrender);
               }
 
               if(casino && botInsurance())
@@ -283,6 +296,18 @@ public boolean play(int players){
                   case 1: {bot2.setCurrentBotBet(5); break;}
                   case 2: {bot2.setCurrentBotBet(10); break;}
                 }
+              }
+
+              Card[] bot2Cards = getBotCards(2);
+              if(casino && checkIfBotShouldSurrender(bot2Cards, bot2.getBotTotal()));
+              {
+                int temp = bot2.getCurrentBotBet();
+                temp = temp / 2;
+                bot2.setCurrentBotBet(temp);
+                players++;
+                casinoPanel.bot2surrenderCase = true;
+                String botSurrender = "Bot2 Surrendered the Round.";
+                JOptionPane.showMessageDialog(null,botSurrender);
               }
 
               if(casino && botInsurance())
@@ -692,40 +717,55 @@ public void giveCardPlayer(){
    else return 0;
  }
 
-
- /* public boolean checkIfBotShouldSurrender(){
-    Card[] bot1Hand = getBotCards(1);
-    Card[] bot2Hand = getBotCards(2);
+ public boolean checkIfBotShouldSurrender(Card[] currentBotHand, int currentBotTotal){
     Card[] dealerHand = getBotCards(3);
-    if(players == 1)
-    {
-      if(bot1.getBotTotal() == 5 && bot1Hand[0].getspecCard() != "Ace" && bot1Hand[1].getspecCard() != "Ace"){
+
+      if(currentBotTotal == 5 && currentBotHand[0].getspecCard() != "Ace" && currentBotHand[1].getspecCard() != "Ace"){
         return true;
       }
-      else if(bot1.getBotTotal() == 6 && bot1Hand[0].getspecCard() != "Ace" && bot1Hand[1].getspecCard() != "Ace"){
+      else if(currentBotTotal == 6 && currentBotHand[0].getspecCard() != "Ace" && currentBotHand[1].getspecCard() != "Ace"){
         return true;
       }
-      else if(bot1.getBotTotal() == 12 && bot1Hand[0].getspecCard() != "Ace" && bot1Hand[1].getspecCard() != "Ace"){
+      else if(currentBotTotal == 12 && currentBotHand[0].getspecCard() != "Ace" && currentBotHand[1].getspecCard() != "Ace"){
         return true;
       }
-      else if(bot1.getBotTotal() == 13 && bot1Hand[0].getspecCard() != "Ace" && bot1Hand[1].getspecCard() != "Ace"){
+      else if(currentBotTotal == 13 && currentBotHand[0].getspecCard() != "Ace" && currentBotHand[1].getspecCard() != "Ace"){
         return true;
       }
-      else if(bot1.getBotTotal() == 14 && bot1Hand[0].getspecCard() != "Ace" && bot1Hand[1].getspecCard() != "Ace"){
+      else if(currentBotTotal == 14 && currentBotHand[0].getspecCard() != "Ace" && currentBotHand[1].getspecCard() != "Ace"){
         return true;
       }
-      else if(bot1.getBotTotal() == 15 && bot1Hand[0].getspecCard() != "Ace" && bot1Hand[1].getspecCard() != "Ace"){
+      else if(currentBotTotal == 15 && currentBotHand[0].getspecCard() != "Ace" && currentBotHand[1].getspecCard() != "Ace"){
         return true;
       }
-      else if(bot1.getBotTotal() == 16 && bot1Hand[0].getspecCard() != "Ace" && bot1Hand[1].getspecCard() != "Ace"){
+      else if(currentBotTotal == 16 && currentBotHand[0].getspecCard() != "Ace" && currentBotHand[1].getspecCard() != "Ace"){
         return true;
       }
-      else if(bot1.getBotTotal() == 17 && bot1Hand[0].getspecCard() != "Ace" && bot1Hand[1].getspecCard() != "Ace"){
+      else if(currentBotTotal == 17 && currentBotHand[0].getspecCard() != "Ace" && currentBotHand[1].getspecCard() != "Ace"){
+        return true;
+      }
+      else if(dealerHand[0].getcardValue() == 10 && currentBotTotal == 14 && currentBotHand[0].getspecCard() != "Ace" && currentBotHand[1].getspecCard() != "Ace")
+      {
+        return true;
+      }
+      else if(dealerHand[0].getcardValue() == 10 && currentBotTotal == 15 && currentBotHand[0].getspecCard() != "Ace" && currentBotHand[1].getspecCard() != "Ace")
+      {
+        return true;
+      }
+      else if(dealerHand[0].getcardValue() == 10 && currentBotTotal == 16 && currentBotHand[0].getspecCard() != "Ace" && currentBotHand[1].getspecCard() != "Ace")
+      {
+        return true;
+      }
+      else if(dealerHand[0].getcardValue() == 10 && currentBotTotal == 14 && currentBotHand[0].getcardValue() == 7 && currentBotHand[1].getcardValue() == 7)
+      {
+        return true;
+      }
+      else if(dealerHand[0].getcardValue() == 10 && currentBotTotal == 16 && currentBotHand[0].getcardValue() == 8 && currentBotHand[1].getcardValue() == 8)
+      {
         return true;
       }
       else
         return false;
-      }
-  } */
+  }
 
 } //end of BlackJack class
