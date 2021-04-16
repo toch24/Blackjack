@@ -220,6 +220,7 @@ public class casinoPanel extends JPanel{
           //this gives half the bet to the bot and half the bet to the pot
           game.setBotWallet(1);
           Pot.addToPot((temp)); 
+          System.out.println("Player 1 is adding " + temp + " to the pot. " + " The current pot now is " + Pot.getPot());
           String surrenderMessage = "Player 1 surrendered this round.";
           JOptionPane.showMessageDialog(null, surrenderMessage);
           System.out.println("Bot 1 is surrendering with a bet of " + temp + " The new wallet value should be " + newWallet);
@@ -240,6 +241,7 @@ public class casinoPanel extends JPanel{
            players++;
         }
       }
+        highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
         bot1Value = new JLabel("Player 1 hand value: " + String.valueOf(game.getHandValue(1)));
         bot1Value.setBounds(50,200,200,50);
         add(bot1Value);
@@ -386,6 +388,7 @@ public class casinoPanel extends JPanel{
                               betFrame.dispose();                              // Forse the JFrame closed when we successfully make a bet.
                               String betAddress = "Bet Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
                               JOptionPane.showMessageDialog(null, betAddress);
+                              surrender.setEnabled(false);
                         }
                         else{
                             String doublebet = "Can't double bet because bet will surprass wallet";
@@ -403,6 +406,7 @@ public class casinoPanel extends JPanel{
                         betFrame.dispose();                              // Forse the JFrame closed when we successfully make a bet.
                         String betAddress = "Bet Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
                         JOptionPane.showMessageDialog(null, betAddress);
+                        surrender.setEnabled(false);
                     }
 
                     }
@@ -411,7 +415,7 @@ public class casinoPanel extends JPanel{
                       JOptionPane.showMessageDialog(null, betAddress);
                     }
 
-
+                  
                   pwallet.setVisible(false);
                   pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
                   pwallet.setBounds(250,360,200,50);
@@ -426,6 +430,7 @@ public class casinoPanel extends JPanel{
                 }
             }
         });
+          
           // Making insurance stuff
           pwallet.setVisible(false);
           pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
@@ -534,6 +539,20 @@ public class casinoPanel extends JPanel{
         boolean play = game.play(players);
         setCards(1);
 
+        if(game.getSurrender2()){
+          double temp = game.getBotBet(2);
+          double newWallet;
+          temp = temp/2.0;
+          newWallet = game.returnWallet(3) - temp;
+          //this gives half the bet to the bot and half the bet to the pot
+          game.setBotWallet(2);
+          Pot.addToPot((temp)); 
+          System.out.println("Player 3 is adding " + temp + " to the pot. " + " The current pot now is " + Pot.getPot());
+          String surrenderMessage = "Player 3 surrendered this round.";
+          JOptionPane.showMessageDialog(null, surrenderMessage);
+          System.out.println("Bot 2 is surrendering with a bet of " + temp + " The new wallet value should be " + newWallet);
+
+        }
         if(bot2insurance){
           bot2insuranceBet = new JLabel("Insurance bet: " + String.valueOf(game.returnInsurance(2)));
           bot2insuranceBet.setBounds(600,125,200,50);
@@ -541,13 +560,16 @@ public class casinoPanel extends JPanel{
           add(bot2insuranceBet);
         }
 
+        if(!game.getSurrender2()){
         if(naturalbot2BlackJack && game.blackjackHand(2)){
          bot2BJ = true;
          String msg = "Player 3 got blackjack!";
          JOptionPane.showMessageDialog(null, msg);
          players++;
       }
+    }
 
+        highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
         bot2Value = new JLabel("Player 3 hand value: " + String.valueOf(game.getHandValue(3)));
         bot2Value.setBounds(600,200,200,50);
         add(bot2Value);
@@ -562,6 +584,7 @@ public class casinoPanel extends JPanel{
       bot2bet.setBounds(600,150,200,50);
       add(bot2bet);
 
+      if(!game.getSurrender2()){
         if(play && bot2BJ != true){
           String msg = "Player 3 busted, they are out for this round";
           JOptionPane.showMessageDialog(null, msg);
@@ -576,6 +599,11 @@ public class casinoPanel extends JPanel{
           players++;
         }
       }
+      else {
+        players++;
+      }
+      }
+
     }
         catch(InterruptedException ex){
           Thread.currentThread().interrupt();

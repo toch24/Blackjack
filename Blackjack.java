@@ -238,6 +238,13 @@ public boolean play(int players){
         }
       }
 
+      Card[] bot2Cards = getBotCards(2);
+      if(casino && checkIfBotShouldSurrender(bot2Cards, bot2.getBotTotal()))
+      {
+        surrender2 = true;
+      } else surrender2 = false;
+
+      if(!surrender2){
         if(!noDoubleDown){
             //if we are in casino panel
             if(casino){
@@ -254,7 +261,7 @@ public boolean play(int players){
           bot2.botPlay(deck);
         }
         }
-
+      }
 
         if(bot2.getEachBotWallet() >= 100 && bot2.getEachBotWallet() < 500)
               {
@@ -344,7 +351,7 @@ public boolean play(int players){
 
             }
               //if double down is true, then double the bet and give bot1 another card
-             if(casino && doubledown && !noDoubleDown){
+             if(casino && doubledown && !noDoubleDown && !surrender2){
                 int temp = bot2.getCurrentBotBet();
                 temp *= 2;
                 if(temp <= bot2.getEachBotWallet()){
@@ -362,8 +369,10 @@ public boolean play(int players){
 
               setHighestBet();
           //    System.out.println("Bots wallet before is: "+bot2.getEachBotWallet() );
+          if(!surrender2){
           if(casino && casinoPanel.bot2insurance){
             double newWallet = bot2.getEachBotWallet() - bot2.getCurrentBotBet()- bot2.getBotInsurance();
+            bot2.setBotWallet(newWallet);
           }
           else{
             double newWallet = bot2.getEachBotWallet() - bot2.getCurrentBotBet();
@@ -371,7 +380,7 @@ public boolean play(int players){
           }
           //    System.out.println("Bots 2 wallet after  is: "+bot2.getEachBotWallet() );
           //    System.out.println("Bots 1 wallet after  is: "+bot1.getEachBotWallet() );
-
+        }
             if(bot2.getBotTotal() > 21)
               return true;
             else
@@ -494,12 +503,18 @@ public void setBotWallet(int n){
       else{
         newWallet = bot1.getEachBotWallet() + bot1.getCurrentBotBet();
       }
-    //  System.out.println("Bot 1 bet they will gain is: " + bot1.getCurrentBotBet());
+
       bot1.setBotWallet(newWallet);
     }
     else if(n==2){
-      double newWallet = bot2.getEachBotWallet() + bot2.getCurrentBotBet();
-    //  System.out.println("Bot 2 bet they will gain is: " + bot2.getCurrentBotBet());
+      double newWallet;
+      if(surrender2){
+        newWallet = bot2.getEachBotWallet() - (bot2.getCurrentBotBet()/2.0);
+      }
+      else{
+      newWallet = bot2.getEachBotWallet() + bot2.getCurrentBotBet();
+      }
+
       bot2.setBotWallet(newWallet);
     }
 }
