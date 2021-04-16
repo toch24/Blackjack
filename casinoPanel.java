@@ -352,6 +352,34 @@ public class casinoPanel extends JPanel{
                 }
             }
         });
+          // Making insurance stuff
+          if(insurance()){
+            JFrame insuranceFrame = new JFrame("Insurance");
+            JPanel insurancePanel = new JPanel();
+            JLabel insuranceLabel = new JLabel("The dealer has an Ace; Place an Insurance Bet?");
+
+            JButton yes = new JButton("Yes");
+            JButton no = new JButton("No");
+
+            insuranceLabel.setAlignmentX(JLabel.CENTER);
+            yes.setBounds(250,250,100,50);
+            no.setBounds(250,250,100,50);
+
+            insuranceFrame.add(insurancePanel);
+            insurancePanel.add(yes);
+            insurancePanel.add(no);
+
+            insuranceFrame.setVisible(true);
+            insurancePanel.setVisible(true);
+            yes.setVisible(true);
+            no.setVisible(true);
+
+            no.addActionListener(new ActionListener(){
+              public void actionPerformed(ActionEvent e){
+                insuranceFrame.dispose();
+              }
+            });
+          }
 
           // Making insurance stuff
           if(insurance()){
@@ -909,7 +937,7 @@ public class casinoPanel extends JPanel{
     Card cards[] = game.getBotCards(3);
     if(cards[0].getspecCard() == "Ace")
       return true;
-    else
+    else 
       return false;
   }
 }
