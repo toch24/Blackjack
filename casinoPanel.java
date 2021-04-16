@@ -28,7 +28,7 @@ public class casinoPanel extends JPanel{
     static boolean naturalbot2BlackJack = false;
     private boolean playerDoubleDown = false;
     private boolean pinsurance = false;
-    private boolean surrenderCase = false;
+    private static boolean surrenderCase = false;
     static boolean bot1insurance = false;
     static boolean bot2insurance = false;
 
