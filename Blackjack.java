@@ -130,7 +130,7 @@ public boolean play(int players){
                 temp = temp/2;
                 bot1.setCurrentBotBet(temp);
                 players++;
-
+                casinoPanel.bot1surrenderCase = true;
                 String botSurrender = "Bot2 Surrendered the Round.";
                 JOptionPane.showMessageDialog(null,botSurrender);
               }
@@ -305,7 +305,7 @@ public boolean play(int players){
                 temp = temp / 2;
                 bot2.setCurrentBotBet(temp);
                 players++;
-
+                casinoPanel.bot2surrenderCase = true;
                 String botSurrender = "Bot2 Surrendered the Round.";
                 JOptionPane.showMessageDialog(null,botSurrender);
               }
