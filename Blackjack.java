@@ -13,6 +13,8 @@ public class Blackjack{
     private Deck deck = new Deck();
     private boolean casino = false;
     private boolean noDoubleDown = false;
+    private boolean surrender1 = false;
+    private boolean surrender2 = false;
 
     private Random rand = new Random();
     
@@ -60,6 +62,14 @@ public boolean play(int players){
             }
           }
 
+          Card[] bot1Cards = getBotCards(1);
+          if(casino && checkIfBotShouldSurrender(bot1Cards, bot1.getBotTotal()))
+          {
+            surrender1 = true;
+          } else surrender1 = false;
+        
+        
+          if(!surrender1){
             if(!noDoubleDown){
             //if we are in casino panel
             if(casino){
@@ -76,7 +86,7 @@ public boolean play(int players){
               bot1.botPlay(deck);
               }
             }
-
+          }
 
             if(bot1.getEachBotWallet() >= 100 && bot1.getEachBotWallet() < 500)
               {
@@ -123,17 +133,6 @@ public boolean play(int players){
                 }
               }
 
-              Card[] bot1Cards = getBotCards(1);
-              if(casino && checkIfBotShouldSurrender(bot1Cards, bot1.getBotTotal()));
-              {
-                int temp = bot1.getCurrentBotBet();
-                temp = temp/2;
-                bot1.setCurrentBotBet(temp);
-                players++;
-                casinoPanel.bot1surrenderCase = true;
-                String botSurrender = "Bot2 Surrendered the Round.";
-                JOptionPane.showMessageDialog(null,botSurrender);
-              }
 
               if(casino && botInsurance())
               {
@@ -185,7 +184,7 @@ public boolean play(int players){
             }
 
               //if double down is true, then double the bet and give bot1 another card
-              if(casino && doubledown && !noDoubleDown){
+              if(casino && doubledown && !noDoubleDown && !surrender1){
                 int temp = bot1.getCurrentBotBet();
                 temp *= 2;
                 if(temp <= bot1.getEachBotWallet()){
@@ -202,14 +201,18 @@ public boolean play(int players){
               }
 
               setHighestBet();
+              if(!surrender1){
                 if(casino && casinoPanel.bot1insurance){
                   double newWallet = bot1.getEachBotWallet() - bot1.getCurrentBotBet() - bot1.getBotInsurance();
                   bot1.setBotWallet(newWallet);
                 }
             else{
+              
               double newWallet = bot1.getEachBotWallet() - bot1.getCurrentBotBet();
               bot1.setBotWallet(newWallet);
+             
             }
+          }
 
             if(bot1.getBotTotal() > 21)
               return true;
@@ -298,17 +301,6 @@ public boolean play(int players){
                 }
               }
 
-              Card[] bot2Cards = getBotCards(2);
-              if(casino && checkIfBotShouldSurrender(bot2Cards, bot2.getBotTotal()));
-              {
-                int temp = bot2.getCurrentBotBet();
-                temp = temp / 2;
-                bot2.setCurrentBotBet(temp);
-                players++;
-                casinoPanel.bot2surrenderCase = true;
-                String botSurrender = "Bot2 Surrendered the Round.";
-                JOptionPane.showMessageDialog(null,botSurrender);
-              }
 
               if(casino && botInsurance())
               {
@@ -495,7 +487,13 @@ public double returnWallet(int playerNumber){
 
 public void setBotWallet(int n){
     if(n == 1){
-      double newWallet = bot1.getEachBotWallet() + bot1.getCurrentBotBet();
+      double newWallet;
+      if(surrender1){
+        newWallet = bot1.getEachBotWallet() - (bot1.getCurrentBotBet()/2.0);
+      }
+      else{
+        newWallet = bot1.getEachBotWallet() + bot1.getCurrentBotBet();
+      }
     //  System.out.println("Bot 1 bet they will gain is: " + bot1.getCurrentBotBet());
       bot1.setBotWallet(newWallet);
     }
@@ -716,6 +714,14 @@ public void giveCardPlayer(){
    }
    else return 0;
  }
+
+ public boolean getSurrender1(){
+   return surrender1;
+ }
+
+ public boolean getSurrender2(){
+  return surrender2;
+}
 
  public boolean checkIfBotShouldSurrender(Card[] currentBotHand, int currentBotTotal){
     Card[] dealerHand = getBotCards(3);

@@ -212,6 +212,19 @@ public class casinoPanel extends JPanel{
         boolean play = game.play(players);
         setCards(1);
 
+        if(game.getSurrender1()){
+          double temp = game.getBotBet(1);
+          double newWallet;
+          temp = temp/2.0;
+          newWallet = game.returnWallet(1) - temp;
+          //this gives half the bet to the bot and half the bet to the pot
+          game.setBotWallet(1);
+          Pot.addToPot((temp)); 
+          String surrenderMessage = "Player 1 surrendered this round.";
+          JOptionPane.showMessageDialog(null, surrenderMessage);
+          System.out.println("Bot 1 is surrendering with a bet of " + temp + " The new wallet value should be " + newWallet);
+
+        }
         if(bot1insurance){
           bot1insuranceBet = new JLabel("Insurance bet: " + String.valueOf(game.returnInsurance(1)));
           bot1insuranceBet.setBounds(50,125,200,50);
@@ -219,13 +232,14 @@ public class casinoPanel extends JPanel{
           add(bot1insuranceBet);
         }
 
+        if(!game.getSurrender1()){
         if(naturalbot1BlackJack && game.blackjackHand(1)){
            bot1BJ = true;
            String msg = "Player 1 got blackjack!";
            JOptionPane.showMessageDialog(null, msg);
            players++;
         }
-
+      }
         bot1Value = new JLabel("Player 1 hand value: " + String.valueOf(game.getHandValue(1)));
         bot1Value.setBounds(50,200,200,50);
         add(bot1Value);
@@ -240,6 +254,7 @@ public class casinoPanel extends JPanel{
         bot1bet.setBounds(50,150,200,50);
         add(bot1bet);
 
+        if(!game.getSurrender1()){
         if(play && bot1BJ != true){
           String msg = "Player 1 busted, they are out for this round";
           JOptionPane.showMessageDialog(null, msg);
@@ -255,10 +270,17 @@ public class casinoPanel extends JPanel{
           bot1Bust = false;
           players++;
         }
+      } 
+      else
+      { 
+        players++;
       }
-    }
+
+      }
+  }
           catch(Exception e){
           }
+          
 } //end of player 1 turn
 
         //Enable buttons for human player once player places their bet
