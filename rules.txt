@@ -1,28 +1,41 @@
-INSERT RULES HERE
+BASICS RULES
+————————————————————————————
 
+Make an initial buy in: this will be the amount in your wallet at the start of the game. Must be at least $100
 
-BLAH BLAH BLAH
+Make a bet on your turn for each round.
 
+You can choose to hit or hold. If you hit, you get another card. If you hold, it is the next player’s turn.
 
+Dealer must stand on soft 17.
 
+When the round ends, click new round to continue.
 
+If any player runs out of money in their wallet, they are no longer in the game.
 
+The game continues until human player has no money in their wallet.
 
-
-MORE RULES
-
-
-
-
-
+Payout Guidelines:
+This is standard blackjack with 3-2 payout
+-If player gets natural blackjack, they will be paid $3 for every $2 they bet
+-If player does not have natural black jack, and busts, they lose their bet
+-If player does not have natural black jack, and does not bust, if they have a higher hand than the dealer at the end of round, dealer pays 2-1
+-If player does not have natural blackjack, and does not bust,if they have a lower hand than dealer, they lose their bet
+-If player does not have natural black jack,and does not bust, if they have an equal hand as the dealer, it is a push, and dealer pays even (they get their bet back and nothing else)
 
 
 CASINO RULES
+————————————————————————————
+
+Rules are the same as basics with added features of Insurance, Double-Down, and Surrender
+
+Insurance: If Dealer has an Ace for face up card, player can choose to make a side bet, which is half of the original bet. 
+-If dealer has natural black jack, player is paid 2 to 1 on insurance, and breaks even
+-If dealer does not have natural black jack, player loses insurance bet, and hand continues as normal
+
+Double-Down: The player is allowed to increase the initial bet up to 100% in exchange for committing to stand after receiving exactly one more card. The player can only double down when it’s their turn to bet and they only have their 2 initial cards. Payouts determined if a player wins or loses the round.
+
+Surrender: If player surrenders the round they get half their bet back
 
 
 
-
-
-
-
-MORE RULES

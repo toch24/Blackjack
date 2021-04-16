@@ -14,7 +14,7 @@ public class Blackjack{
     private boolean noDoubleDown = false;
 
     private Random rand = new Random();
-    
+
     public Blackjack(){
       newGame();
     }
@@ -691,6 +691,7 @@ public void giveCardPlayer(){
    }
    else return 0;
  }
+
 
  /* public boolean checkIfBotShouldSurrender(){
     Card[] bot1Hand = getBotCards(1);
