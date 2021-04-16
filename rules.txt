@@ -29,7 +29,7 @@ CASINO RULES
 
 Rules are the same as basics with added features of Insurance, Double-Down, and Surrender
 
-Insurance: If Dealer has an Ace for face up card, player can choose to make a side bet, which is half of the original bet. 
+Insurance: If Dealer has an Ace for face up card, player can choose to make a side bet, which is half of the original bet. Player must place a bet BEFORE choosing insurance option
 -If dealer has natural black jack, player is paid 2 to 1 on insurance, and breaks even
 -If dealer does not have natural black jack, player loses insurance bet, and hand continues as normal
 

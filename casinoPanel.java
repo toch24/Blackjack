@@ -32,6 +32,7 @@ public class casinoPanel extends JPanel{
     static boolean bot2surrenderCase = false;
     static boolean bot1insurance = false;
     static boolean bot2insurance = false;
+    private static boolean insuranceOption = false;
 
 
 
@@ -77,7 +78,7 @@ public class casinoPanel extends JPanel{
         // add Next Round button to the JPanel
         newRound = new JButton("Next Round");
         newRound.setBounds(250,300,100,50);
-        newRound.setEnabled(false);
+        newRound.setEnabled(true);
         add(newRound);
 
         surrender = new JButton("Surrender");
@@ -142,7 +143,7 @@ public class casinoPanel extends JPanel{
             temp = temp/2.0;
             newWallet = Player.getWallet() + temp;
             Player.setWalletBet(newWallet);
-            Pot.addToPot((-temp)); 
+            Pot.addToPot((-temp));
             System.out.println("Player 2 is taking " + temp + " from the pot. " + " The current pot now is " + Pot.getPot());
             System.out.println("Player 2 is surrendering with a bet of " + temp + " The new wallet value should be " + newWallet);
 
@@ -228,7 +229,7 @@ public class casinoPanel extends JPanel{
           newWallet = game.returnWallet(1) - temp;
           //this gives half the bet to the bot and half the bet to the pot
           game.setBotWallet(1);
-          Pot.addToPot((temp)); 
+          Pot.addToPot((temp));
           System.out.println("Player 1 is adding " + temp + " to the pot. " + " The current pot now is " + Pot.getPot());
           String surrenderMessage = "Player 1 surrendered this round.";
           JOptionPane.showMessageDialog(null, surrenderMessage);
@@ -281,9 +282,9 @@ public class casinoPanel extends JPanel{
           bot1Bust = false;
           players++;
         }
-      } 
+      }
       else
-      { 
+      {
         players++;
       }
 
@@ -291,7 +292,7 @@ public class casinoPanel extends JPanel{
   }
           catch(Exception e){
           }
-          
+
 } //end of player 1 turn
 
         //Enable buttons for human player once player places their bet
@@ -305,7 +306,7 @@ public class casinoPanel extends JPanel{
           playerBJ = false;
           String msg = "Your turn!";
           JOptionPane.showMessageDialog(null, msg);
-  
+
 
           JFrame betFrame = new JFrame("Betting...");
           JPanel betPanel = new JPanel();
@@ -344,6 +345,7 @@ public class casinoPanel extends JPanel{
                 playerbet = new JLabel("You bet: " + userBet);
                 playerbet.setBounds(250,330,200,70);
                 add(playerbet);
+
                 if(userBet == 5 || userBet == 10 || userBet == 50 || userBet == 100 || userBet == 500)
                 {
                     userBetForInsurance = userBet;
@@ -418,8 +420,86 @@ public class casinoPanel extends JPanel{
                       String betAddress = "You dont have that amount to bet.";
                       JOptionPane.showMessageDialog(null, betAddress);
                     }
+                    if(insurance()){
+                      pinsurance = true;
+                      JFrame insuranceFrame = new JFrame("Insurance");
+                      JPanel insurancePanel = new JPanel();
+                      JLabel insuranceLabel = new JLabel("The dealer has an Ace; Place an Insurance Bet?");
 
-                  
+                      JButton yes = new JButton("Yes");
+                      JButton no = new JButton("No");
+
+                      insuranceFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                      insuranceFrame.setLocationRelativeTo(null);
+                      insuranceLabel.setAlignmentX(JLabel.CENTER);
+                      yes.setBounds(250,250,100,50);
+                      no.setBounds(250,250,100,50);
+
+                      insuranceFrame.setResizable(false);
+                      insuranceFrame.setSize(300,100);
+
+                      insuranceFrame.add(insurancePanel);
+                      insurancePanel.add(insuranceLabel);
+                      insurancePanel.add(yes);
+                      insurancePanel.add(no);
+
+                      yes.setVisible(true);
+                      no.setVisible(true);
+
+                      insuranceFrame.setVisible(true);
+                      insurancePanel.setVisible(true);
+
+                      no.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e){
+                          insuranceFrame.dispose();
+                        }
+                      });
+
+                      yes.addActionListener(new ActionListener(){
+                        public void actionPerformed(ActionEvent e){
+                          iBet = (userBetForInsurance/2);
+
+                          double newWallet;
+                          if(Player.getWallet() >= iBet){
+                              newWallet = Player.getWallet() - iBet;
+                              Player.setPlayerInsurance(iBet);
+                              Player.setWalletBet(newWallet);
+                              Pot.addToPot(iBet);                               // Add to the pot.
+                              highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
+                              insuranceFrame.dispose();
+                              System.out.println(iBet);
+                              String insuranceAddress = "Insurance Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
+                              JOptionPane.showMessageDialog(null, insuranceAddress);
+                              System.out.println("The wallet after insurance placed is: " + Player.getWallet());
+
+                              pwallet.setVisible(false);
+                              pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
+                              pwallet.setBounds(250,360,200,50);
+                              pwallet.setVisible(true);
+                              add(pwallet);
+
+                            }
+                          else{
+                            String error = "Insufficient Funds for Insurance.";
+                            JOptionPane.showMessageDialog(null, error);
+                            insuranceFrame.dispose();
+                          }
+                          insuranceBet = new JLabel("Insurance bet: " + String.valueOf(iBet));
+                          insuranceBet.setBounds(400,360,300,50);
+                          insuranceBet.setVisible(true);
+                          add(insuranceBet);
+                          }
+                      });
+
+
+                      pwallet.setVisible(false);
+                      pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
+                      pwallet.setBounds(250,360,200,50);
+                      pwallet.setVisible(true);
+                      add(pwallet);
+                    }
+
+
                   pwallet.setVisible(false);
                   pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
                   pwallet.setBounds(250,360,200,50);
@@ -434,7 +514,7 @@ public class casinoPanel extends JPanel{
                 }
             }
         });
-          
+
           // Making insurance stuff
           pwallet.setVisible(false);
           pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
@@ -446,7 +526,7 @@ public class casinoPanel extends JPanel{
           playerValue.setBounds(250,385,200,50);
           add(playerValue);
 
-          if(insurance()){
+    /*      if(insurance() && insuranceOption){
             pinsurance = true;
             JFrame insuranceFrame = new JFrame("Insurance");
             JPanel insurancePanel = new JPanel();
@@ -522,7 +602,7 @@ public class casinoPanel extends JPanel{
             pwallet.setBounds(250,360,200,50);
             pwallet.setVisible(true);
             add(pwallet);
-          }
+          } */
     }
 }  //end of player 2
 
@@ -550,7 +630,7 @@ public class casinoPanel extends JPanel{
           newWallet = game.returnWallet(3) - temp;
           //this gives half the bet to the bot and half the bet to the pot
           game.setBotWallet(2);
-          Pot.addToPot((temp)); 
+          Pot.addToPot((temp));
           System.out.println("Player 3 is adding " + temp + " to the pot. " + " The current pot now is " + Pot.getPot());
           String surrenderMessage = "Player 3 surrendered this round.";
           JOptionPane.showMessageDialog(null, surrenderMessage);
