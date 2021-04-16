@@ -264,12 +264,7 @@ public class casinoPanel extends JPanel{
                 add(playerbet);
                 if(userBet == 5 || userBet == 10 || userBet == 50 || userBet == 100 || userBet == 500)
                 {
-<<<<<<< Updated upstream
-                  //TODO: if the bet is less than the highest bet, re-prompt the user for a new bet
-                  //Checking that user has the money
-=======
                     //Checking that user has the money
->>>>>>> Stashed changes
                     if(Player.getWallet() >= userBet){
 
                       if(game.blackjackHand(3)){
@@ -399,37 +394,6 @@ public class casinoPanel extends JPanel{
               }
             });
 
-<<<<<<< Updated upstream
-          // Making insurance stuff
-          if(insurance()){
-            JFrame insuranceFrame = new JFrame("Insurance");
-            JPanel insurancePanel = new JPanel();
-            JLabel insuranceLabel = new JLabel("The dealer has an Ace; Place an Insurance Bet?");
-
-            JButton yes = new JButton("Yes");
-            JButton no = new JButton("No");
-
-            insuranceLabel.setAlignmentX(JLabel.CENTER);
-            yes.setBounds(250,250,100,50);
-            no.setBounds(250,250,100,50);
-
-            insuranceFrame.add(insurancePanel);
-            insurancePanel.add(yes);
-            insurancePanel.add(no);
-
-            insuranceFrame.setVisible(true);
-            insurancePanel.setVisible(true);
-            yes.setVisible(true);
-            no.setVisible(true);
-
-            no.addActionListener(new ActionListener(){
-              public void actionPerformed(ActionEvent e){
-                insuranceFrame.dispose();
-              }
-            });
-          }
-
-=======
             yes.addActionListener(new ActionListener(){
               public void actionPerformed(ActionEvent e){
                 insuranceBet.setVisible(true);
@@ -464,7 +428,6 @@ public class casinoPanel extends JPanel{
               }
             });
           }
->>>>>>> Stashed changes
           pwallet.setVisible(false);
           pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
           pwallet.setBounds(250,360,200,50);
@@ -474,14 +437,7 @@ public class casinoPanel extends JPanel{
           playerValue = new JLabel("Your hand value: " + String.valueOf(game.getHandValue(2)));
           playerValue.setBounds(250,385,200,50);
           add(playerValue);
-<<<<<<< Updated upstream
-
-      } //end of else
-
-}
-=======
         }
->>>>>>> Stashed changes
 
         if(players == 3){
           bot2BJ = false;
@@ -611,6 +567,7 @@ public class casinoPanel extends JPanel{
       bot2ResetWallet = game.returnWallet(3);
     }
   }
+}
 
   public void payouts(boolean bot1Bust, boolean bot2Bust, boolean playerBust){
   if(!bot1BJ && !bot1Bust && game.greaterHand(1)){
