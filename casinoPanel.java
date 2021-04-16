@@ -526,83 +526,6 @@ public class casinoPanel extends JPanel{
           playerValue.setBounds(250,385,200,50);
           add(playerValue);
 
-    /*      if(insurance() && insuranceOption){
-            pinsurance = true;
-            JFrame insuranceFrame = new JFrame("Insurance");
-            JPanel insurancePanel = new JPanel();
-            JLabel insuranceLabel = new JLabel("The dealer has an Ace; Place an Insurance Bet?");
-
-            JButton yes = new JButton("Yes");
-            JButton no = new JButton("No");
-
-            insuranceFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            insuranceLabel.setAlignmentX(JLabel.CENTER);
-            yes.setBounds(250,250,100,50);
-            no.setBounds(250,250,100,50);
-
-            insuranceFrame.setResizable(false);
-            insuranceFrame.setSize(300,100);
-
-            insuranceFrame.add(insurancePanel);
-            insurancePanel.add(insuranceLabel);
-            insurancePanel.add(yes);
-            insurancePanel.add(no);
-
-            yes.setVisible(true);
-            no.setVisible(true);
-
-            insuranceFrame.setVisible(true);
-            insurancePanel.setVisible(true);
-
-            no.addActionListener(new ActionListener(){
-              public void actionPerformed(ActionEvent e){
-                insuranceFrame.dispose();
-              }
-            });
-
-            yes.addActionListener(new ActionListener(){
-              public void actionPerformed(ActionEvent e){
-                iBet = (userBetForInsurance/2);
-
-                double newWallet;
-                if(Player.getWallet() >= iBet){
-                    newWallet = Player.getWallet() - iBet;
-                    Player.setPlayerInsurance(iBet);
-                    Player.setWalletBet(newWallet);
-                    Pot.addToPot(iBet);                               // Add to the pot.
-                    highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
-                    insuranceFrame.dispose();
-                    System.out.println(iBet);
-                    String insuranceAddress = "Insurance Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
-                    JOptionPane.showMessageDialog(null, insuranceAddress);
-                    System.out.println("The wallet after insurance placed is: " + Player.getWallet());
-
-                    pwallet.setVisible(false);
-                    pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
-                    pwallet.setBounds(250,360,200,50);
-                    pwallet.setVisible(true);
-                    add(pwallet);
-
-                  }
-                else{
-                  String error = "Insufficient Funds for Insurance.";
-                  JOptionPane.showMessageDialog(null, error);
-                  insuranceFrame.dispose();
-                }
-                insuranceBet = new JLabel("Insurance bet: " + String.valueOf(iBet));
-                insuranceBet.setBounds(400,360,300,50);
-                insuranceBet.setVisible(true);
-                add(insuranceBet);
-                }
-            });
-
-
-            pwallet.setVisible(false);
-            pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
-            pwallet.setBounds(250,360,200,50);
-            pwallet.setVisible(true);
-            add(pwallet);
-          } */
     }
 }  //end of player 2
 
@@ -737,22 +660,6 @@ public class casinoPanel extends JPanel{
 
             payouts(bot1Bust, bot2Bust, playerBust);
 
-          /*  if(!bot1Bust && game.handMatch(1)){
-              System.out.println("Dealer gives money to bot1");
-              game.setBotWallet(1);
-              System.out.println("Bot1 wallet is now: "+ game.returnWallet(1));
-            }
-            if(!bot2Bust && game.handMatch(2)){
-              System.out.println("Dealer gives money to bot2");
-              game.setBotWallet(2);
-              System.out.println("Bot2 wallet is now: "+ game.returnWallet(3));
-            }
-            if(!playerBust && game.handMatch(3)){
-              System.out.println("Dealer gives money to player");
-              //int payback = Player.getCurrentBet();
-              Player.revertBet();
-              System.out.println("Player wallet is now: "+ game.returnWallet(2));
-            }   */
           }
           String message = "Round Over: Press 'Next Round' to Continue.";
           JOptionPane.showMessageDialog(null,message);

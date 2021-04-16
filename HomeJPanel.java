@@ -281,7 +281,7 @@ public class HomeJPanel extends JPanel
           basicsFrame.remove(casinoPanel);
           casinoPanel = new casinoPanel();
           basicsFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
-          basicsFrame.add( casinoPanel ); 					//add screensaverJPanel to frame
+          basicsFrame.add( casinoPanel ); 					
           basicsFrame.setBackground( Color.green.darker()); 				//set frame background color
           casinoPanel.setBackground( Color.green.darker());
           basicsFrame.setSize( 800, 750 ); 						//set frame size
