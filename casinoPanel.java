@@ -12,6 +12,7 @@ public class casinoPanel extends JPanel{
     private JButton  hit, pass, startGame, newRound;
     private JTextField betField;                      // Using this to get the input from the bets i guess
     private int userBet = 0;
+    private int iBet = 0;
     private Blackjack game;
     private Card[] cards;
     private int players = 1;
@@ -66,7 +67,7 @@ public class casinoPanel extends JPanel{
 
         newRound = new JButton("Next Round");
         newRound.setBounds(300,300,100,50);
-        newRound.setEnabled(false);
+        newRound.setEnabled(true);
         add(newRound);
 
         newRound.addActionListener(new ActionListener(){
@@ -263,8 +264,12 @@ public class casinoPanel extends JPanel{
                 add(playerbet);
                 if(userBet == 5 || userBet == 10 || userBet == 50 || userBet == 100 || userBet == 500)
                 {
+<<<<<<< Updated upstream
                   //TODO: if the bet is less than the highest bet, re-prompt the user for a new bet
                   //Checking that user has the money
+=======
+                    //Checking that user has the money
+>>>>>>> Stashed changes
                     if(Player.getWallet() >= userBet){
 
                       if(game.blackjackHand(3)){
@@ -357,30 +362,44 @@ public class casinoPanel extends JPanel{
             JFrame insuranceFrame = new JFrame("Insurance");
             JPanel insurancePanel = new JPanel();
             JLabel insuranceLabel = new JLabel("The dealer has an Ace; Place an Insurance Bet?");
+            JTextField insuranceBet = new JTextField(4);
 
             JButton yes = new JButton("Yes");
             JButton no = new JButton("No");
 
+            insuranceFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             insuranceLabel.setAlignmentX(JLabel.CENTER);
             yes.setBounds(250,250,100,50);
             no.setBounds(250,250,100,50);
 
+            insuranceFrame.setResizable(false);
+            insuranceFrame.setSize(300,100);
+
             insuranceFrame.add(insurancePanel);
+            insurancePanel.add(insuranceLabel);
             insurancePanel.add(yes);
             insurancePanel.add(no);
 
-            insuranceFrame.setVisible(true);
-            insurancePanel.setVisible(true);
             yes.setVisible(true);
             no.setVisible(true);
+
+            insuranceBet.setBounds(50,100, 200,30);
+            insuranceBet.setAlignmentX(JTextField.CENTER);
+            insuranceBet.setAlignmentY(JTextField.SOUTH);
+            insuranceBet.setVisible(false);
+            
+            insurancePanel.add(insuranceBet);
+
+            insuranceFrame.setVisible(true);
+            insurancePanel.setVisible(true);
 
             no.addActionListener(new ActionListener(){
               public void actionPerformed(ActionEvent e){
                 insuranceFrame.dispose();
               }
             });
-          }
 
+<<<<<<< Updated upstream
           // Making insurance stuff
           if(insurance()){
             JFrame insuranceFrame = new JFrame("Insurance");
@@ -410,6 +429,42 @@ public class casinoPanel extends JPanel{
             });
           }
 
+=======
+            yes.addActionListener(new ActionListener(){
+              public void actionPerformed(ActionEvent e){
+                insuranceBet.setVisible(true);
+                yes.setVisible(false);
+                no.setVisible(false);
+                insuranceBet.setVisible(true);
+
+                insuranceBet.addActionListener(new ActionListener(){
+                  public void actionPerformed(ActionEvent e){
+                    iBet = Integer.parseInt(betField.getText());      // Take the user bet.
+                    double newWallet;
+                    if(iBet == 10 || iBet == 50 ||iBet == 100 || iBet == 500){
+                      if(Player.getWallet() >= userBet){
+                        newWallet = Player.getWallet() - iBet;
+                        Player.setPlayerInsurance(iBet);
+
+                        Player.setWalletBet(newWallet);
+                        Pot.addToPot(iBet);                               // Add to the pot.
+
+                        highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
+                        insuranceFrame.dispose();
+                        String insuranceAddress = "Insurance Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
+                        JOptionPane.showMessageDialog(null, insuranceAddress);
+                      }
+                    }
+                    else{
+                      String insuranceError = "Error: Player can insure either: 5,10,50,100,500 ";
+                      JOptionPane.showMessageDialog(null, insuranceError);
+                    }
+                  }
+                });
+              }
+            });
+          }
+>>>>>>> Stashed changes
           pwallet.setVisible(false);
           pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
           pwallet.setBounds(250,360,200,50);
@@ -419,10 +474,14 @@ public class casinoPanel extends JPanel{
           playerValue = new JLabel("Your hand value: " + String.valueOf(game.getHandValue(2)));
           playerValue.setBounds(250,385,200,50);
           add(playerValue);
+<<<<<<< Updated upstream
 
       } //end of else
 
 }
+=======
+        }
+>>>>>>> Stashed changes
 
         if(players == 3){
           bot2BJ = false;
