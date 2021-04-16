@@ -56,8 +56,13 @@ public boolean play(int players){
             boolean doubledown = false;
 
             if(bot1.getBotTotal() == 21){
+              if(casino){
+                casinoPanel.naturalbot1BlackJack = true;
+              }
+              else{
               basicsPanel.naturalbot1BlackJack = true;
             }
+          }
 
             if(!noDoubleDown){
             //if we are in casino panel
@@ -73,10 +78,10 @@ public boolean play(int players){
             if(!doubledown){
             while(bot1.getBotTotal() < 17){
               bot1.botPlay(deck);
-              }               
-            }  
-                                
-                           
+              }
+            }
+
+
             if(bot1.getEachBotWallet() >= 100 && bot1.getEachBotWallet() < 500)
               {
                 int temp = rand.nextInt(3)+1;
@@ -121,9 +126,10 @@ public boolean play(int players){
                   case 2: {bot1.setCurrentBotBet(10); break;}
                 }
               }
-              
+
               if(casino && botInsurance())
               {
+                casinoPanel.bot1insurance = true;
                 if(bot1.getEachBotWallet() >= 100 && bot1.getEachBotWallet() < 500)
               {
                 int temp = rand.nextInt(3)+1;
@@ -173,7 +179,7 @@ public boolean play(int players){
               //if double down is true, then double the bet and give bot1 another card
               if(casino && doubledown && !noDoubleDown){
                 int temp = bot1.getCurrentBotBet();
-                temp *= 2; 
+                temp *= 2;
                 if(temp <= bot1.getEachBotWallet()){
                   bot1.setCurrentBotBet(temp);
                   bot1.setNextCard(deck);
@@ -183,13 +189,19 @@ public boolean play(int players){
                 else {
                   //if bot doesnt have enough money for doubling, call play again but without double down
                   noDoubleDown = true;
-                  play(1); 
-                  }      
+                  play(1);
+                  }
               }
 
               setHighestBet();
+                if(casino && casinoPanel.bot1insurance){
+                  double newWallet = bot1.getEachBotWallet() - bot1.getCurrentBotBet() - bot1.getBotInsurance();
+                  bot1.setBotWallet(newWallet);
+                }
+            else{
               double newWallet = bot1.getEachBotWallet() - bot1.getCurrentBotBet();
               bot1.setBotWallet(newWallet);
+            }
 
             if(bot1.getBotTotal() > 21)
               return true;
@@ -207,8 +219,13 @@ public boolean play(int players){
         boolean doubledown = false;
 
         if(bot2.getBotTotal() == 21){
+          if(casino){
+            casinoPanel.naturalbot2BlackJack = true;
+          }
+          else{
           basicsPanel.naturalbot2BlackJack = true;
         }
+      }
 
         if(!noDoubleDown){
             //if we are in casino panel
@@ -275,47 +292,49 @@ public boolean play(int players){
 
               if(casino && botInsurance())
               {
-                if(bot1.getEachBotWallet() >= 100 && bot1.getEachBotWallet() < 500)
+                casinoPanel.bot2insurance = true;
+                if(bot2.getEachBotWallet() >= 100 && bot2.getEachBotWallet() < 500)
               {
                 int temp = rand.nextInt(3)+1;
               //  System.out.println(temp);
             //    System.out.println(bot1.getEachBotWallet());
                 switch(temp)
                 {
-                  case 1: {bot1.setBotInsurance(5); break;}
-                  case 2: {bot1.setBotInsurance(10); break;}
-                  case 3: {bot1.setBotInsurance(50); break;}
-                  case 4: {bot1.setBotInsurance(100); break;}
+                  case 1: {bot2.setBotInsurance(5); break;}
+                  case 2: {bot2.setBotInsurance(10); break;}
+                  case 3: {bot2.setBotInsurance(50); break;}
+                  case 4: {bot2.setBotInsurance(100); break;}
                 }
               }
-              else if(bot1.getEachBotWallet() >= 500)
+              else if(bot2.getEachBotWallet() >= 500)
               {
                 int temp = rand.nextInt(4)+1;
               //  System.out.println(temp);
 
                 switch(temp)
                 {
-                  case 1: {bot1.setBotInsurance(5); break;}
-                  case 2: {bot1.setBotInsurance(10); break;}
-                  case 3: {bot1.setBotInsurance(50); break;}
-                  case 4: {bot1.setBotInsurance(100); break;}
-                  case 5: {bot1.setBotInsurance(500); break;}
+                  case 1: {bot2.setBotInsurance(5); break;}
+                  case 2: {bot2.setBotInsurance(10); break;}
+                  case 3: {bot2.setBotInsurance(50); break;}
+                  case 4: {bot2.setBotInsurance(100); break;}
+                  case 5: {bot2.setBotInsurance(500); break;}
                 }
               }
-              else if(bot1.getEachBotWallet() < 100 && bot1.getEachBotWallet() >= 50 ){
+              else if(bot2.getEachBotWallet() < 100 && bot2.getEachBotWallet() >= 50 ){
                 int temp = rand.nextInt(2)+1;
                 switch(temp)
                 {
-                  case 1: {bot1.setBotInsurance(5); break;}
-                  case 2: {bot1.setBotInsurance(10); break;}
-                  case 3: {bot1.setBotInsurance(50); break;}
+                  case 1: {bot2.setBotInsurance(5); break;}
+                  case 2: {bot2.setBotInsurance(10); break;}
+                  case 3: {bot2.setBotInsurance(50); break;}
                 }
               }
 
+            }
               //if double down is true, then double the bet and give bot1 another card
              if(casino && doubledown && !noDoubleDown){
                 int temp = bot2.getCurrentBotBet();
-                temp *= 2; 
+                temp *= 2;
                 if(temp <= bot2.getEachBotWallet()){
                     bot2.setCurrentBotBet(temp);
                     bot2.setNextCard(deck);
@@ -325,14 +344,19 @@ public boolean play(int players){
                 else {
                     //if bot doesnt have enough money for doubling, call play again but without double down
                     noDoubleDown = true;
-                    play(2); 
-                   }      
+                    play(2);
+                   }
                   }
 
               setHighestBet();
           //    System.out.println("Bots wallet before is: "+bot2.getEachBotWallet() );
-              double newWallet = bot2.getEachBotWallet() - bot2.getCurrentBotBet();
-              bot2.setBotWallet(newWallet);
+          if(casino && casinoPanel.bot2insurance){
+            double newWallet = bot2.getEachBotWallet() - bot2.getCurrentBotBet()- bot2.getBotInsurance();
+          }
+          else{
+            double newWallet = bot2.getEachBotWallet() - bot2.getCurrentBotBet();
+            bot2.setBotWallet(newWallet);
+          }
           //    System.out.println("Bots 2 wallet after  is: "+bot2.getEachBotWallet() );
           //    System.out.println("Bots 1 wallet after  is: "+bot1.getEachBotWallet() );
 
@@ -340,8 +364,7 @@ public boolean play(int players){
               return true;
             else
               return false;
-      }
-
+  }
 
     //dealer
     if(players == 4){
@@ -356,9 +379,10 @@ public boolean play(int players){
             else
               return false;
       }
+      return false;
   }
-  return false;
-}
+
+
 
 
 public void setUserBet(int bet){
@@ -508,6 +532,12 @@ public boolean blackjackHand(int n){
     }
     else return false;
   }
+  else if(n == 4){
+      if(dealer.hasBlackjack())
+        return true;
+      else
+        return false;
+  }
   return false;
 }
 
@@ -584,13 +614,13 @@ public void setBothBotBets (int bot){
     //play it safe, if the the dealer has an ace. Don't double down.
     case 1: if(bot1.getBotTotal() < 12 && dealer.getFirstCard() != 1){
               //todo: if the bot has an ace and its other card value is less than 9
-              
+
               return true;
             }
-    
+
     case 2: if(bot2.getBotTotal() < 12 && dealer.getFirstCard() != 1){
               //todo: if the bot has an ace and its other card value is less than 9
-              
+
               return true;
             }
 
@@ -602,7 +632,7 @@ public void setBothBotBets (int bot){
   Card cards[] = getBotCards(3);
   if(cards[0].getspecCard() == "Ace")
     return true;
-  else 
+  else
     return false;
 }
 
@@ -622,6 +652,47 @@ public void giveCardPlayer(){
    }
    else if(n == 4){
      return dealer.getBotTotal();
+   }
+   else return 0;
+ }
+
+ public void setInsurance(int n){
+   if(n==1){
+     double payback = bot1.getBotInsurance();
+     double wallet  = payback + bot1.getBotWallet();
+     bot1.setBotWallet(wallet);
+   }
+   else if(n == 2){
+     double payback = bot2.getBotInsurance();
+     double wallet  = payback + bot2.getBotWallet();
+     bot2.setBotWallet(wallet);
+   }
+   if(n == 3){
+     double payback = player.getPlayerInsurance();
+     double wallet  = payback + player.getWallet();
+     player.setWalletBet(wallet);
+   }
+ }
+
+ public void botInsurancePay(int n){
+   if(n == 1){
+     double payback = 2*bot1.getBotInsurance();
+     double wallet  = payback + bot1.getBotWallet();
+     bot1.setBotWallet(wallet);
+   }
+   else if(n == 2){
+     double payback = 2*bot2.getBotInsurance();
+     double wallet  = payback + bot2.getBotWallet();
+     bot2.setBotWallet(wallet);
+   }
+ }
+
+ public double returnInsurance(int n){
+   if(n == 1){
+     return bot1.getBotInsurance();
+   }
+   else if(n == 2){
+     return bot2.getBotInsurance();
    }
    else return 0;
  }

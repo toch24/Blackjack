@@ -12,12 +12,12 @@ public class casinoPanel extends JPanel{
     private JButton  hit, pass, startGame, newRound;
     private JTextField betField;                      // Using this to get the input from the bets i guess
     private int userBet = 0;
-    private int iBet = 0;
+    private static int iBet = 0;
     private static int userBetForInsurance = 0;
     private Blackjack game;
     private Card[] cards;
     private int players = 1;
-    private JLabel highestbetlabel, cp1wallet, pwallet, cp2wallet, dealerwallet, bot1Value, bot2Value, dealerValue, playerValue, bot1bet, bot2bet, playerbet;
+    private JLabel highestbetlabel, cp1wallet, pwallet, cp2wallet, dealerwallet, bot1Value, bot2Value, dealerValue, playerValue, bot1bet, bot2bet, playerbet, insuranceBet, bot1insuranceBet, bot2insuranceBet;
     private int cp1WalletVal, cp2WalletVal;
     private static double bot1ResetWallet, bot2ResetWallet;
     private boolean bot1Bust = false;
@@ -27,6 +27,10 @@ public class casinoPanel extends JPanel{
     static boolean naturalbot1BlackJack = false;
     static boolean naturalbot2BlackJack = false;
     private boolean playerDoubleDown = false;
+    private boolean pinsurance = false;
+     static boolean bot1insurance = false;
+     static boolean bot2insurance = false;
+
 
 
     public casinoPanel(){
@@ -173,6 +177,13 @@ public class casinoPanel extends JPanel{
       else{
         boolean play = game.play(players);
         setCards(1);
+
+        if(bot1insurance){
+          bot1insuranceBet = new JLabel("Insurance bet: " + String.valueOf(game.returnInsurance(1)));
+          bot1insuranceBet.setBounds(50,125,200,50);
+          bot1insuranceBet.setVisible(true);
+          add(bot1insuranceBet);
+        }
 
         if(naturalbot1BlackJack && game.blackjackHand(1)){
            bot1BJ = true;
@@ -370,6 +381,7 @@ public class casinoPanel extends JPanel{
           add(playerValue);
 
           if(insurance()){
+            pinsurance = true;
             JFrame insuranceFrame = new JFrame("Insurance");
             JPanel insurancePanel = new JPanel();
             JLabel insuranceLabel = new JLabel("The dealer has an Ace; Place an Insurance Bet?");
@@ -417,14 +429,33 @@ public class casinoPanel extends JPanel{
                     System.out.println(iBet);
                     String insuranceAddress = "Insurance Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
                     JOptionPane.showMessageDialog(null, insuranceAddress);
+                    System.out.println("The wallet after insurance placed is: " + Player.getWallet());
+
+                    pwallet.setVisible(false);
+                    pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
+                    pwallet.setBounds(250,360,200,50);
+                    pwallet.setVisible(true);
+                    add(pwallet);
+
                   }
                 else{
                   String error = "Insufficient Funds for Insurance.";
                   JOptionPane.showMessageDialog(null, error);
                   insuranceFrame.dispose();
                 }
+                insuranceBet = new JLabel("Insurance bet: " + String.valueOf(iBet));
+                insuranceBet.setBounds(400,360,300,50);
+                insuranceBet.setVisible(true);
+                add(insuranceBet);
                 }
             });
+
+
+            pwallet.setVisible(false);
+            pwallet = new JLabel("Your wallet total: " + String.valueOf(game.returnWallet(2)));
+            pwallet.setBounds(250,360,200,50);
+            pwallet.setVisible(true);
+            add(pwallet);
           }
     }
 }  //end of player 2
@@ -445,6 +476,13 @@ public class casinoPanel extends JPanel{
         else{
         boolean play = game.play(players);
         setCards(1);
+
+        if(bot2insurance){
+          bot2insuranceBet = new JLabel("Insurance bet: " + String.valueOf(game.returnInsurance(2)));
+          bot2insuranceBet.setBounds(600,125,200,50);
+          bot2insuranceBet.setVisible(true);
+          add(bot2insuranceBet);
+        }
 
         if(naturalbot2BlackJack && game.blackjackHand(2)){
          bot2BJ = true;
@@ -561,32 +599,73 @@ public class casinoPanel extends JPanel{
 
 
   public void payouts(boolean bot1Bust, boolean bot2Bust, boolean playerBust){
-  if(!bot1BJ && !bot1Bust && game.greaterHand(1)){
+
+//if insurance and dealer has black jack, they get their bet back
+    if(pinsurance && game.blackjackHand(4) && !playerBust){
+      Player.revertBet();
+    }
+    if(pinsurance && game.blackjackHand(4) && game.handMatch(3)){
+      game.setInsurance(3);
+    }
+//if insurance and dealer does not have black jack, and
+    if(pinsurance && !game.blackjackHand(4) && !playerBust && game.greaterHand(3)){
+      game.setInsurance(3);
+    }
+
+    if(bot1insurance && game.blackjackHand(4) && !bot1Bust){
+      game.botInsurancePay(1);
+    }
+
+    if(bot1insurance && game.blackjackHand(4) && game.handMatch(1)){
+      game.setInsurance(1);
+    }
+//if insurance and dealer does not have black jack, and
+    if(bot1insurance && !game.blackjackHand(4) && !bot1Bust && game.greaterHand(1)){
+      game.setInsurance(1);
+    }
+
+
+    if(bot2insurance && game.blackjackHand(4) && !bot2Bust){
+      game.botInsurancePay(2);
+    }
+
+    if(bot2insurance && game.blackjackHand(4) && game.handMatch(2)){
+      game.setInsurance(2);
+    }
+  //if insurance and dealer does not have black jack, and
+    if(bot2insurance && !game.blackjackHand(4) && !bot2Bust && game.greaterHand(2)){
+      game.setInsurance(1);
+    }
+
+
+  if(!bot1BJ && !bot1Bust && game.greaterHand(1) && !bot1insurance){
   //  System.out.println("Dealer gives twice bet to bot1");
     game.winningHand(1);
 //    System.out.println("Bot1 wallet is now: "+ game.returnWallet(1));
   }
-  if(!bot2BJ && !bot2Bust && game.greaterHand(2)){
+  if(!bot2BJ && !bot2Bust && game.greaterHand(2) && !bot2insurance){
   //  System.out.println("Dealer gives twice bet to bot2");
     game.winningHand(2);
 //    System.out.println("Bot2 wallet is now: "+ game.returnWallet(3));
   }
-  if(!playerBust && game.greaterHand(3)){
+
+  if(!playerBust && game.greaterHand(3) && !pinsurance){
   //  System.out.println("Dealer twice bet to player");
     Player.winningPHand();
   //  System.out.println("Player wallet is now: "+ game.returnWallet(2));
   }
-  if(!bot1Bust && game.handMatch(1)){
+  if(!bot1Bust && game.handMatch(1) && !bot1insurance){
   //     System.out.println("Dealer gives bet back to bot1");
        game.setBotWallet(1);
   //     System.out.println("Bot1 wallet is now: "+ game.returnWallet(1));
      }
-  if(!bot2Bust && game.handMatch(2)){
+  if(!bot2Bust && game.handMatch(2) && !bot2insurance){
     //   System.out.println("Dealer gives bet back to bot2");
        game.setBotWallet(2);
     //   System.out.println("Bot2 wallet is now: "+ game.returnWallet(3));
      }
-  if(!playerBust && game.handMatch(3)){
+
+  if(!playerBust && game.handMatch(3) && !pinsurance){
   //     System.out.println("Dealer gives bet back to player");
        Player.revertBet();
   //     System.out.println("Player wallet is now: "+ game.returnWallet(2));
