@@ -3,6 +3,7 @@ public class Player {
     private Hand hand = new Hand();
 	private static double bet;
 	private static double wallet;
+	private static double playerInsurance;
 	private static double currentBet;							// hold the "buy in value"
 
     //Return true if the player has a blackjack
@@ -17,6 +18,14 @@ public class Player {
     //Add a card to hand
 	public void addCard(Card card) {
 		hand.addCard(card);
+	}
+
+	public static void setPlayerInsurance(int passedInsurance){
+		playerInsurance = passedInsurance;
+	}
+
+	public static double getPlayerInsurance(){
+		return playerInsurance;
 	}
 
 	public static void setWallet(int buyIn){

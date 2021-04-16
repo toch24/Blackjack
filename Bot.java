@@ -5,6 +5,7 @@ public class Bot {
   private Hand hand = new Hand();
 	private Random rand;
 	private double cpuWallet;
+	private double cpuInsurance;
 	private int botBet;
 	private static int botWallet;
 
@@ -15,6 +16,14 @@ public class Bot {
 
 	public Hand getHand(){
 		return hand;
+	}
+
+	public void setBotInsurance(int passedInsurance){
+		cpuInsurance = passedInsurance;
+	}
+
+	public double getBotInsurance(){
+		return cpuInsurance;
 	}
 
     //Return true if the bot has a blackjack
