@@ -11,6 +11,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.border.Border;
 import javax.swing.text.AbstractDocument.Content;
+import java.io.*;
+import java.util.*;
 
 public class HomeJPanel extends JPanel
 {
@@ -27,6 +29,7 @@ public class HomeJPanel extends JPanel
    static boolean firstRound = true;
    static boolean firstNewRound = true;
   private static JPanel newRoundPanel;
+  private String rules;
 
    private int userBuyIn;
    JTextField buyInField;
@@ -163,9 +166,13 @@ public class HomeJPanel extends JPanel
 
       button2.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent e) {
-        	  String string = "Insert Rules Here: ";
-        	  JOptionPane.showMessageDialog( null, string );
-          }
+            try {
+                showRules();
+              }
+              catch(IOException b) {
+                b.printStackTrace();
+              }
+        }
       });
 
 
@@ -278,5 +285,23 @@ public class HomeJPanel extends JPanel
           basicsFrame.setVisible( true );
 
   }
+
+  //scroll pane to display rules
+  public void showRules() throws IOException{
+    String input = "";
+    BufferedReader reader = new BufferedReader(new FileReader("rules.txt"));
+    String line = null;
+    while ((line = reader.readLine()) != null) {
+        input += line + "\n";
+    }
+    reader.close();
+    JTextArea textArea = new JTextArea(input);
+    JScrollPane scrollPane = new JScrollPane(textArea);
+    textArea.setLineWrap(true);
+    textArea.setWrapStyleWord(true);
+    scrollPane.setPreferredSize( new Dimension( 200, 400 ) );
+    JOptionPane.showMessageDialog(null, scrollPane, "RULES:", JOptionPane.PLAIN_MESSAGE);
+  }
+
 
 } // End JHomePanel
