@@ -81,7 +81,6 @@ public class casinoPanel extends JPanel{
 
         surrender = new JButton("Surrender");
         surrender.setBounds(350,300,100,50);
-        surrender.setVisible(true);
         surrender.setEnabled(false);
         add(surrender);
 
@@ -123,6 +122,7 @@ public class casinoPanel extends JPanel{
           public void actionPerformed(ActionEvent e) {
           hit.setEnabled(false);
           pass.setEnabled(false);
+          surrender.setEnabled(false);
           players++;
           System.out.println("Next player is" + players);
           playerturns(0);
@@ -159,7 +159,6 @@ public class casinoPanel extends JPanel{
             if(game.playerHit()){
               String msg = "Your hand is more 21, you busted. Wait till next round";
               JOptionPane.showMessageDialog(null, msg);
-
               playerValue.setVisible(false);
               playerValue = new JLabel("Your hand value: " + String.valueOf(game.getHandValue(2)));
               playerValue.setBounds(250,385,200,50);
@@ -169,6 +168,7 @@ public class casinoPanel extends JPanel{
               playerturns(1);
             }
             else{
+              surrender.setEnabled(false);
               String msg = "Card drawn!";
               JOptionPane.showMessageDialog(null, msg);
             }
