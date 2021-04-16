@@ -28,7 +28,9 @@ public class casinoPanel extends JPanel{
     static boolean naturalbot2BlackJack = false;
     private boolean playerDoubleDown = false;
     private boolean pinsurance = false;
-    private static boolean surrenderCase = false;
+
+    static boolean bot1surrenderCase = false;
+    static boolean bot2surrenderCase = false;
     static boolean bot1insurance = false;
     static boolean bot2insurance = false;
 
@@ -217,7 +219,12 @@ public class casinoPanel extends JPanel{
           bot1insuranceBet.setVisible(true);
           add(bot1insuranceBet);
         }
-
+        if(bot1surrenderCase){
+          String botSurrender = "Bot1 Surrendered the Round.";
+          JOptionPane.showMessageDialog(null,botSurrender);
+          players++;
+        }
+        
         if(naturalbot1BlackJack && game.blackjackHand(1)){
            bot1BJ = true;
            String msg = "Player 1 got blackjack!";
@@ -517,7 +524,11 @@ public class casinoPanel extends JPanel{
           bot2insuranceBet.setVisible(true);
           add(bot2insuranceBet);
         }
-
+        if(bot2surrenderCase){
+          String botSurrender = "Bot2 Surrendered the Round.";
+          JOptionPane.showMessageDialog(null,botSurrender);
+          players++;
+        }
         if(naturalbot2BlackJack && game.blackjackHand(2)){
          bot2BJ = true;
          String msg = "Player 3 got blackjack!";
