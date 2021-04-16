@@ -108,6 +108,7 @@ public class casinoPanel extends JPanel{
           hit.setEnabled(false);
           pass.setEnabled(false);
           players++;
+          System.out.println("Next player is" + players);
           playerturns(0);
           //System.out.println("On player: "+ players +" In panel");
           }
@@ -150,6 +151,8 @@ public class casinoPanel extends JPanel{
       } //end of casinoPanel class
 
       public void playerturns(int n){
+        //System.out.println("Player 3 is now playing");
+
         if (n == 1)
           playerBust = true;
         else
@@ -392,7 +395,7 @@ public class casinoPanel extends JPanel{
 
             insuranceFrame.setVisible(true);
             insurancePanel.setVisible(true);
-            
+
             no.addActionListener(new ActionListener(){
               public void actionPerformed(ActionEvent e){
                 insuranceFrame.dispose();
@@ -423,9 +426,11 @@ public class casinoPanel extends JPanel{
                 }
             });
           }
-        }
+    }
+}  //end of player 2
 
         if(players == 3){
+          System.out.println("Player 3 is now playing");
           bot2BJ = false;
           try{
             Thread.sleep(1000);
@@ -552,8 +557,8 @@ public class casinoPanel extends JPanel{
       bot1ResetWallet = game.returnWallet(1);
       bot2ResetWallet = game.returnWallet(3);
     }
-  }
-}
+  } //end of player turns
+
 
   public void payouts(boolean bot1Bust, boolean bot2Bust, boolean playerBust){
   if(!bot1BJ && !bot1Bust && game.greaterHand(1)){
@@ -939,7 +944,7 @@ public class casinoPanel extends JPanel{
     Card cards[] = game.getBotCards(3);
     if(cards[0].getspecCard() == "Ace")
       return true;
-    else 
+    else
       return false;
   }
 }
