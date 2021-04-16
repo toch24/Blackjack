@@ -137,17 +137,26 @@ public class casinoPanel extends JPanel{
             pass.setEnabled(false);
             surrender.setEnabled(false);
 
-            int temp = userBetForInsurance;
+            double temp = Double.valueOf(userBetForInsurance);
             double newWallet = 0;
-            temp = temp/2;
-            game.setUserBet(temp);
+            temp = temp/2.0;
             newWallet = Player.getWallet() + temp;
             Player.setWalletBet(newWallet);
             Pot.addToPot((-temp)); 
-            
+            System.out.println("Player 2 is taking " + temp + " from the pot. " + " The current pot now is " + Pot.getPot());
+            System.out.println("Player 2 is surrendering with a bet of " + temp + " The new wallet value should be " + newWallet);
+
             players++;
             String surrenderMessage = "You have surrendered this round.";
             JOptionPane.showMessageDialog(null,surrenderMessage);
+            pwallet.setVisible(false);
+            pwallet = new JLabel("Your wallet total: " + String.valueOf(Player.getWallet()));
+            pwallet.setBounds(250,360,200,50);
+            pwallet.setVisible(true);
+            add(pwallet);
+
+            highestbetlabel.setText("Current Pot Total: " + String.valueOf(Pot.getPot()));
+
             playerturns(0);
           }
         });
@@ -296,9 +305,7 @@ public class casinoPanel extends JPanel{
           playerBJ = false;
           String msg = "Your turn!";
           JOptionPane.showMessageDialog(null, msg);
-          hit.setEnabled(true);
-          surrender.setEnabled(true);
-          pass.setEnabled(true);
+  
 
           JFrame betFrame = new JFrame("Betting...");
           JPanel betPanel = new JPanel();
@@ -342,6 +349,10 @@ public class casinoPanel extends JPanel{
                     userBetForInsurance = userBet;
                     //Checking that user has the money
                     if(Player.getWallet() >= userBet){
+                      //enable all buttons
+                      hit.setEnabled(true);
+                      surrender.setEnabled(true);
+                      pass.setEnabled(true);
 
                       if(game.blackjackHand(3)){
                       String blackjackMessage = "You got blackjack!";
@@ -406,7 +417,6 @@ public class casinoPanel extends JPanel{
                         betFrame.dispose();                              // Forse the JFrame closed when we successfully make a bet.
                         String betAddress = "Bet Placed.";               // Just let the user know their bet was successfully placed, we can take this out if you guys want.
                         JOptionPane.showMessageDialog(null, betAddress);
-                        surrender.setEnabled(false);
                     }
 
                     }
