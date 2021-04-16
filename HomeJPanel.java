@@ -90,6 +90,7 @@ public class HomeJPanel extends JPanel
             basicsFrame.setBackground( Color.green.darker()); 				//set frame background color
 
             basicsFrame.setSize( 800, 750 ); 						//set frame size
+            basicsFrame.setLocationRelativeTo(null);
             basicsFrame.setResizable(false);
             setVisible(true);
 
@@ -111,6 +112,7 @@ public class HomeJPanel extends JPanel
             JLabel buyInLabel = new JLabel("Please determine your buy in value (>= 100): ");
             buyInField = new JTextField();
 
+            buyInFrame.setLocationRelativeTo(null);
             buyInFrame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
             buyInFrame.add( buyInPanel );
             buyInFrame.setResizable(false);
@@ -185,6 +187,7 @@ public class HomeJPanel extends JPanel
             basicsFrame.setBackground( Color.green.darker()); 				//set frame background color
 
             basicsFrame.setSize( 800, 750 ); 						//set frame size
+            basicsFrame.setLocationRelativeTo(null);
             basicsFrame.setResizable(false);
             setVisible(true);
 
@@ -210,6 +213,7 @@ public class HomeJPanel extends JPanel
             buyInFrame.add( buyInPanel );
             buyInFrame.setResizable(false);
             buyInFrame.setSize(300,100);
+            buyInFrame.setLocationRelativeTo(null);
 
             // Create JTextField to allow for user inputs
             buyInField = new JTextField(4);
