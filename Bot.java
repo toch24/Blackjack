@@ -1,8 +1,10 @@
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 public class Bot {
     //A new hand for the bot
-  private Hand hand = new Hand();
+  	private Hand hand = new Hand();
 	private Random rand;
 	private double cpuWallet;
 	private double cpuInsurance;
@@ -90,6 +92,4 @@ public class Bot {
 		int firstcard = hand.firstCard();
 		return firstcard;
 	}
-
-
 }

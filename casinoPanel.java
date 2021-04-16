@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.awt.event.*;
 
 public class casinoPanel extends JPanel{
-    private JButton  hit, pass, startGame, newRound;
+    private JButton hit, pass, startGame, newRound, surrender;
     private JTextField betField;                      // Using this to get the input from the bets i guess
     private int userBet = 0;
     private static int iBet = 0;
@@ -28,8 +28,9 @@ public class casinoPanel extends JPanel{
     static boolean naturalbot2BlackJack = false;
     private boolean playerDoubleDown = false;
     private boolean pinsurance = false;
-     static boolean bot1insurance = false;
-     static boolean bot2insurance = false;
+    private boolean surrenderCase = false;
+    static boolean bot1insurance = false;
+    static boolean bot2insurance = false;
 
 
 
@@ -54,27 +55,38 @@ public class casinoPanel extends JPanel{
           game.walletRound2(2, bot2ResetWallet);
         }
 
-
+        // add the hit button 
         hit = new JButton("Hit");
         hit.setBounds(250,250,100,50);
         hit.setEnabled(false);
 
+        // add the hold button
         pass = new JButton("Hold");
         pass.setBounds(350,250,100,50);
         pass.setEnabled(false);
         add(pass);
 
+        // add start game button
         startGame = new JButton("Start Game");
         startGame.setBounds(323,600,100,50);
         startGame.setVisible(true);
         startGame.setEnabled(true);
         add(startGame);
 
+        // add Next Round button to the JPanel
         newRound = new JButton("Next Round");
-        newRound.setBounds(300,300,100,50);
+        newRound.setBounds(250,300,100,50);
         newRound.setEnabled(false);
         add(newRound);
 
+        surrender = new JButton("Surrender");
+        surrender.setBounds(350,300,100,50);
+        surrender.setVisible(true);
+        surrender.setEnabled(false);
+        add(surrender);
+
+        // Create Functionality for new Round
+        // it Switches the panel out for a new game panel and restarts the round.
         newRound.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
         HomeJPanel.firstRound = false;
@@ -118,9 +130,30 @@ public class casinoPanel extends JPanel{
           }
         });
 
+        surrender.addActionListener(new ActionListener(){
+          public void actionPerformed(ActionEvent e){
+            hit.setEnabled(false);
+            pass.setEnabled(false);
+            surrender.setEnabled(false);
+
+            int temp = userBetForInsurance;
+            double newWallet = 0;
+            temp = temp/2;
+            game.setUserBet(temp);
+            newWallet = Player.getWallet() + temp;
+            Player.setWalletBet(newWallet);
+            Pot.addToPot((-temp)); 
+            
+            players++;
+            String surrenderMessage = "You have surrendered this round.";
+            JOptionPane.showMessageDialog(null,surrenderMessage);
+            playerturns(0);
+          }
+        });
+
         //add hit button
         add(hit);
-      hit.addActionListener(new ActionListener(){
+        hit.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e) {
           //draw a hard if clicked
             if(game.playerHit()){
@@ -239,6 +272,7 @@ public class casinoPanel extends JPanel{
           String msg = "Your turn!";
           JOptionPane.showMessageDialog(null, msg);
           hit.setEnabled(true);
+          surrender.setEnabled(true);
           pass.setEnabled(true);
 
           JFrame betFrame = new JFrame("Betting...");

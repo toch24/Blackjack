@@ -2,12 +2,7 @@
 // Blackjack game
 // Project X
 
-import java.util.ArrayList;
 import java.util.Random;
-import java.awt.event.*;
-import java.awt.*;
-import javax.swing.*;
-import java.util.Scanner;
 
 public class Blackjack{
     private Bot bot1 = new Bot();
@@ -19,7 +14,7 @@ public class Blackjack{
     private boolean noDoubleDown = false;
 
     private Random rand = new Random();
-
+    
     public Blackjack(){
       newGame();
     }
@@ -697,5 +692,39 @@ public void giveCardPlayer(){
    else return 0;
  }
 
+ /* public boolean checkIfBotShouldSurrender(){
+    Card[] bot1Hand = getBotCards(1);
+    Card[] bot2Hand = getBotCards(2);
+    Card[] dealerHand = getBotCards(3);
+    if(players == 1)
+    {
+      if(bot1.getBotTotal() == 5 && bot1Hand[0].getspecCard() != "Ace" && bot1Hand[1].getspecCard() != "Ace"){
+        return true;
+      }
+      else if(bot1.getBotTotal() == 6 && bot1Hand[0].getspecCard() != "Ace" && bot1Hand[1].getspecCard() != "Ace"){
+        return true;
+      }
+      else if(bot1.getBotTotal() == 12 && bot1Hand[0].getspecCard() != "Ace" && bot1Hand[1].getspecCard() != "Ace"){
+        return true;
+      }
+      else if(bot1.getBotTotal() == 13 && bot1Hand[0].getspecCard() != "Ace" && bot1Hand[1].getspecCard() != "Ace"){
+        return true;
+      }
+      else if(bot1.getBotTotal() == 14 && bot1Hand[0].getspecCard() != "Ace" && bot1Hand[1].getspecCard() != "Ace"){
+        return true;
+      }
+      else if(bot1.getBotTotal() == 15 && bot1Hand[0].getspecCard() != "Ace" && bot1Hand[1].getspecCard() != "Ace"){
+        return true;
+      }
+      else if(bot1.getBotTotal() == 16 && bot1Hand[0].getspecCard() != "Ace" && bot1Hand[1].getspecCard() != "Ace"){
+        return true;
+      }
+      else if(bot1.getBotTotal() == 17 && bot1Hand[0].getspecCard() != "Ace" && bot1Hand[1].getspecCard() != "Ace"){
+        return true;
+      }
+      else
+        return false;
+      }
+  } */
 
 } //end of BlackJack class
