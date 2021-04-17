@@ -474,50 +474,50 @@ public void payouts(boolean bot1Bust, boolean bot2Bust, boolean playerBust){
         if(c.getspecCard() == null)
           {
             if(suit.equals("Hearts")){
-              png = "Cards/" + value + "H" + ".png";
+              png = value + "H" + ".png";
             }
             else if(suit.equals("Spades")){
-              png = "Cards/" + value + "S" + ".png";
+              png = value + "S" + ".png";
             }
             else if(suit.equals("Clubs")){
-              png = "Cards/" + value + "C" + ".png";
+              png = value + "C" + ".png";
             }
             else if(suit.equals("Diamonds")){
-              png = "Cards/" + value + "D" + ".png";
+              png = value + "D" + ".png";
             }
           }
           else if(c.getspecCard() != null)        // we are checking if we have a face card :)
           { // This whole switch statement accounts for if the card has a face (I.E] Jack,Queen,King)
             if(c.getspecCard() == "King"){
               switch(suit){
-                case "Hearts" : {png = "Cards/" + 13 + "H" + ".png"; break;}
-                case "Clubs"  : {png = "Cards/" + 13 + "C" + ".png"; break;}
-                case "Spades"  : {png = "Cards/" + 13 + "S" + ".png"; break;}
-                case "Diamonds"  : {png = "Cards/" + 13 + "D" + ".png"; break;}
+                case "Hearts" : {png = 13 + "H" + ".png"; break;}
+                case "Clubs"  : {png = 13 + "C" + ".png"; break;}
+                case "Spades"  : {png = 13 + "S" + ".png"; break;}
+                case "Diamonds"  : {png = 13 + "D" + ".png"; break;}
               }
             }
             else if(c.getspecCard() == "Queen"){
               switch(suit){
-                case "Hearts" : {png = "Cards/" + 12 + "H" + ".png"; break;}
-                case "Clubs"  : {png = "Cards/" + 12 + "C" + ".png"; break;}
-                case "Spades"  : {png = "Cards/" + 12 + "S" + ".png"; break;}
-                case "Diamonds"  : {png = "Cards/" + 12 + "D" + ".png"; break;}
+                case "Hearts" : {png = 12 + "H" + ".png"; break;}
+                case "Clubs"  : {png = 12 + "C" + ".png"; break;}
+                case "Spades"  : {png = 12 + "S" + ".png"; break;}
+                case "Diamonds"  : {png = 12 + "D" + ".png"; break;}
               }
             }
             else if(c.getspecCard() == "Jack"){
               switch(suit){
-                case "Hearts" : {png = "Cards/" + 11 + "H" + ".png"; break;}
-                case "Clubs"  : {png = "Cards/" + 11 + "C" + ".png"; break;}
-                case "Spades"  : {png = "Cards/" + 11 + "S" + ".png"; break;}
-                case "Diamonds"  : {png = "Cards/" + 11 + "D" + ".png"; break;}
+                case "Hearts" : {png = 11 + "H" + ".png"; break;}
+                case "Clubs"  : {png = 11 + "C" + ".png"; break;}
+                case "Spades"  : {png = 11 + "S" + ".png"; break;}
+                case "Diamonds"  : {png = 11 + "D" + ".png"; break;}
               }
             }
             else if(c.getspecCard() == "Ace"){
               switch(suit){
-                case "Hearts" : {png = "Cards/" + 1 + "H" + ".png"; break;}
-                case "Clubs"  : {png = "Cards/" + 1 + "C" + ".png"; break;}
-                case "Spades"  : {png = "Cards/" + 1 + "S" + ".png"; break;}
-                case "Diamonds"  : {png = "Cards/" + 1 + "D" + ".png"; break;}
+                case "Hearts" : {png = 1 + "H" + ".png"; break;}
+                case "Clubs"  : {png = 1 + "C" + ".png"; break;}
+                case "Spades"  : {png = 1 + "S" + ".png"; break;}
+                case "Diamonds"  : {png = 1 + "D" + ".png"; break;}
               }
             }
           }
@@ -578,50 +578,50 @@ public void payouts(boolean bot1Bust, boolean bot2Bust, boolean playerBust){
           if(c.getspecCard() == null)
             {
               if(suit.equals("Hearts")){
-                png = "Cards/" + value + "H" + ".png";
+                png = value + "H" + ".png";
               }
               else if(suit.equals("Spades")){
-                png = "Cards/" + value + "S" + ".png";
+                png = value + "S" + ".png";
               }
               else if(suit.equals("Clubs")){
-                png = "Cards/" + value + "C" + ".png";
+                png = value + "C" + ".png";
               }
               else if(suit.equals("Diamonds")){
-                png = "Cards/" + value + "D" + ".png";
+                png = value + "D" + ".png";
               }
             }
             else if(c.getspecCard() != null)        // we are checking if we have a face card :)
             { // This whole switch statement accounts for if the card has a face (I.E] Jack,Queen,King)
               if(c.getspecCard() == "King"){
                 switch(suit){
-                  case "Hearts" : {png = "Cards/" + 13 + "H" + ".png"; break;}
-                  case "Clubs"  : {png = "Cards/" + 13 + "C" + ".png"; break;}
-                  case "Spades"  : {png = "Cards/" + 13 + "S" + ".png"; break;}
-                  case "Diamonds"  : {png = "Cards/" + 13 + "D" + ".png"; break;}
+                  case "Hearts" : {png = 13 + "H" + ".png"; break;}
+                  case "Clubs"  : {png = 13 + "C" + ".png"; break;}
+                  case "Spades"  : {png = 13 + "S" + ".png"; break;}
+                  case "Diamonds"  : {png = 13 + "D" + ".png"; break;}
                 }
               }
               else if(c.getspecCard() == "Queen"){
                 switch(suit){
-                  case "Hearts" : {png = "Cards/" + 12 + "H" + ".png"; break;}
-                  case "Clubs"  : {png = "Cards/" + 12 + "C" + ".png"; break;}
-                  case "Spades"  : {png = "Cards/" + 12 + "S" + ".png"; break;}
-                  case "Diamonds"  : {png = "Cards/" + 12 + "D" + ".png"; break;}
+                  case "Hearts" : {png = 12 + "H" + ".png"; break;}
+                  case "Clubs"  : {png = 12 + "C" + ".png"; break;}
+                  case "Spades"  : {png = 12 + "S" + ".png"; break;}
+                  case "Diamonds"  : {png = 12 + "D" + ".png"; break;}
                 }
               }
               else if(c.getspecCard() == "Jack"){
                 switch(suit){
-                  case "Hearts" : {png = "Cards/" + 11 + "H" + ".png"; break;}
-                  case "Clubs"  : {png = "Cards/" + 11 + "C" + ".png"; break;}
-                  case "Spades"  : {png = "Cards/" + 11 + "S" + ".png"; break;}
-                  case "Diamonds"  : {png = "Cards/" + 11 + "D" + ".png"; break;}
+                  case "Hearts" : {png = 11 + "H" + ".png"; break;}
+                  case "Clubs"  : {png = 11 + "C" + ".png"; break;}
+                  case "Spades"  : {png = 11 + "S" + ".png"; break;}
+                  case "Diamonds"  : {png = 11 + "D" + ".png"; break;}
                 }
               }
               else if(c.getspecCard() == "Ace"){
                 switch(suit){
-                  case "Hearts" : {png = "Cards/" + 1 + "H" + ".png"; break;}
-                  case "Clubs"  : {png = "Cards/" + 1 + "C" + ".png"; break;}
-                  case "Spades"  : {png = "Cards/" + 1 + "S" + ".png"; break;}
-                  case "Diamonds"  : {png = "Cards/" + 1 + "D" + ".png"; break;}
+                  case "Hearts" : {png = 1 + "H" + ".png"; break;}
+                  case "Clubs"  : {png = 1 + "C" + ".png"; break;}
+                  case "Spades"  : {png = 1 + "S" + ".png"; break;}
+                  case "Diamonds"  : {png = 1 + "D" + ".png"; break;}
                 }
               }
             }
@@ -695,50 +695,50 @@ public void payouts(boolean bot1Bust, boolean bot2Bust, boolean playerBust){
           if(c.getspecCard() == null)
           {
             if(suit.equals("Hearts")){
-              png = "Cards/" + value + "H" + ".png";
+              png = value + "H" + ".png";
             }
             else if(suit.equals("Spades")){
-              png = "Cards/" + value + "S" + ".png";
+              png = value + "S" + ".png";
             }
             else if(suit.equals("Clubs")){
-              png = "Cards/" + value + "C" + ".png";
+              png = value + "C" + ".png";
             }
             else if(suit.equals("Diamonds")){
-              png = "Cards/" + value + "D" + ".png";
+              png = value + "D" + ".png";
             }
           }
           else if(c.getspecCard() != null)        // we are checking if we have a face card :)
           {
             if(c.getspecCard() == "King"){
               switch(suit){
-                case "Hearts" : {png = "Cards/" + 13 + "H" + ".png"; break;}
-                case "Clubs"  : {png = "Cards/" + 13 + "C" + ".png"; break;}
-                case "Spades"  : {png = "Cards/" + 13 + "S" + ".png"; break;}
-                case "Diamonds"  : {png = "Cards/" + 13 + "D" + ".png"; break;}
+                case "Hearts" : {png = 13 + "H" + ".png"; break;}
+                case "Clubs"  : {png = 13 + "C" + ".png"; break;}
+                case "Spades"  : {png = 13 + "S" + ".png"; break;}
+                case "Diamonds"  : {png = 13 + "D" + ".png"; break;}
               }
             }
             else if(c.getspecCard() == "Queen"){
               switch(suit){
-                case "Hearts" : {png = "Cards/" + 12 + "H" + ".png"; break;}
-                case "Clubs"  : {png = "Cards/" + 12 + "C" + ".png"; break;}
-                case "Spades"  : {png = "Cards/" + 12 + "S" + ".png"; break;}
-                case "Diamonds"  : {png = "Cards/" + 12 + "D" + ".png"; break;}
+                case "Hearts" : {png = 12 + "H" + ".png"; break;}
+                case "Clubs"  : {png = 12 + "C" + ".png"; break;}
+                case "Spades"  : {png = 12 + "S" + ".png"; break;}
+                case "Diamonds"  : {png = 12 + "D" + ".png"; break;}
               }
             }
             else if(c.getspecCard() == "Jack"){
               switch(suit){
-                case "Hearts" : {png = "Cards/" + 11 + "H" + ".png"; break;}
-                case "Clubs"  : {png = "Cards/" + 11 + "C" + ".png"; break;}
-                case "Spades"  : {png = "Cards/" + 11 + "S" + ".png"; break;}
-                case "Diamonds"  : {png = "Cards/" + 11 + "D" + ".png"; break;}
+                case "Hearts" : {png = 11 + "H" + ".png"; break;}
+                case "Clubs"  : {png = 11 + "C" + ".png"; break;}
+                case "Spades"  : {png = 11 + "S" + ".png"; break;}
+                case "Diamonds"  : {png = 11 + "D" + ".png"; break;}
               }
             }
             else if(c.getspecCard() == "Ace"){
               switch(suit){
-                case "Hearts" : {png = "Cards/" + 1 + "H" + ".png"; break;}
-                case "Clubs"  : {png = "Cards/" + 1 + "C" + ".png"; break;}
-                case "Spades"  : {png = "Cards/" + 1 + "S" + ".png"; break;}
-                case "Diamonds"  : {png = "Cards/" + 1 + "D" + ".png"; break;}
+                case "Hearts" : {png = 1 + "H" + ".png"; break;}
+                case "Clubs"  : {png = 1 + "C" + ".png"; break;}
+                case "Spades"  : {png = 1 + "S" + ".png"; break;}
+                case "Diamonds"  : {png = 1 + "D" + ".png"; break;}
               }
             }
           }
