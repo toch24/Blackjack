@@ -813,43 +813,31 @@ public class casinoPanel extends JPanel{
 
     //if not natural blackjack, bot1 didnt bust, and has greater hand than dealer
   if(!bot1BJ && !bot1Bust && game.greaterHand(1) && !bot1insurance){
-  //  System.out.println("Dealer gives twice bet to bot1");
     game.winningHand(1);
-//    System.out.println("Bot1 wallet is now: "+ game.returnWallet(1));
   }
 
   //if not natural blackjack, bot2 didnt bust, and has greater hand than dealer
   if(!bot2BJ && !bot2Bust && game.greaterHand(2) && !bot2insurance){
-  //  System.out.println("Dealer gives twice bet to bot2");
     game.winningHand(2);
-//    System.out.println("Bot2 wallet is now: "+ game.returnWallet(3));
   }
 
   //if not natural blackjack, player didnt bust, and has greater hand than dealer
   if(!playerBJ && !playerBust && game.greaterHand(3) && !pinsurance){
-  //  System.out.println("Dealer twice bet to player");
     Player.winningPHand();
-  //  System.out.println("Player wallet is now: "+ game.returnWallet(2));
   }
 
   //if bot1 didnt bust, and has equal hand as dealer
   if(!bot1BJ && !bot1Bust && game.handMatch(1) && !bot1insurance){
-  //     System.out.println("Dealer gives bet back to bot1");
        game.setBotWallet(1);
-  //     System.out.println("Bot1 wallet is now: "+ game.returnWallet(1));
      }
 
   //if bot2 didnt bust, and has equal hand as dealer
   if(!bot2BJ && !bot2Bust && game.handMatch(2) && !bot2insurance){
-    //   System.out.println("Dealer gives bet back to bot2");
        game.setBotWallet(2);
-    //   System.out.println("Bot2 wallet is now: "+ game.returnWallet(3));
      }
 
   if(!playerBJ && !playerBust && game.handMatch(3) && !pinsurance){
-  //     System.out.println("Dealer gives bet back to player");
        Player.revertBet();
-  //     System.out.println("Player wallet is now: "+ game.returnWallet(2));
   }
 }
 
